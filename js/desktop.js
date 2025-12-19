@@ -28,9 +28,9 @@ class FileSystemManager {
             reeyuki: {
               Documents: {},
               Pictures: {
-                "wallpaper1.jpg": { type: "file", content: "/static/wallpapers/wallpaper1.webp" },
-                "wallpaper2.jpg": { type: "file", content: "/static/wallpapers/wallpaper2.jpg" },
-                "wallpaper3.jpg": { type: "file", content: "/static/wallpapers/wallpaper3.jpg" },
+                "wallpaper1.webp": { type: "file", content: "/static/wallpapers/wallpaper1.webp" },
+                "wallpaper2.webp": { type: "file", content: "/static/wallpapers/wallpaper2.webp" },
+                "wallpaper3.webp": { type: "file", content: "/static/wallpapers/wallpaper3.webp" },
               },
               Music: {},
             },
