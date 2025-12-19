@@ -226,12 +226,12 @@ class ExplorerApp {
         const ext = name.split(".").pop().toLowerCase();
         if (["png", "jpg", "jpeg", "gif", "webp"].includes(ext)) {
           const fileContent = this.fs.getFileContent(this.currentPath, name);
-          iconImg = fileContent || "https://cdn-icons-png.flaticon.com/512/32/32329.png";
+          iconImg = fileContent || "/icons/file.png";
         } else {
-          iconImg = "https://cdn-icons-png.flaticon.com/512/32/32329.png";
+          iconImg = "/icons/file.png";
         }
       } else {
-        iconImg = "https://cdn-icons-png.flaticon.com/512/716/716784.png";
+        iconImg = "/icons/notepad.png";
       }
 
       item.innerHTML = `
