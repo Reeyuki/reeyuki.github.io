@@ -1,0 +1,16 @@
+{
+  "name": "webos-desktop",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "pnpm run format && vite build && rm -rf ../desktop && cp -r dist ../desktop",
+    "preview": "vite preview",
+    "format": "prettier . --write"
+  },
+  "devDependencies": {
+    "vite": "^7.3.0",
+    "prettier": "^3.7.4"
+  }
+}
