@@ -45,7 +45,7 @@ export class AppLauncher {
       pokemonRed: { type: "gba", url: "pokemon-red.gba" },
       pokemonEmerald: { type: "gba", url: "pokemon-emerald.gba" },
       pokemonPlatinum: { type: "nds", url: "pokemon-platinum.nds" },
-      pokemonHeartgold: { type: "nds", url: "pokemon-heartgold.nds" },
+      pokemonHeartgold: { type: "nds", url: "https://files.catbox.moe/xntjzl.nds" },
       pokemonWhite: { type: "nds", url: "https://files.catbox.moe/dcicfh.nds" }
     };
 
