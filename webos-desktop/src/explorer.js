@@ -53,6 +53,7 @@ export class ExplorerApp {
     `;
 
     desktop.appendChild(win);
+    document.getElementById("explorer-view").style.width = "600px";
     this.wm.makeDraggable(win);
     this.wm.makeResizable(win);
     this.wm.setupWindowControls(win);
@@ -89,11 +90,10 @@ export class ExplorerApp {
     this.currentPath = [...newPath];
     this.render();
   }
-  renderMusicPage() {
-    const view = document.getElementById("explorer-view");
-    if (!view) return;
+  renderMusicPage(element) {
+    if (!element) return;
 
-    view.innerHTML = `
+    element.innerHTML = `
     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
       <iframe 
         src="https://open.spotify.com/embed/playlist/6oK6F4LglYBr4mYLSRDJOa" 
@@ -134,7 +134,7 @@ export class ExplorerApp {
     pathDisplay.textContent = "/" + this.currentPath.join("/");
 
     if (this.currentPath[2] === "Music") {
-      this.renderMusicPage();
+      this.renderMusicPage(document.getElementById("explorer-view"));
       return;
     }
 

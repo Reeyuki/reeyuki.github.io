@@ -165,16 +165,15 @@ class FileSystemManager {
 }
 
 class MusicPlayer {
-  constructor() {
-    this.currentTrackIndex = 0;
-  }
+  constructor() {}
   open(windowManager) {
     if (document.getElementById("music-win")) {
+      console.log("bringing window to front");
       windowManager.bringToFront(document.getElementById("music-win"));
       return;
     }
+    console.log("Creating window");
     const win = windowManager.createWindow("music-win", "MUSIC");
-    const initialTrackId = CONFIG.MUSIC_PLAYLIST[this.currentTrackIndex];
 
     win.innerHTML = `
   <div class="window-header">
@@ -186,49 +185,16 @@ class MusicPlayer {
     </div>
   </div>
   <div class="window-content" style="width:100%; height:100%;">
-    <div class="player-container" style="display:flex; flex-direction:column; align-items:center; gap:10px; padding:10px;">
-      <iframe id="player-frame" 
-              src="https://open.spotify.com/embed/track/${initialTrackId}?utm_source=generator" 
-              style="width:100%; height:100%; border:none;" 
-              allow="autoplay; encrypted-media"></iframe>
-      <div class="player-controls" style="display:flex; align-items:center; gap:15px; background:#282828; padding:8px 15px; border-radius:20px; color:white;">
-        <button id="music-prev" style="background:none; border:none; color:white; cursor:pointer; font-size:18px;">⏮</button>
-        <span id="music-status" style="font-family:monospace; font-size:12px; min-width:80px; text-align:center;">Track ${
-          this.currentTrackIndex + 1
-        } / ${CONFIG.MUSIC_PLAYLIST.length}</span>
-        <button id="music-next" style="background:none; border:none; color:white; cursor:pointer; font-size:18px;">⏭</button>
-      </div>
+    <div id="player-container" style="display:flex; flex-direction:column; align-items:center; gap:10px; padding:10px;"></div>
     </div>
   </div>`;
 
     desktop.appendChild(win);
+    explorerApp.renderMusicPage(document.getElementById("player-container"));
     windowManager.makeDraggable(win);
     windowManager.makeResizable(win);
     windowManager.setupWindowControls(win);
     windowManager.addToTaskbar(win.id, "MUSIC");
-
-    this.setupControls(win);
-  }
-  setupControls(win) {
-    const frame = win.querySelector("#player-frame");
-    const status = win.querySelector("#music-status");
-
-    win.querySelector("#music-next").onclick = () => {
-      this.currentTrackIndex = (this.currentTrackIndex + 1) % CONFIG.MUSIC_PLAYLIST.length;
-      this.updateUI(frame, status);
-    };
-
-    win.querySelector("#music-prev").onclick = () => {
-      this.currentTrackIndex =
-        (this.currentTrackIndex - 1 + CONFIG.MUSIC_PLAYLIST.length) % CONFIG.MUSIC_PLAYLIST.length;
-      this.updateUI(frame, status);
-    };
-  }
-  updateUI(frame, status) {
-    const trackId = CONFIG.MUSIC_PLAYLIST[this.currentTrackIndex];
-    frame.src = "";
-    frame.src = `https://open.spotify.com/embed/track/${trackId}`;
-    status.innerText = `Track ${this.currentTrackIndex + 1} / ${CONFIG.MUSIC_PLAYLIST.length}`;
   }
 }
 

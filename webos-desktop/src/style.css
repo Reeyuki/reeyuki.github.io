@@ -231,6 +231,7 @@ body {
   flex-wrap: wrap;
   align-content: flex-start;
   padding: 10px;
+  max-height: 500px;
   gap: 15px;
   overflow-y: auto;
   background: #1e1e1e;
