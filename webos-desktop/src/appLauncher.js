@@ -75,7 +75,7 @@ export class AppLauncher {
 
   // --- Common blacklist check ---
   isBlacklisted(gameName) {
-    if (location.hostname === "reeyuki.github.io") return false;
+    if (location.hostname !== "reeyuki.neocities.org") return false;
     return this.emulatorBlacklist.includes(gameName);
   }
 

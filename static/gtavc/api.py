@@ -7,7 +7,14 @@ from time import sleep
 
 app = Flask(__name__)
 
-CORS(app, origins=["*"], supports_credentials=True)
+def get_origin():
+    return request.headers.get('Origin')
+
+CORS(
+    app,
+    origins=get_origin,
+    supports_credentials=True
+)
 
 MAX_RETRIES = 3
 TIMEOUT = 10
