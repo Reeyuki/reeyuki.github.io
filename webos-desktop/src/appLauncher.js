@@ -175,15 +175,13 @@ export class AppLauncher {
         Redirecting to playable version…<br>
         If you are not redirected, <a href="https://reeyuki.github.io/desktop/" target="_blank">click here</a>.
       </div>
-      <script>
-        setTimeout(() => {
-          window.location.href = "https://reeyuki.github.io/desktop?game=${gameName}";
-        }, 1500);
-      </script>
-
     `;
 
     document.body.appendChild(popup);
+
+    setTimeout(() => {
+      window.location.href = `https://reeyuki.github.io/desktop?game=${gameName}`;
+    }, 1500);
   }
 
   // --- Create Window ---
