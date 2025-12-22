@@ -92,47 +92,40 @@ let haveOriginalGame = false;
 })();
 
 async function loadData() {
-  let cache;
+  let response;
   try {
-    cache = await caches.open(location.hostname);
-    const cached = await cache.match(data_content);
-    if (cached && data_content !== "index.data") {
-      return new Uint8Array(await cached.arrayBuffer());
-    }
-  } catch (e) {
-    console.error("Failed to open cache:", e);
+    response = await fetch(data_content);
+  } catch (err) {
+    console.error("Failed to fetch data:", err);
+    throw err;
   }
-  const response = await fetch(data_content);
+
+  if (!response.ok) {
+    throw new Error(`Failed to load data file: ${response.status}`);
+  }
 
   const reader = response.body.getReader();
   let receivedLength = 0;
-  let chunks = [];
+  const chunks = [];
+
   while (true) {
     const { done, value } = await reader.read();
-    if (done) {
-      break;
-    }
+    if (done) break;
     chunks.push(value);
     receivedLength += value.length;
     if (typeof setStatus === "function") {
-      setStatus(`Downloading...(${receivedLength}/${dataSize})`);
+      setStatus(`Downloading...(${receivedLength})`);
     }
   }
-  let buffer = new Uint8Array(receivedLength);
+
+  const buffer = new Uint8Array(receivedLength);
   let position = 0;
-  for (let chunk of chunks) {
+  for (const chunk of chunks) {
     buffer.set(chunk, position);
     position += chunk.length;
   }
-  buffer = buffer.buffer;
-  if (cache) {
-    try {
-      await cache.put(data_content, new Response(buffer, { headers: { "Content-Type": "application/octet-stream" } }));
-    } catch (e) {
-      console.error("Failed to cache data:", e.message);
-    }
-  }
-  return new Uint8Array(buffer);
+
+  return buffer;
 }
 
 async function startGame(e) {
