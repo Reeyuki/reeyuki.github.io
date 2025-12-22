@@ -82,7 +82,7 @@ export class AppLauncher {
   // --- Open Ruffle SWF ---
   openRuffleApp(gameName, swfPath) {
     if (this.isBlacklisted(gameName)) {
-      this.showCannotLoadPopup();
+      this.showCannotLoadPopup(gameName);
       return;
     }
 
@@ -99,7 +99,7 @@ export class AppLauncher {
   // --- Open Emulator Game ---
   openEmulatorApp(gameName, romName, core) {
     if (this.isBlacklisted(gameName)) {
-      this.showCannotLoadPopup();
+      this.showCannotLoadPopup(gameName);
       return;
     }
 
@@ -126,7 +126,7 @@ export class AppLauncher {
   // --- Open normal game ---
   openGameApp(gameName, url) {
     if (this.isBlacklisted(gameName)) {
-      this.showCannotLoadPopup();
+      this.showCannotLoadPopup(gameName);
       return;
     }
 
@@ -148,7 +148,7 @@ export class AppLauncher {
   }
 
   // --- Show Cannot Load Game Popup ---
-  showCannotLoadPopup() {
+  showCannotLoadPopup(gameName) {
     const popup = document.createElement("div");
     popup.style.position = "fixed";
     popup.style.top = "20px";
@@ -162,10 +162,16 @@ export class AppLauncher {
     popup.style.zIndex = 9999;
 
     popup.innerHTML = `
-      <strong>Cannot Load Game</strong><br>
-      Neocities hosting does not allow loading game assets from different domains. To play this game, use GitHub:<br>
-      <a href="https://reeyuki.github.io/desktop/" target="_blank">https://reeyuki.github.io/desktop/</a><br>
-      <button id="closePopup" style="margin-top:10px;">Close</button>
+      <div style="text-align:center; margin-top:20px;">
+        Redirecting to playable version…<br>
+        If you are not redirected, <a href="https://reeyuki.github.io/desktop/" target="_blank">click here</a>.
+      </div>
+      <script>
+        setTimeout(() => {
+          window.location.href = "https://reeyuki.github.io/desktop?game=${gameName}";
+        }, 1500);
+      </script>
+
     `;
 
     document.body.appendChild(popup);
