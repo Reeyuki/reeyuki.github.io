@@ -91,7 +91,6 @@ let haveOriginalGame = false;
 
 const wasm_content = "/static/gtavc/vc-sky-en-v6.wasm";
 const data_content = "https://files.catbox.moe/dz0szc.data";
-
 async function loadData() {
   let cache;
   try {
@@ -103,23 +102,37 @@ async function loadData() {
   } catch (e) {
     console.error("Failed to open cache:", e);
   }
-
   const response = await fetch(data_content);
-  const buffer = await response.arrayBuffer(); 
-  const data = new Uint8Array(buffer);
 
-
+  const reader = response.body.getReader();
+  let receivedLength = 0;
+  let chunks = [];
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      break;
+    }
+    chunks.push(value);
+    receivedLength += value.length;
+    if (typeof setStatus === "function") {
+      setStatus(`Downloading...(${receivedLength}/${dataSize})`);
+    }
+  }
+  let buffer = new Uint8Array(receivedLength);
+  let position = 0;
+  for (let chunk of chunks) {
+    buffer.set(chunk, position);
+    position += chunk.length;
+  }
+  buffer = buffer.buffer;
   if (cache) {
     try {
-      await cache.put(
-        data_content,
-        new Response(buffer, { headers: { "Content-Type": "application/octet-stream" } })
-      );
+      await cache.put(data_content, new Response(buffer, { headers: { "Content-Type": "application/octet-stream" } }));
     } catch (e) {
       console.error("Failed to cache data:", e.message);
     }
   }
-  return data;
+  return new Uint8Array(buffer);
 }
 
 async function startGame(e) {
@@ -145,7 +158,7 @@ async function startGame(e) {
   const clickHandler = () => {
     intro.pause();
     introContainer.style.display = "none";
-    loadGame(dataBuffer); 
+    loadGame(dataBuffer);
   };
   if (isMobile) {
     window.addEventListener("pointerup", clickHandler, { once: true });
