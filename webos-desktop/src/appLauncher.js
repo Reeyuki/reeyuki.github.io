@@ -211,7 +211,7 @@ export class AppLauncher {
     popup.innerHTML = `
       <div style="text-align:center; margin-top:20px;">
         Redirecting to playable version…<br>
-        If you are not redirected, <a href="https://reeyuki.github.io/desktop/" target="_blank">click here</a>.
+        If you are not redirected, <a href="https://reeyuki.github.io/desktop/?game=${gameName}" target="_blank">click here</a>.
       </div>
     `;
 
