@@ -21,38 +21,46 @@ body {
   width: 100%;
   height: calc(100vh - var(--taskbar-height));
 }
-
 .icon {
-  width: 74px;
-  height: 80px;
+  width: 80px; /* 🔒 fixed size */
+  height: 80px; /* 🔒 fixed size */
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   text-align: center;
   color: white;
   cursor: pointer;
-  position: absolute;
-  padding-top: 5px;
+  position: relative;
+  padding-top: 0.3rem;
   border: 1px solid transparent;
-  transition: background 0.2s;
-  font-size: 12px;
+  transition:
+    background 0.2s,
+    border 0.2s;
+  font-size: 0.75rem;
   text-shadow: 1px 1px 2px black;
+  box-sizing: border-box;
 }
 
 .icon:hover {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
+  border-radius: 0.2rem;
 }
 
 .icon.selected {
   background: rgba(0, 120, 215, 0.3);
   border: 1px solid rgba(0, 120, 215, 0.6);
-  border-radius: 3px;
+  border-radius: 0.2rem;
 }
 
 .icon img {
-  width: 42px;
-  height: 42px;
+  width: 50%;
+  height: auto;
   display: block;
-  margin: 0 auto 5px;
+  margin-bottom: 0.3rem;
 }
 
 .window {

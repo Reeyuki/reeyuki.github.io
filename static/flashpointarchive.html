@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>9o3o</title>
+    <link rel="stylesheet" href="https://ooooooooo.ooo/static/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="/static/games/flashpointarchive/main.js" defer></script>
+    <style>
+      #maximize-btn {
+        z-index: 1;
+        width: 25px;
+        height: 25px;
+        right: 10px;
+        color: #fff;
+        background-color: #555;
+        top: 0px;
+        position: absolute;
+      }
+    </style>
+    <script>
+      function maximizeFullscreen() {
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch((err) => console.error("Failed to exit fullscreen:", err));
+        } else {
+          document.documentElement
+            .requestFullscreen()
+            .then(() => console.log("Entered fullscreen"))
+            .catch((err) => console.error("Failed to enter fullscreen:", err));
+        }
+      }
+
+      document.addEventListener("fullscreenchange", () => {
+        const maximizeBtn = document.getElementById("maximize-btn");
+        if (!maximizeBtn) return;
+        if (document.fullscreenElement) {
+          maximizeBtn.style.display = "none";
+        } else {
+          maximizeBtn.style.display = "block";
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="content">
+      <div class="header"></div>
+      <button id="maximize-btn" onclick="maximizeFullscreen()">□</button>
+      <div class="player"></div>
+      <div class="footer">
+        <div class="navigation">
+          <div class="general">
+            <a href="/faq">[FAQ]</a>
+            <a href="https://flashpointproject.github.io/flashpoint-database/">[Browse]</a>
+            <a href=".">[Random]</a>
+            <div class="toggle">
+              <input type="checkbox" id="extreme" checked /><label for="extreme">Filter NSFW</label>
+            </div>
+          </div>
+          <div class="entry">
+            <a href="" class="info" target="_blank">[More info]</a>
+            <a href="" class="link">[Direct link]</a>
+          </div>
+        </div>
+        <div class="compatibility">
+          <div class="rating">
+            <b>Compatibility rating:</b> <span class="fraction">N/A</span> (<span class="total">0</span> votes)
+          </div>
+          <div class="vote">
+            Is this entry working? <span class="button working">[Yes]</span> or <span class="button broken">[No]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reeyuki Desktop</title>
-    <script type="module" crossorigin src="/desktop/assets/index-C2u-kibS.js"></script>
-    <link rel="stylesheet" crossorigin href="/desktop/assets/index-ymK8Y44B.css">
+    <script type="module" crossorigin src="/desktop/assets/index-IAN_KUFi.js"></script>
+    <link rel="stylesheet" crossorigin href="/desktop/assets/index-yyAAk0eh.css">
   </head>
 
   <body>
@@ -97,22 +97,23 @@
         <div>Zombotron 2</div>
       </div>
 
+      <div class="icon selectable" data-app="zombotron2Time">
+        <img src="/static/icons/zombotron2.webp" />
+        <div>Zombotron 2 Time Machine</div>
+      </div>
+
       <div class="icon selectable" data-app="swarmQueen">
         <img src="/static/icons/swarm.webp" />
         <div>Swarm Queen</div>
       </div>
 
       <div class="icon selectable" data-app="fancyPants">
-        <img
-          src="https://play-lh.googleusercontent.com/uUknF-T1uzoMBLoR7CJo2R6GT_2RYs9qxXSvzCxsxZ-i7KD43k3RsdCyw7xXESIkOUg"
-        />
+        <img src="/static/icons/fancypants.png" />
         <div>Fancy Pants</div>
       </div>
 
       <div class="icon selectable" data-app="fancyPants2">
-        <img
-          src="https://play-lh.googleusercontent.com/uUknF-T1uzoMBLoR7CJo2R6GT_2RYs9qxXSvzCxsxZ-i7KD43k3RsdCyw7xXESIkOUg"
-        />
+        <img src="/static/icons/fancypants2.png" />
         <div>Fancy Pants 2</div>
       </div>
 
@@ -150,24 +151,61 @@
         <div>Pokemon White</div>
       </div>
 
-      <div class="icon selectable" data-app="vscode">
-        <img src="/static/icons/code.ico" />
-        <div>Visual Studio Code</div>
-      </div>
-
       <div class="icon selectable" data-app="gtaVc">
         <img src="/static/icons/gtavc.png" />
         <div>GTA Vice City</div>
       </div>
 
+      <div class="icon selectable" data-app="subwaySurfers">
+        <img src="/static/icons/subway.png" />
+        <div>Subway Surfers</div>
+      </div>
+
+      <div class="icon selectable" data-app="mutantFighting">
+        <img src="/static/icons/mutantcup1.png" />
+        <div>Mutant Fighting Cup</div>
+      </div>
+
+      <div class="icon selectable" data-app="mutantFighting2">
+        <img src="/static/icons/mutantcup2.png" />
+        <div>Mutant Fighting Cup 2</div>
+      </div>
+
+      <div class="icon selectable" data-app="finnAndBones">
+        <img src="/static/icons/finn-and-bones.webp" />
+        <div>Finn And Bones</div>
+      </div>
+
+      <div class="icon selectable" data-app="infectonator">
+        <img src="/static/icons/infectonator.webp" />
+        <div>Infectonator</div>
+      </div>
+
+      <div class="icon selectable" data-app="infectonator2">
+        <img src="/static/icons/infectonator2.webp" />
+        <div>Infectonator 2</div>
+      </div>
+
+      <div class="icon selectable" data-app="newyorkShark">
+        <img src="/static/icons/newyorkshark.webp" />
+        <div>New York Shark</div>
+      </div>
+
+      <div class="icon selectable" data-app="vscode">
+        <img src="/static/icons/vscode.webp" />
+        <div>Visual Studio Code</div>
+      </div>
+
       <div class="icon selectable" data-app="minecraft">
-        <img src="/static/icons/minecraft.webp" alt="Minecraft" />
-        <div>
-          <a href="https://eaglercraft.com/play/?version=" target="_blank">Minecraft</a>
-        </div>
+        <img src="/static/icons/minecraft.webp" />
+        <div>Minecraft</div>
+      </div>
+
+      <div class="icon selectable" data-app="swordsSouls">
+        <img src="/static/icons/swordsandsouls.webp" />
+        <div>Swords And Souls</div>
       </div>
     </div>
-
     <div id="start-menu" class="kde-menu">
       <div class="kde-sidebar">
         <div class="kde-user">
@@ -219,40 +257,55 @@
     </div>
 
     <div id="context-menu"></div>
-  </body>
 
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-  <script>
-    const icons = desktop.querySelectorAll(".icon");
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script>
+      const ICON_WIDTH = 80;
+      const ICON_HEIGHT = 100;
+      const GAP = 5;
 
-    const ICON_WIDTH = 80;
-    const ICON_HEIGHT = 100;
-    const GAP = 5;
-    const COLUMNS = 5;
+      const desktop = document.getElementById("desktop");
+      const icons = desktop.querySelectorAll(".icon");
 
-    icons.forEach((icon, index) => {
-      const col = index % COLUMNS;
-      const row = Math.floor(index / COLUMNS);
-      icon.style.position = "absolute";
-      icon.style.top = `${GAP + row * (ICON_HEIGHT + GAP)}px`;
-      icon.style.left = `${GAP + col * (ICON_WIDTH + GAP)}px`;
-    });
+      function layoutIcons() {
+        const desktopHeight = desktop.clientHeight;
 
-    document.querySelectorAll(".kde-cat").forEach((cat) => {
-      cat.onclick = () => {
-        document.querySelectorAll(".kde-cat").forEach((c) => c.classList.remove("active"));
-        document.querySelectorAll(".kde-page").forEach((p) => p.classList.remove("active"));
+        let x = GAP;
+        let y = GAP;
 
-        cat.classList.add("active");
-        document.querySelector(`.kde-page[data-page="${cat.dataset.cat}"]`).classList.add("active");
-      };
-    });
+        icons.forEach((icon) => {
+          icon.style.position = "absolute";
+          icon.style.left = `${x}px`;
+          icon.style.top = `${y}px`;
 
-    document.getElementById("kde-search").addEventListener("input", (e) => {
-      const q = e.target.value.toLowerCase();
-      document.querySelectorAll(".kde-item").forEach((item) => {
-        item.style.display = item.textContent.toLowerCase().includes(q) ? "" : "none";
+          y += ICON_HEIGHT + GAP;
+
+          if (y + ICON_HEIGHT > desktopHeight) {
+            y = GAP;
+            x += ICON_WIDTH + GAP;
+          }
+        });
+      }
+
+      window.addEventListener("load", layoutIcons);
+      window.addEventListener("resize", layoutIcons);
+
+      document.querySelectorAll(".kde-cat").forEach((cat) => {
+        cat.onclick = () => {
+          document.querySelectorAll(".kde-cat").forEach((c) => c.classList.remove("active"));
+          document.querySelectorAll(".kde-page").forEach((p) => p.classList.remove("active"));
+
+          cat.classList.add("active");
+          document.querySelector(`.kde-page[data-page="${cat.dataset.cat}"]`).classList.add("active");
+        };
       });
-    });
-  </script>
+
+      document.getElementById("kde-search").addEventListener("input", (e) => {
+        const q = e.target.value.toLowerCase();
+        document.querySelectorAll(".kde-item").forEach((item) => {
+          item.style.display = item.textContent.toLowerCase().includes(q) ? "" : "none";
+        });
+      });
+    </script>
+  </body>
 </html>

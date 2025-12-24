@@ -15,8 +15,8 @@ export class AppLauncher {
       terminal: { type: "system", action: () => this.terminalApp.open() },
       notepad: { type: "system", action: () => this.notepadApp.open() },
       music: { type: "system", action: () => this.musicPlayer.open(this.wm) },
-      sonic: { type: "swf", swf: "https://reeyuki.github.io/static/sonic.swf" },
-      swarmQueen: { type: "swf", swf: "https://reeyuki.github.io/static/swarmQueen.swf" },
+      sonic: { type: "swf", swf: "https://reeyuki.github.io/static/games/swfGames/sonic.swf" },
+      swarmQueen: { type: "swf", swf: "https://reeyuki.github.io/static/games/swfGames/swarmQueen.swf" },
       pacman: { type: "game", url: "https://pacman-e281c.firebaseapp.com" },
       pvz: { type: "game", url: "https://emupedia.net/emupedia-game-pvz" },
       tetris: { type: "game", url: "https://turbowarp.org/embed.html?autoplay#31651654" },
@@ -28,6 +28,7 @@ export class AppLauncher {
       zombieTd: { type: "game", url: "https://www.gamesflow.com/jeux.php?id=2061391" },
       zombotron: { type: "game", url: "https://www.gameflare.com/embed/zombotron" },
       zombotron2: { type: "game", url: "https://www.gameflare.com/embed/zombotron-2" },
+      zombotron2Time: { type: "game", url: "https://www.gameflare.com/embed/zombotron-2-time-machine/" },
       fancyPants: { type: "game", url: "https://www.friv.com/z/games/fancypantsadventure/game.html" },
       fancyPants2: { type: "game", url: "https://www.friv.com/z/games/fancypantsadventure2/game.html" },
       strikeForce: { type: "game", url: "https://www.friv.com/z/games/strikeforcekitty/game.html" },
@@ -36,11 +37,29 @@ export class AppLauncher {
         url: "https://www.retrogames.cc/embed/8843-jojos-bizarre-adventure%3A-heritage-for-the-future-jojo-no-kimyou-na-bouken%3A-mirai-e-no-isan-japan-990927-no-cd.html"
       },
       gtaVc: { type: "game", url: "/static/vciframe.html" },
+      subwaySurfers: {
+        type: "game",
+        url: "https://g.igroutka.ru/games/164/Xm2W5MIcPqrF1Y90/12/subway_surfers_easter_edinburgh"
+      },
+      mutantFighting: { type: "game", url: "https://www.gameflare.com/embed/mutant-fighting-cup" },
+      mutantFighting2: { type: "game", url: "https://www.gameflare.com/embed/mutant-fighting-cup-2" },
+      finnAndBones: { type: "game", url: "/static/flashpointarchive.html?fpGameName=finnAndBones" },
+      infectonator: { type: "swf", swf: "https://cache.armorgames.com/files/games/infectonator-5020.swf?v=1373587522" },
+      infectonator2: {
+        type: "swf",
+        swf: "https://cache.armorgames.com/files/games/infectonator-2-13150.swf?v=1373587527"
+      },
+      newyorkShark: {
+        type: "swf",
+        swf: "https://cache.armorgames.com/files/games/new-york-shark-12969.swf?v=1373587527"
+      },
+      swordsSouls: { type: "swf", swf: "https://cache.armorgames.com/files/games/swordssouls-17817.swf?v=1464609285" },
       pokemonRed: { type: "gba", url: "pokemon-red.gba" },
       pokemonEmerald: { type: "gba", url: "pokemon-emerald.gba" },
       pokemonPlatinum: { type: "nds", url: "pokemon-platinum.nds" },
       pokemonHeartgold: { type: "nds", url: "https://files.catbox.moe/xntjzl.nds" },
-      pokemonWhite: { type: "nds", url: "https://files.catbox.moe/dcicfh.nds" }
+      pokemonWhite: { type: "nds", url: "https://files.catbox.moe/dcicfh.nds" },
+      minecraft: { type: "remote", url: "https://eaglercraft.com/play" }
     };
 
     // Blacklist of full game names
@@ -79,7 +98,27 @@ export class AppLauncher {
       case "game":
         this.openGameApp(app, info.url);
         break;
+      case "html":
+        this.openHtmlApp(app, info.html);
+        break;
+      case "remote":
+        this.openRemoteApp(info.url);
     }
+  }
+  openRemoteApp(appUrl) {
+    window.open(appUrl, "_blank", "noopener,noreferrer");
+  }
+  openHtmlApp(appName, htmlContent) {
+    if (document.getElementById(`${appName}-win`)) {
+      this.wm.bringToFront(document.getElementById(`${appName}-win`));
+      return;
+    }
+
+    this.createWindow(
+      appName,
+      appName.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase()),
+      htmlContent
+    );
   }
 
   // --- Common blacklist check ---
@@ -90,6 +129,11 @@ export class AppLauncher {
 
   // --- Open Ruffle SWF ---
   openRuffleApp(gameName, swfPath) {
+    if (!swfPath) {
+      console.error("Swf is null!");
+      return;
+    }
+
     if (this.isBlacklisted(gameName)) {
       this.showCannotLoadPopup(gameName);
       return;
