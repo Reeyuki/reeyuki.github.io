@@ -1,10 +1,10 @@
-from flask import Flask, request, send_file, abort
+from flask import Flask, request, send_file, abort,jsonify
 from flask_cors import CORS
-import os
+import os,json
 import requests
 from urllib.parse import urlparse
 from time import sleep
-
+from datetime import datetime, timezone
 app = Flask(__name__)
 origins  = "*"
 CORS(app, origins=origins, supports_credentials=True)
@@ -17,6 +17,24 @@ os.makedirs(SAVE_DIR, exist_ok=True)
 
 ALLOWED_DOMAIN = "cdn.dos.zone" 
 
+@app.route("/analytics", methods=["POST"])
+def analytics():
+    payload = request.get_json(silent=True)
+    if payload is None:
+        return jsonify({"error": "invalid json"}), 400
+
+    record = {
+        "data": payload,
+        "ip_address": request.headers.get("X-Forwarded-For", request.remote_addr),
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+    with open("analytics.jsonl", "a") as f:
+        f.write(json.dumps(record) + "\n")
+
+    return jsonify({"status": "ok"}), 200
+
+    
 @app.route("/fetch", methods=["GET"])
 def fetch_file():
     url = request.args.get("url")

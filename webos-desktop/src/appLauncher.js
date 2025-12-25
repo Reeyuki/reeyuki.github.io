@@ -6,8 +6,8 @@ export class AppLauncher {
     this.explorerApp = explorerApp;
     this.terminalApp = terminalApp;
     this.notepadApp = notepadApp;
+    this.pageLoadTime = Date.now();
 
-    // Map of all apps and games
     this.appMap = {
       return: { type: "system", action: () => (window.location.href = "/") },
       explorer: { type: "system", action: () => this.explorerApp.open() },
@@ -63,46 +63,98 @@ export class AppLauncher {
       minecraft: { type: "remote", url: "https://eaglercraft.com/play" }
     };
 
-    this.emulatorBlacklist = [
-      ...Object.keys(this.appMap).filter((key) => ["swf", "gba", "nds"].includes(this.appMap[key].type)),
-      "gtaVc",
-      "finnAndBones"
-    ];
+    this.emulatorBlacklist = Object.keys(this.appMap)
+      .filter((key) => ["swf", "gba", "nds"].includes(this.appMap[key].type))
+      .concat(["gtaVc", "finnAndBones"]);
 
     populateStartMenu(this);
   }
 
-  // Launch app by type
   launch(app) {
     const info = this.appMap[app];
     if (!info) return;
 
-    switch (info.type) {
-      case "system":
-        info.action();
-        break;
-      case "swf":
-        this.openRuffleApp(app, info.swf);
-        break;
-      case "gba":
-        this.openEmulatorApp(app, info.url, "gba");
-        break;
-      case "nds":
-        this.openEmulatorApp(app, info.url, "nds");
-        break;
-      case "game":
-        this.openGameApp(app, info.url);
-        break;
-      case "html":
-        this.openHtmlApp(app, info.html);
-        break;
-      case "remote":
-        this.openRemoteApp(info.url);
-    }
+    const analyticsBase = this._getAnalyticsBase(app);
+    this.sendAnalytics({ ...analyticsBase, event: "launch" });
+
+    const handleApp = {
+      system: () => info.action(),
+      swf: () => this.openRuffleApp(app, info.swf, analyticsBase),
+      gba: () => this.openEmulatorApp(app, info.url, "gba", analyticsBase),
+      nds: () => this.openEmulatorApp(app, info.url, "nds", analyticsBase),
+      game: () => this.openGameApp(app, info.url, analyticsBase),
+      html: () => this.openHtmlApp(app, info.html, analyticsBase),
+      remote: () => this.openRemoteApp(info.url)
+    };
+
+    handleApp[info.type]?.();
   }
+
+  _getAnalyticsBase(app) {
+    let gpu = "Unknown";
+    try {
+      const canvas = document.createElement("canvas");
+      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      if (gl) {
+        const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+        gpu = debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
+      }
+    } catch {}
+
+    const elapsedMs = Date.now() - this.pageLoadTime;
+    const hours = Math.floor(elapsedMs / 3600000);
+    const minutes = Math.floor((elapsedMs % 3600000) / 60000);
+    const uptimeStr = `${hours}h, ${minutes}m`;
+    const isBrave =
+      /Brave\//.test(navigator.userAgent) ||
+      (window.navigator.brave && typeof window.navigator.brave.isBrave === "function");
+
+    return {
+      app,
+      timestamp: Date.now(),
+      browser: {
+        userAgent: navigator.userAgent,
+        isBrave,
+        language: navigator.language,
+        platform: navigator.platform,
+        screenWidth: window.screen.width,
+        screenHeight: window.screen.height,
+        uptime: uptimeStr,
+        gpu,
+        ram: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "Unknown",
+        cpuCores: navigator.hardwareConcurrency || "Unknown",
+        dnt: navigator.doNotTrack === "1" || window.doNotTrack === "1" ? "Enabled" : "Disabled"
+      }
+    };
+  }
+
+  sendAnalytics(data) {
+    fetch("https://reeyuki.duckdns.org/analytics", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+  }
+
+  recordUsage(winId, analyticsBase) {
+    const startTime = Date.now();
+    const win = document.getElementById(winId);
+
+    const sendUsage = () => {
+      const durationMs = Date.now() - startTime;
+      this.sendAnalytics({ ...analyticsBase, event: "usage", durationMs });
+    };
+
+    win.querySelector(".close-btn").addEventListener("click", sendUsage);
+    win.addEventListener("blur", sendUsage);
+  }
+
   openRemoteApp(appUrl) {
+    const analyticsBase = this._getAnalyticsBase(appUrl);
+    this.sendAnalytics({ ...analyticsBase, event: "launch" });
     window.open(appUrl, "_blank", "noopener,noreferrer");
   }
+
   openHtmlApp(appName, htmlContent) {
     if (document.getElementById(`${appName}-win`)) {
       this.wm.bringToFront(document.getElementById(`${appName}-win`));
@@ -116,21 +168,10 @@ export class AppLauncher {
     );
   }
 
-  // --- Common blacklist check ---
-  isBlacklisted(gameName) {
-    if (location.hostname !== "reeyuki.neocities.org") return false;
-    return this.emulatorBlacklist.includes(gameName);
-  }
-
   // --- Open Ruffle SWF ---
   openRuffleApp(gameName, swfPath) {
     if (!swfPath) {
       console.error("Swf is null!");
-      return;
-    }
-
-    if (this.isBlacklisted(gameName)) {
-      this.showCannotLoadPopup(gameName);
       return;
     }
 
@@ -146,11 +187,6 @@ export class AppLauncher {
 
   // --- Open Emulator Game ---
   openEmulatorApp(gameName, romName, core) {
-    if (this.isBlacklisted(gameName)) {
-      this.showCannotLoadPopup(gameName);
-      return;
-    }
-
     const uniqueId = `${core}-${romName.replace(/\W/g, "")}-${Date.now()}`;
     if (document.getElementById(uniqueId)) {
       this.wm.bringToFront(document.getElementById(uniqueId));
@@ -173,11 +209,6 @@ export class AppLauncher {
 
   // --- Open normal game ---
   openGameApp(gameName, url) {
-    if (this.isBlacklisted(gameName)) {
-      this.showCannotLoadPopup(gameName);
-      return;
-    }
-
     if (document.getElementById(`${gameName}-win`)) {
       this.wm.bringToFront(document.getElementById(`${gameName}-win`));
       return;
@@ -193,34 +224,6 @@ export class AppLauncher {
 
     const formattedName = gameName.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase());
     this.createWindow(gameName, formattedName, content, url);
-  }
-
-  // --- Show Cannot Load Game Popup ---
-  showCannotLoadPopup(gameName) {
-    const popup = document.createElement("div");
-    popup.style.position = "fixed";
-    popup.style.top = "20px";
-    popup.style.left = "50%";
-    popup.style.transform = "translateX(-50%)";
-    popup.style.background = "#fff";
-    popup.style.border = "1px solid #ccc";
-    popup.style.padding = "15px";
-    popup.style.borderRadius = "5px";
-    popup.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
-    popup.style.zIndex = 9999;
-
-    popup.innerHTML = `
-      <div style="text-align:center; margin-top:20px;">
-        Redirecting to playable version…<br>
-        If you are not redirected, <a href="https://reeyuki.github.io/desktop/?game=${gameName}" target="_blank">click here</a>.
-      </div>
-    `;
-
-    document.body.appendChild(popup);
-
-    setTimeout(() => {
-      window.location.href = `https://reeyuki.github.io/desktop?game=${gameName}`;
-    }, 1500);
   }
 
   // --- Create Window ---
@@ -246,10 +249,11 @@ export class AppLauncher {
     this.wm.setupWindowControls(win);
 
     if (externalUrl) {
-      win.querySelector(".external-btn").addEventListener("click", () => window.open(externalUrl, "_blank"));
+      win.querySelector(".external-btn").addEventListener("click", () => this.openRemoteApp(externalUrl));
     }
 
     this.wm.addToTaskbar(win.id, title);
+    this.recordUsage(`${id}-win`);
   }
 }
 
