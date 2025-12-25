@@ -414,3 +414,6 @@ if (game) {
     appLauncher.launch(game);
   }, 100);
 }
+console.log(
+  "Howdy, devtools user! the source of this site is available at: https://github.com/Reeyuki/reeyuki.github.io"
+);

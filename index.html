@@ -12,7 +12,7 @@
       }
 
       body {
-        background-color: black;
+        background: black;
         color: white;
         cursor: url("/static/icons/cursor.png"), auto;
         display: flex;
@@ -28,147 +28,103 @@
         flex-direction: column;
         align-items: center;
         gap: 25px;
-        padding: 30px 20px 20px 20px;
+        padding: 30px 20px 20px;
         text-align: center;
         width: 100%;
         max-width: 1200px;
       }
 
       h1,
-      h2 {
-        margin: 10px 0;
-      }
+      h2,
       p {
         margin: 10px 0;
       }
 
-      a {
-        color: rgb(116, 155, 218);
-        text-decoration: none;
-        margin: 5px 0;
-        display: inline-block;
-        transition: color 0.3s;
-      }
-      a:hover {
-        color: #8e0522;
-      }
-
-      button {
-        color: rgb(116, 155, 218);
-        background-color: transparent;
-        border: none;
-        font-size: 1.2em;
-        cursor: pointer;
-      }
-
-      .enter-desktop {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        background-color: #222;
-        color: white;
-        border: 1px solid white;
-        border-radius: 5px;
-        transition:
-          background-color 0.3s,
-          color 0.3s;
-      }
-      .enter-desktop:hover {
-        background-color: white;
-        color: black;
-      }
-
-      .projects {
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: 10px;
       }
 
+      ul li a {
+        color: rgb(116, 155, 218);
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: inline-block;
+        transition: 0.3s;
+      }
+
+      ul li a:hover {
+        background: white;
+        color: black;
+      }
+
+      .images-row {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+      }
+      .images-row img {
+        max-height: 150px;
+        width: auto;
+      }
+
       main > img,
-      .images-row img,
       footer img {
         max-width: 90%;
         max-height: 300px;
         width: auto;
         height: auto;
-        object-fit: cover;
         border-radius: 5px;
-      }
-
-      .images-row {
-        display: flex;
-        flex-wrap: nowrap;
-        gap: 10px;
-        overflow-x: auto;
-      }
-
-      .images-row img {
-        max-height: 150px;
-        height: auto;
-        width: auto;
-      }
-
-      .astolfo-images {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-        width: 100%;
-      }
-      .astolfo-images img {
-        height: 400px;
-      }
-
-      .trick {
-        display: inline-block;
-        cursor: pointer;
-        margin-top: 20px;
-        padding: 10px 20px;
-        border: 1px solid white;
-        border-radius: 5px;
-      }
-
-      .popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        max-width: 560px;
-        aspect-ratio: 16 / 9;
-        background: black;
-        z-index: 999;
-        border-radius: 5px;
-        overflow: hidden;
-      }
-
-      .popup video {
-        width: 100%;
-        height: 100%;
-        display: block;
       }
 
       footer {
         margin-top: auto;
         padding: 20px 0;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 20px;
       }
-
       footer img {
         max-width: 200px;
         max-height: 100px;
-        width: auto;
-        height: auto;
-        display: block;
       }
+
       #anime-greet {
         height: 250px;
+      }
+
+      .popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        z-index: 999;
+        justify-content: center;
+        align-items: center;
+      }
+      .popup video {
+        max-width: 90%;
+        max-height: 90%;
+      }
+      .popup-message {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-shadow: 0 0 10px black;
+        pointer-events: none;
       }
     </style>
   </head>
@@ -177,32 +133,24 @@
       <h1>Reeyuki</h1>
       <img id="anime-greet" src="/static/anime.webp" alt="Anime image" />
       <p>Thanks for visiting my site!</p>
-      <button class="enter-desktop" onclick="window.location.href = 'https://reeyuki.github.io/desktop/'">Enter Desktop</button>
-      <a href="/blog.html">My Blog</a>
 
-      <!--  <div class="astolfo-images"> -->
-      <!--    <img src="/static/astolfo.jpg" alt="Astolfo" /> -->
-      <!--    <img src="/static/astolfo2.jpg" alt="Astolfo 2" /> -->
-      <!--  </div> -->
+      <ul>
+        <li><a href="#rickroll">Femboy Thighs Gallery</a></li>
+        <li><a href="https://reeyuki.github.io/desktop/" target="_blank">Enter Desktop</a></li>
+        <li><a href="/blog.html">My Blog</a></li>
+      </ul>
 
-      <!-- <div class="trick" id="rickroll-button">Femboy Thighs Gallery</div> -->
-      <div class="popup" id="rickroll-popup">
-        <video controls autoplay>
-          <source src="https://dn721809.ca.archive.org/0/items/youtube-xvFZjo5PgG0/xvFZjo5PgG0.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <h2>My Projects</h2>
+      <ul>
+        <li><a href="https://liventcord.koyeb.app" target="_blank">Open Source Discord Alternative</a></li>
+        <li><a href="https://github.com/Reeyuki" target="_blank">My Github</a></li>
+      </ul>
 
       <h2>My Other Domains</h2>
       <ul>
         <li><a href="https://reeyuki.github.io" target="_blank">GitHub Pages</a></li>
         <li><a href="https://reeyuki.neocities.org" target="_blank">Neocities</a></li>
       </ul>
-
-      <div class="projects">
-        <h2>My Projects</h2>
-        <a href="https://liventcord.koyeb.app">Open Source Discord Alternative</a>
-        <a href="https://github.com/Reeyuki">My Github</a>
-      </div>
     </main>
 
     <div class="images-row">
@@ -211,18 +159,37 @@
       <img src="/static/4.gif" alt="Gif 4" />
       <img src="/static/3.gif" alt="Gif 3" />
     </div>
+
     <footer>
       <img src="/static/nocookie.gif" alt="No Cookie" />
+      <img src="/static/javascriptfreepage.gif" alt="Javascript Free Page" />
       <img src="/static/keepwebfree.gif" alt="Keep Web Free" />
     </footer>
 
-    <!-- <script>     -->
-    <!--   const button = document.getElementById("rickroll-button");     -->
-    <!--   const popup = document.getElementById("rickroll-popup");     -->
-    <!--   if (button && popup)     -->
-    <!--     button.addEventListener("click", () => {     -->
-    <!--       popup.style.display = "block";     -->
-    <!--     });     -->
-    <!-- </script>     -->
+    <div id="rickroll" class="popup">
+      <video id="rickroll-video" autoplay controls>
+        <source src="https://dn721809.ca.archive.org/0/items/youtube-xvFZjo5PgG0/xvFZjo5PgG0.mp4" type="video/mp4" />
+      </video>
+      <p class="popup-message">You’ve been rickrolled!</p>
+    </div>
+
+    <script>
+      const popup = document.getElementById("rickroll");
+      const video = document.getElementById("rickroll-video");
+
+      function checkTarget() {
+        if (location.hash === "#rickroll") {
+          popup.style.display = "flex";
+          video.play();
+        } else {
+          popup.style.display = "none";
+          video.pause();
+          video.currentTime = 0;
+        }
+      }
+
+      window.addEventListener("hashchange", checkTarget);
+      window.addEventListener("load", checkTarget);
+    </script>
   </body>
 </html>
