@@ -1,0 +1,174 @@
+:root {
+  --accent: #ff2d78;
+  --accent2: #ff8fc7;
+  --accent3: #ffd400;
+
+  --bg: #170611;
+  --bg2: #220a1b;
+
+  --card: #2a0d22;
+  --border: #4a1a38;
+
+  --text: #ffe3f1;
+}
+
+body {
+  background:
+    radial-gradient(
+      ellipse at 15% 10%,
+      rgba(255, 45, 120, 0.14),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 85% 18%,
+      rgba(255, 143, 199, 0.08),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 50% 90%,
+      rgba(255, 212, 0, 0.05),
+      transparent 50%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(180deg, #170611 0%, #220a1b 55%, #2c0c24 100%);
+}
+
+#sidebar {
+  background: rgba(20, 6, 16, 0.96);
+  border-right: 1px solid var(--accent);
+  box-shadow: 0 0 30px rgba(255, 45, 120, 0.1);
+}
+
+#anime-greet {
+  box-shadow:
+    0 0 18px rgba(255, 45, 120, 0.4),
+    0 0 50px rgba(255, 45, 120, 0.12);
+}
+
+.glitch-text {
+  position: relative;
+  text-shadow:
+    0 0 16px var(--accent),
+    0 0 42px rgba(255, 45, 120, 0.4);
+}
+
+#typing-tagline {
+  text-shadow:
+    0 0 10px rgba(255, 143, 199, 0.6),
+    0 0 26px rgba(255, 143, 199, 0.2);
+}
+
+.page-kicker {
+  text-shadow:
+    0 0 14px var(--accent),
+    0 0 36px rgba(255, 45, 120, 0.3);
+}
+
+.sidebar-links a:hover {
+  color: var(--accent2);
+  text-shadow: 0 0 7px rgba(255, 143, 199, 0.5);
+}
+
+.side-btn {
+  border-color: var(--border);
+}
+
+.side-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 10px rgba(255, 45, 120, 0.25);
+}
+
+section ul li a:hover {
+  text-shadow: 0 0 9px rgba(255, 143, 199, 0.6);
+}
+
+h2 {
+  text-shadow:
+    0 0 12px rgba(255, 143, 199, 0.5),
+    0 0 28px rgba(255, 143, 199, 0.15);
+}
+
+.project-showcase-title {
+  text-shadow:
+    0 0 16px var(--accent),
+    0 0 44px rgba(255, 45, 120, 0.3);
+}
+
+.project-tab.active,
+.project-tab:hover {
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255, 45, 120, 0.35);
+}
+
+.project-panel {
+  border-color: var(--border);
+}
+
+.slide-caption {
+  background: linear-gradient(transparent, rgba(20, 6, 16, 0.95));
+}
+
+.slide-caption p {
+  text-shadow: 0 0 7px var(--accent);
+}
+
+.dot.active {
+  box-shadow: 0 0 5px var(--accent);
+}
+
+.slide-nav {
+  background: rgba(20, 6, 16, 0.7);
+}
+
+.slide-nav:hover {
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255, 45, 120, 0.4);
+}
+
+.game-name {
+  text-shadow:
+    0 0 14px rgba(255, 143, 199, 0.6),
+    0 0 32px rgba(255, 143, 199, 0.18);
+}
+
+.construction-wrap {
+  border-color: var(--accent3);
+  box-shadow: 0 0 14px rgba(255, 212, 0, 0.3);
+}
+
+.feature-card:hover {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 10px rgba(255, 45, 120, 0.14),
+    inset 0 0 10px rgba(255, 45, 120, 0.03);
+}
+
+.webring-item:hover {
+  border-color: var(--accent2);
+  color: var(--accent2);
+  box-shadow: 0 0 9px rgba(255, 143, 199, 0.18);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 45, 120, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 45, 120, 0.75);
+}

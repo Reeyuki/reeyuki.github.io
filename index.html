@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reeyuki Portfolio</title>
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link id="purple-theme" rel="stylesheet" href="" />
+    <script>
+      if (Math.random() >= 0.5) {
+        document.getElementById("purple-theme").href = "style-purple.css";
+      }
+    </script>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/static/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/static/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/static/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="mask-icon"
+      href="/static/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <link rel="shortcut icon" href="/static/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta
+      name="msapplication-config"
+      content="/static/favicon/browserconfig.xml"
+    />
+    <meta name="author" content="Reeyuki" />
+    <meta
+      name="description"
+      content="reeyuki's little corner of the web. weird projects and other junk."
+    />
+    <meta property="og:title" content="reeyuki" />
+    <meta
+      property="og:description"
+      content="weird projects and other junk i made."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/static/seo2.webp" />
+    <meta property="og:url" content="https://reeyuki.neocities.org" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside id="sidebar">
+        <div class="sidebar-scroll">
+          <div class="profile-block">
+            <img id="anime-greet" src="/static/reeyuki.jpg" alt="Reeyuki" />
+            <h1 class="glitch-text" data-text="Reeyuki">Reeyuki</h1>
+          </div>
+
+          <ul class="sidebar-links">
+            <li><a href="/blog.html">My Blog</a></li>
+            <li>
+              <a
+                class="external-link"
+                target="_blank"
+                href="https://github.com/Reeyuki"
+                rel="noopener noreferrer"
+                >My GitHub
+              </a>
+            </li>
+
+            <li>
+              <a
+                class="external-link"
+                target="_blank"
+                href="https://discord.com/users/452491822871085066"
+                rel="noopener noreferrer"
+                >My Discord
+              </a>
+            </li>
+          </ul>
+
+          <div class="sidebar-divider"></div>
+
+          <button
+            id="toggle-purple"
+            class="side-btn"
+            aria-label="Toggle purple theme"
+          >
+            Purple theme
+          </button>
+
+          <div class="sidebar-divider"></div>
+
+          <div class="sidebar-badges">
+            <img
+              src="data:image/png;base64,R0lGODdhWAAfALMAAAMAAykBAGQeAZczAdgEAP8AAP8mJqtYEclzL/VkWc6TNdydUP+YmNPZ3f///////ywAAAAAWAAfAAAE/tDJSau9OOvNM+hgKI4b8DlNqqZF675rLM90bd+yKclv3+Mpk7ABWBVxx1pSeeL5ngVgULWUTq25pupH496SxaPYZCSHx8YgObtjwWxeJTVMrMeWdDvYTtOhGgZvN4EuX1RTaGWIamt6VXNtPkBxOYd1eJV5j5hsKDCCAAsLCgsHA1uFfZZ0Q3NiV42XsWUSbz2iuLmmblFYvr93J4K3oqS4CqcNLgnAzb5+qaguuaMCu8rRUq+PlrBg3Gq1LSsHCrcHogfWK9k2nO5zevKNZ+K9DaWkxAemCuzjRL6pCXjJm6s02xC9CmivgQBS/AYs6GHqWLJCCQvOY7WIj0ZN+2nCOXCBTtQAdQgO9CBlTMEBbFHwDFkIUgjIQxn3QBrZohwCBMgAlDP3otgCBAJ4xuwIq2OepjidGoTW8wDQnwMQLAhAtMUoUQgGvKG3sCDNb5zIXiFItcWAt/wEnLSqr4XLuS4YONsLpG2vt28bwOWnskXKAQTaPQs5A1ylnTCZzXAAWKxbmPeAOWaMhNYfQTUSPGmM9uDHgasSEfToh1fm0JSa7pk9e60Z2UwZ/sGMI/ZaPk/P4GwlL6CZmZ7/KZYGsDHT4Kc3Qf0drI1yKL4VMTKdM2081DKtM8f+mq95JFqcQDnP3ooOm/Djy59Pv779+/jz69/Pv799ADs="
+              alt="No cookies badge"
+            />
+            <a target="_blank" href="//www.fsf.org/campaigns/fight-to-repair"
+              ><img
+                src="/static/righttorepair.jpg"
+                title="Fight to Repair"
+                alt="[Fight to Repair]"
+            /></a>
+            <img
+              src="/static/gimp.png"
+              title="Green Is My Pepper"
+              alt="[Green Is My Pepper]"
+            />
+            <img src="/static/keepwebfree.gif" alt="Keep web free badge" />
+            <a target="_blank" href="//www.kernel.org/"
+              ><img
+                src="https://patchysicp.xyz/buttons/linux.gif"
+                title="Linux Now!"
+                alt="[Linux Now!]"
+            /></a>
+            <a target="_blank" href="https://www.fsf.org/windows">
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAACpQTFRFKCcmgpGY293b////FBMVph0gn6GrSklJJigtZWxuAAD//wAAAP8A//8AgxdlfgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oDBxY6BJsTFY8AAAEdSURBVEjH1ZWNFoIgDIWHgyTQ93/dEEaOgWH+dE7TxqaH71xvs+Ax3BPwuIc8BjAcDmvtO5cxcnC4byngbIznFHfAQV/b/gsUP1UdA9jzintgY8y6yeS0XDQp0npAMdtTgnm/YYXWyjnl/VLsAhvONN94DBtgeuwSXDjBwVLwDsXE6igOOKeUj0VHcUqr1R1wrfgH4Na4CfDmuGkWteIzb54kXwh2zmntvb8YLMlXggsvBkAMt0JCKjCmpYacWYexwxT7wBDX+KHqfcqOrkjF8zxrPU1TBtPBtq34vIDoarDg7gBnQwhMvjTActywftC0m/Hwg2K79YK0wIW50DCm4XH1s4mMdeTLsz0wH7fS3WLcWuB7/v7h38BwS4wvWZAOKLy0D7UAAAAASUVORK5CYII="
+                alt="Hate microsoft"
+              />
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <main id="content">
+        <header id="sec-top">
+          <h2 class="page-kicker">
+            <span class="marquee-text">hi, i'm reeyuki</span>
+          </h2>
+          <p class="intro-text">i make games and build websites</p>
+        </header>
+
+        <section class="project-showcase" id="sec-games">
+          <div class="project-showcase-title">Projects</div>
+          <div class="project-tabs">
+            <button class="project-tab active" data-game="voraxoid">
+              Voraxoid
+            </button>
+            <button class="project-tab" data-game="soulthera">Soulthera</button>
+            <button class="project-tab" data-game="yukios">YukiOS</button>
+            <button class="project-tab" data-game="liventcord">
+              LiventCord
+            </button>
+          </div>
+
+          <div class="project-panel active" id="panel-voraxoid">
+            <div class="slideshow-wrapper" id="slideshow-voraxoid">
+              <div class="slide" data-index="0">
+                <img src="/static/vorax.webp" alt="Voraxoid main" />
+                <div class="slide-caption">
+                  <p>Voraxoid, a monstrous evolution idle game</p>
+                </div>
+              </div>
+              <div class="slide" data-index="1">
+                <img src="/static/lab1.webp" alt="Evolution Laboratory" />
+                <div class="slide-caption">
+                  <p>Evolution laboratory, mutate and upgrade your form</p>
+                </div>
+              </div>
+              <div class="slide" data-index="2">
+                <img src="/static/lab2.webp" alt="Evolution Laboratory" />
+                <div class="slide-caption">
+                  <p>Grow claws, tails, and terrifying appendages</p>
+                </div>
+              </div>
+              <div class="slide" data-index="3">
+                <img src="/static/lab3.webp" alt="Evolution Laboratory" />
+                <div class="slide-caption">
+                  <p>Unlock new biological tiers as you evolve</p>
+                </div>
+              </div>
+              <div class="slide" data-index="4">
+                <img src="/static/gun.webp" alt="Turret attachment" />
+                <div class="slide-caption">
+                  <p>Mount turrets and unleash mechanical destruction</p>
+                </div>
+              </div>
+              <div class="slide-dots" id="dots-voraxoid">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+                <div class="dot" data-index="3"></div>
+                <div class="dot" data-index="4"></div>
+              </div>
+              <button class="slide-nav prev-btn" data-target="voraxoid">
+                ◀
+              </button>
+              <button class="slide-nav next-btn" data-target="voraxoid">
+                &gt;
+              </button>
+            </div>
+            <div class="game-info">
+              <div class="game-name">Voraxoid</div>
+              <p class="game-desc">
+                Become a monstrous creation of the humans who made you.
+              </p>
+              <ul class="game-features">
+                <li>Devour humans, civilians and scientists alike.</li>
+                <li>Collect rewards, meat, gems and eggs to power upgrades.</li>
+                <li>
+                  Evolve your body, grow claws, tails, and turret attachments.
+                </li>
+                <li>
+                  Summon allies, hatch demon servants, mage allies, and mimic
+                  bots to hunt for you.
+                </li>
+                <li>
+                  Explore new worlds, gather broken spaceship parts to move to
+                  the next planet.
+                </li>
+                <li>
+                  Idle & daily rewards, keep growing even when you're away.
+                </li>
+              </ul>
+              <a
+                href="https://reeyuki.itch.io/voraxoid"
+                class="play-btn"
+                target="_blank"
+                >▶ Play on itch</a
+              >
+            </div>
+          </div>
+
+          <div class="project-panel" id="panel-soulthera">
+            <div class="slideshow-wrapper" id="slideshow-soulthera">
+              <div class="slide active" data-index="0">
+                <img src="/static/soulthera1.webp" alt="Soulthera main" />
+                <div class="slide-caption">
+                  <p>Soulthera, you are a ghost</p>
+                </div>
+              </div>
+              <div class="slide" data-index="1">
+                <img src="/static/soulthera2.webp" alt="Soulthera gameplay" />
+                <div class="slide-caption">
+                  <p>Things keep coming. They don't stop.</p>
+                </div>
+              </div>
+              <div class="slide" data-index="2">
+                <img src="/static/soulthera3.webp" alt="Soulthera upgrades" />
+                <div class="slide-caption">
+                  <p>Pick upgrades. Become something else.</p>
+                </div>
+              </div>
+              <div class="slide-dots" id="dots-soulthera">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+              </div>
+              <button class="slide-nav prev-btn" data-target="soulthera">
+                ◀
+              </button>
+              <button class="slide-nav next-btn" data-target="soulthera">
+                &gt;
+              </button>
+            </div>
+            <div class="game-info">
+              <div class="game-name">Soulthera Ascendant</div>
+              <p class="game-desc">
+                A small roguelike where you drift around as a ghost and survive
+                for as long as you can. You don't attack directly, things around
+                you do it for you.
+              </p>
+              <ul class="game-features">
+                <li>Rats, wolves, slimes, spiders, flying skulls, worms</li>
+                <li>Auto-aim weapons, move and dodge while they fire</li>
+                <li>Grab exp orbs mid-fight, choose upgrades between waves</li>
+                <li>
+                  Elite variants and Cerberus spawn the longer you survive
+                </li>
+              </ul>
+              <a
+                href="https://reeyuki.itch.io/soulthera-ascendant"
+                class="play-btn"
+                target="_blank"
+                >▶ Play on itch</a
+              >
+            </div>
+          </div>
+
+          <div class="project-panel" id="panel-yukios">
+            <div class="slideshow-wrapper" id="slideshow-yukios">
+              <div class="slide active" data-index="0">
+                <img src="/static/yukios-login.webp" alt="YukiOS login" />
+                <div class="slide-caption">
+                  <p>
+                    YukiOS login screen, a browser-based desktop environment
+                  </p>
+                </div>
+              </div>
+              <div class="slide" data-index="1">
+                <img
+                  src="/static/yukios-audio1.webp"
+                  alt="YukiOS audio mixer"
+                />
+                <div class="slide-caption">
+                  <p>Audio mixer with per-app volume controls and visualizer</p>
+                </div>
+              </div>
+              <div class="slide" data-index="2">
+                <img src="/static/yukios-overlay.webp" alt="YukiOS overlay" />
+                <div class="slide-caption">
+                  <p>In-game overlay with achievements, friends, and browser</p>
+                </div>
+              </div>
+              <div class="slide" data-index="3">
+                <img src="/static/yukios-widget.png" alt="YukiOS" />
+                <div class="slide-caption">
+                  <p>Desktop widgets</p>
+                </div>
+              </div>
+              <div class="slide-dots" id="dots-yukios">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+                <div class="dot" data-index="3"></div>
+              </div>
+              <button class="slide-nav prev-btn" data-target="yukios">◀</button>
+              <button class="slide-nav next-btn" data-target="yukios">
+                &gt;
+              </button>
+            </div>
+            <div class="game-info">
+              <div class="game-name">YukiOS</div>
+              <p class="game-desc">
+                A browser-based desktop environment running in a single web page
+                with windowed multitasking, persistent storage, emulators, and
+                80+ built-in applications.
+              </p>
+              <ul class="game-features">
+                <li>
+                  Draggable, resizable windows with snapping, workspaces, and
+                  focus cycling
+                </li>
+                <li>
+                  File explorer with persistent IndexedDB storage and
+                  drag-and-drop from host OS
+                </li>
+                <li>
+                  Built-in terminal, code editor (Monaco), dev tools, and
+                  command palette
+                </li>
+                <li>
+                  Emulators for Flash (Ruffle), DOS (JsDos), console
+                  (EmulatorJS), and x86
+                </li>
+                <li>
+                  Theme system with 40 presets, animated wallpapers, and
+                  Vanta.js support
+                </li>
+                <li>
+                  80+ apps including games, media tools, web apps, and
+                  Steam-like game launcher
+                </li>
+              </ul>
+              <a
+                href="https://github.com/reeyuki/yukios"
+                class="play-btn"
+                target="_blank"
+                >▶ Open on GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-panel" id="panel-liventcord">
+            <div
+              class="slideshow-wrapper"
+              id="slideshow-liventcord"
+              style="
+                background: transparent;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <iframe
+                src="https://liventcord.github.io/"
+                style="width: 100%; height: 100%; border: none"
+                loading="lazy"
+                title="LiventCord"
+              ></iframe>
+            </div>
+            <div class="game-info">
+              <div class="game-name">LiventCord</div>
+              <p class="game-desc">A open source discord alternative</p>
+              <a
+                href="https://liventcord.github.io/"
+                class="play-btn"
+                target="_blank"
+                >▶ Visit LiventCord</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <section id="sec-footer-links">
+          <div class="footer-links-row">
+            <div class="footer-links-group">
+              <span class="footer-links-label">Other Sites</span>
+              <a
+                target="_blank"
+                href="https://reeyuki.neocities.org"
+                rel="noopener"
+                >Neocities</a
+              >
+              <a target="_blank" href="https://reeyuki.nekoweb.org">NekoWeb</a>
+              <a target="_blank" href="https://reeyuki.github.io"
+                >GitHub Pages</a
+              >
+            </div>
+            <div class="footer-links-group">
+              <span class="footer-links-label">Webrings</span>
+              <a
+                target="_blank"
+                href="https://memo.jamful.top"
+                class="webring-item"
+                rel="noopener"
+              >
+                <img src="/static/jam.webp" alt="Jam" width="24" height="24" />
+                Jam
+              </a>
+              <a
+                target="_blank"
+                href="https://patchysicp.xyz"
+                class="webring-item"
+                rel="noopener"
+              >
+                <img
+                  src="/static/patchysicp.jpg"
+                  alt="Patchysicp"
+                  width="24"
+                  height="24"
+                />
+                Patchysicp
+              </a>
+            </div>
+            <div class="footer-links-group">
+              <span class="footer-links-label">Support</span>
+              <a target="_blank" href="https://patreon.com/Reeyuki">Patreon</a>
+              <span class="footer-monero"
+                >Monero:
+                4B5RKGR4C5WDkHGKVemU4rDcnKDG5NbwBLogE1tnxAWJAqbLPpNiDNaVZC1jrfwSdB7Sh1ALQNe3TMMvhdEJTPRcAUJhyVm</span
+              >
+            </div>
+          </div>
+        </section>
+
+        <section id="sec-comments">
+          <h2>comments</h2>
+          <div class="comments-wrap">
+            <form id="gb-form">
+              <input
+                type="text"
+                id="gb-name"
+                placeholder="Your name"
+                required
+                maxlength="50"
+              />
+              <textarea
+                id="gb-message"
+                placeholder="Add a comment"
+                required
+                maxlength="1000"
+                rows="3"
+              ></textarea>
+              <button type="submit" class="side-btn" style="width: auto">
+                Comment
+              </button>
+            </form>
+            <div id="gb-messages"></div>
+            <div class="gb-footer">
+              <select id="gb-limit">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+              <div id="gb-pagination"></div>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <div id="android-banner"></div>
+          <div class="construction-wrap">
+            <img src="/static/construction.gif" />
+          </div>
+          <a target="_blank" href="https://hits.sh/reeyuki.neocities.org/">
+            <img
+              src="https://hits.sh/reeyuki.neocities.org/.svg?style=for-the-badge&label=VISITORS&color=00ffcc&labelColor=0a0a0a"
+              alt="Visitor count"
+              style="border: 2px solid #00ffcc"
+            />
+          </a>
+        </footer>
+
+        <div id="ladder-container"></div>
+        <div class="easter-egg">
+          <p>You found 3 demon girls</p>
+          <p>Listen to some helltaker music since u scrolled that far</p>
+          <audio controls src="/static/vitality.mp3"></audio>
+          <img src="/static/helltaker.webp" alt="Helltaker Dancing" />
+        </div>
+      </main>
+    </div>
+
+    <audio id="idiot-audio"></audio>
+
+    <script src="https://keepandroidopen.org/banner.js?id=android-banner"></script>
+    <script src="mainscript.js"></script>
+  </body>
+</html>

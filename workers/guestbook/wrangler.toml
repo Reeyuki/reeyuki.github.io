@@ -1,0 +1,8 @@
+name = "reeyuki-guestbook"
+main = "src/index.js"
+compatibility_date = "2024-12-18"
+
+[[kv_namespaces]]
+
+binding = "GUESTBOOK"
+id = "47a4fa7bf2d740a2bfe4f0078553ec4e"

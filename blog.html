@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog – Reeyuki</title>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/static/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/static/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/static/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="mask-icon"
+      href="/static/favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <link rel="shortcut icon" href="/static/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta
+      name="msapplication-config"
+      content="/static/favicon/browserconfig.xml"
+    />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <style>
+      body {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      header {
+        margin-bottom: 2rem;
+      }
+
+      .blog-title {
+        margin: 0.5rem 0;
+      }
+
+      nav {
+        margin: 0.5rem 0;
+      }
+
+      nav a {
+        margin-right: 1rem;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      article {
+        border: 1px solid currentColor;
+      }
+
+      .article-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.6rem;
+        border-bottom: 1px solid currentColor;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .article-body {
+        display: none;
+        padding: 1rem;
+      }
+
+      .article-body.open {
+        display: block;
+      }
+
+      .read-time {
+        font-size: 0.85em;
+        margin-bottom: 0.75rem;
+      }
+
+      footer {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .construction-wrap {
+        margin-top: 1rem;
+      }
+
+      h2 {
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="home-button">◀ HOME</a>
+      <div class="blog-title">BLOG</div>
+      <nav>
+        <a href="#post1">KERNEL ANTI-CHEATS</a>
+      </nav>
+    </header>
+
+    <main>
+      <article id="post1">
+        <div class="article-header" onclick="toggleArticle(this)">
+          <div class="article-id">POST_001.TXT</div>
+          <div class="read-time"></div>
+        </div>
+        <div class="article-body">
+          <h2>Kernel-level anti-cheats SUCK, and here's why</h2>
+          <p>
+            There's a growing trend in multiplayer games where developers deploy
+            anti-cheat software that runs at the kernel level, with deep access
+            to your hardware and operating system. Riot's Vanguard is a
+            well-known example, running with the same privileges as the OS
+            itself <sup><a href="#ref1">[1]</a></sup
+            >.
+          </p>
+          <p>
+            These anti-cheats also tend to conflict with each other. Battlefield
+            6 refused to run if Riot Vanguard was installed because both systems
+            competed for low-level control <sup><a href="#ref2">[2]</a></sup
+            >.
+          </p>
+          <p>
+            On top of that, kernel-level anti-cheats introduce real performance
+            and privacy risks. They can observe most running processes and
+            system activity, and users have reported overhead, instability, and
+            general system issues <sup><a href="#ref3">[3]</a></sup
+            >.
+          </p>
+          <p>
+            All of this is done largely to reduce the cost of proper server-side
+            cheat detection. Instead, your PC becomes a constantly reporting
+            client. If anything goes wrong on their end, your system is the one
+            exposed <sup><a href="#ref4">[4]</a></sup
+            >.
+          </p>
+          <p>
+            I would strongly advise against supporting games from companies that
+            operate like this. They give zero shits about your privacy, and
+            every "security" measure they add is another attack on it.
+          </p>
+          <p>
+            Protection SHOULD be done on the server side, never on the client.
+            Any client-side protection can be inspected, modified, bypassed, or
+            removed entirely. Going kernel-level doesn't make an anti-cheat
+            foolproof, cheaters can and do write their own kernel drivers
+            <sup><a href="#ref5">[5]</a></sup
+            >.
+          </p>
+          <p>
+            To make things worse, some companies push misleading narratives
+            about Linux being a major source of cheating. Apex Legends
+            developers claimed removing Linux support reduced cheating by 33%
+            during the same period the game experienced a massive player drop,
+            and Linux users were only ~2% of the base
+            <sup><a href="#ref6">[6]</a></sup
+            ><sup><a href="#ref7">[7]</a></sup
+            >.
+          </p>
+          <p>
+            And in the end, this noisy approach still fails to eliminate
+            cheaters.
+          </p>
+          <hr />
+          <h3>References</h3>
+          <ol>
+            <li id="ref1">
+              <a href="https://en.wikipedia.org/wiki/Riot_Vanguard"
+                >https://en.wikipedia.org/wiki/Riot_Vanguard</a
+              >
+            </li>
+            <li id="ref2">
+              <a
+                href="https://www.reddit.com/r/technology/comments/1mpv50v/battlefield_6_open_beta_wont_run_if_you_have"
+                >https://www.reddit.com/r/technology/comments/1mpv50v/battlefield_6_open_beta_wont_run_if_you_have</a
+              >
+            </li>
+            <li id="ref3">
+              <a
+                href="https://tskkc.com/more/138428/kernel-level-anti-cheat-explained-how-it-works-and-risks"
+                >https://tskkc.com/more/138428/kernel-level-anti-cheat-explained-how-it-works-and-risks</a
+              >
+            </li>
+            <li id="ref4">
+              <a
+                href="https://leveluptalk.com/news/kernel-level-anti-cheat-gaming-risks-benefits/"
+                >https://leveluptalk.com/news/kernel-level-anti-cheat-gaming-risks-benefits/</a
+              >
+            </li>
+            <li id="ref5">
+              <a
+                href="https://courses.csail.mit.edu/6.857/2021/projects/Lee-Jiang-Srinivasan-Wang.pdf"
+                >https://courses.csail.mit.edu/6.857/2021/projects/Lee-Jiang-Srinivasan-Wang.pdf</a
+              >
+            </li>
+            <li id="ref6">
+              <a href="https://www.reddit.com/r/linux_gaming/comments/1imv61k/"
+                >https://www.reddit.com/r/linux_gaming/comments/1imv61k/</a
+              >
+            </li>
+            <li id="ref7">
+              <a href="https://www.reddit.com/r/apexlegends/comments/1ggi63h/"
+                >https://www.reddit.com/r/apexlegends/comments/1ggi63h/</a
+              >
+            </li>
+          </ol>
+        </div>
+      </article>
+
+      <article id="post2">
+        <div class="article-header" onclick="toggleArticle(this)">
+          <div class="article-id">POST_002.TXT</div>
+          <div class="read-time"></div>
+        </div>
+        <div class="article-body">
+          <h2>Use Linux</h2>
+          <p id="linux"></p>
+          <p>is the year of linux desktop</p>
+          <script>
+            document.getElementById("linux").textContent = String(
+              new Date().getFullYear(),
+            );
+          </script>
+        </div>
+      </article>
+
+      <h2>Donations</h2>
+      <p>
+        Monero:
+        4B5RKGR4C5WDkHGKVemU4rDcnKDG5NbwBLogE1tnxAWJAqbLPpNiDNaVZC1jrfwSdB7Sh1ALQNe3TMMvhdEJTPRcAUJhyVm
+      </p>
+
+      <footer>
+        <img
+          src="data:image/png;base64,R0lGODdhWAAfALMAAAMAAykBAGQeAZczAdgEAP8AAP8mJqtYEclzL/VkWc6TNdydUP+YmNPZ3f///////ywAAAAAWAAfAAAE/tDJSau9OOvNM+hgKI4b8DlNqqZF675rLM90bd+yKclv3+Mpk7ABWBVxx1pSeeL5ngVgULWUTq25pupH496SxaPYZCSHx8YgObtjwWxeJTVMrMeWdDvYTtOhGgZvN4EuX1RTaGWIamt6VXNtPkBxOYd1eJV5j5hsKDCCAAsLCgsHA1uFfZZ0Q3NiV42XsWUSbz2iuLmmblFYvr93J4K3oqS4CqcNLgnAzb5+qaguuaMCu8rRUq+PlrBg3Gq1LSsHCrcHogfWK9k2nO5zevKNZ+K9DaWkxAemCuzjRL6pCXjJm6s02xC9CmivgQBS/AYs6GHqWLJCCQvOY7WIj0ZN+2nCOXCBTtQAdQgO9CBlTMEBbFHwDFkIUgjIQxn3QBrZohwCBMgAlDP3otgCBAJ4xuwIq2OepjidGoTW8wDQnwMQLAhAtMUoUQgGvKG3sCDNb5zIXiFItcWAt/wEnLSqr4XLuS4YONsLpG2vt28bwOWnskXKAQTaPQs5A1ylnTCZzXAAWKxbmPeAOWaMhNYfQTUSPGmM9uDHgasSEfToh1fm0JSa7pk9e60Z2UwZ/sGMI/ZaPk/P4GwlL6CZmZ7/KZYGsDHT4Kc3Qf0drI1yKL4VMTKdM2081DKtM8f+mq95JFqcQDnP3ooOm/Djy59Pv779+/jz69/Pv799ADs="
+          alt="No cookies badge"
+        />
+        <a href="//www.fsf.org/campaigns/fight-to-repair"
+          ><img
+            src="/static/righttorepair.jpg"
+            title="Fight to Repair"
+            alt="[Fight to Repair]"
+        /></a>
+        <img
+          src="/static/gimp.png"
+          title="Green Is My Pepper"
+          alt="[Green Is My Pepper]"
+        />
+        <img src="/static/keepwebfree.gif" alt="Keep web free badge" />
+        <a href="https://www.fsf.org/windows">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAACpQTFRFKCcmgpGY293b////FBMVph0gn6GrSklJJigtZWxuAAD//wAAAP8A//8AgxdlfgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oDBxY6BJsTFY8AAAEdSURBVEjH1ZWNFoIgDIWHgyTQ93/dEEaOgWH+dE7TxqaH71xvs+Ax3BPwuIc8BjAcDmvtO5cxcnC4byngbIznFHfAQV/b/gsUP1UdA9jzintgY8y6yeS0XDQp0npAMdtTgnm/YYXWyjnl/VLsAhvONN94DBtgeuwSXDjBwVLwDsXE6igOOKeUj0VHcUqr1R1wrfgH4Na4CfDmuGkWteIzb54kXwh2zmntvb8YLMlXggsvBkAMt0JCKjCmpYacWYexwxT7wBDX+KHqfcqOrkjF8zxrPU1TBtPBtq34vIDoarDg7gBnQwhMvjTActywftC0m/Hwg2K79YK0wIW50DCm4XH1s4mMdeTLsz0wH7fS3WLcWuB7/v7h38BwS4wvWZAOKLy0D7UAAAAASUVORK5CYII="
+            alt="Hate microsoft"
+          />
+        </a>
+        <a href="https://hits.sh/reeyuki.neocities.org/">
+          <img
+            src="https://hits.sh/reeyuki.neocities.org/.svg?style=for-the-badge&label=VISITORS&color=00ffcc&labelColor=0a0a0a"
+            alt="Visitor count"
+            style="border: 2px solid #00ffcc"
+          />
+        </a>
+      </footer>
+
+      <div id="android-banner"></div>
+      <div class="construction-wrap">
+        <img src="/static/construction.gif" />
+      </div>
+    </main>
+
+    <script src="https://keepandroidopen.org/banner.js"></script>
+    <script>
+      function toggleArticle(header) {
+        const body = header.nextElementSibling;
+        body.classList.toggle("open");
+      }
+
+      const WPM = 200;
+      document.querySelectorAll("article").forEach((article) => {
+        const body = article.querySelector(".article-body");
+        const read = article.querySelector(".read-time");
+        const title = body.querySelector("h2");
+        if (!body || !read || !title) return;
+        const words = body.innerText.trim().split(/\s+/).length;
+        const minutes = Math.max(1, Math.ceil(words / WPM));
+        read.textContent = title.textContent.trim() + " - " + minutes + " min";
+      });
+    </script>
+  </body>
+</html>
