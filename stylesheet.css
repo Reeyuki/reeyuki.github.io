@@ -822,6 +822,38 @@ footer {
   }
 }
 
+#sec-games-i-like h2 {
+  margin-bottom: 10px;
+}
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.game-list div {
+  font-family: var(--vt);
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.game-list div::before {
+  content: "• ";
+  color: var(--accent);
+}
+
+.game-list div a {
+  color: var(--text);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.game-list div a:hover {
+  color: var(--accent);
+}
+
 @media (max-width: 860px) {
   #sidebar {
     position: static;
