@@ -658,36 +658,20 @@
 
         <section id="sec-comments">
           <h2>comments</h2>
-          <div class="comments-wrap">
-            <form id="gb-form">
-              <input
-                type="text"
-                id="gb-name"
-                placeholder="Your name"
-                required
-                maxlength="50"
-              />
-              <textarea
-                id="gb-message"
-                placeholder="Add a comment"
-                required
-                maxlength="1000"
-                rows="3"
-              ></textarea>
-              <button type="submit" class="side-btn" style="width: auto">
-                Comment
-              </button>
-            </form>
-            <div id="gb-messages"></div>
-            <div class="gb-footer">
-              <select id="gb-limit">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-              </select>
-              <div id="gb-pagination"></div>
-            </div>
-          </div>
+          <iframe
+            src="https://reeyuki.github.io/comments.html"
+            id="gb-iframe"
+            style="
+              width: 100%;
+              max-width: 500px;
+              border: none;
+              overflow: hidden;
+              display: block;
+              background: transparent;
+            "
+            loading="lazy"
+            title="Comments"
+          ></iframe>
         </section>
 
         <footer>
@@ -718,5 +702,15 @@
 
     <script src="https://keepandroidopen.org/banner.js?id=android-banner"></script>
     <script src="mainscript.js"></script>
+    <script>
+      window.addEventListener("message", (e) => {
+        if (e.data?.type === "resize" && e.data.height) {
+          const iframe = document.getElementById("gb-iframe");
+          if (iframe && e.source === iframe.contentWindow) {
+            iframe.style.height = e.data.height + "px";
+          }
+        }
+      });
+    </script>
   </body>
 </html>
