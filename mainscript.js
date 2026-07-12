@@ -21,6 +21,7 @@ document.addEventListener("mousemove", (e) => {
 const slideshows = {
   voraxoid: { current: 0, interval: null, duration: 4000 },
   soulthera: { current: 0, interval: null, duration: 4000 },
+  seasweeper: { current: 0, interval: null, duration: 4000 },
   yukios: { current: 0, interval: null, duration: 4000 },
   liventcord: { current: 0, interval: null, duration: 4000 },
 };
@@ -95,7 +96,12 @@ document.addEventListener("DOMContentLoaded", () => {
       tabPanels.forEach((p) => p.classList.remove("active"));
       const target = document.getElementById("panel-" + game);
       if (target) target.classList.add("active");
-      if (game === "voraxoid" || game === "soulthera" || game === "yukios") {
+      if (
+        game === "voraxoid" ||
+        game === "soulthera" ||
+        game === "seasweeper" ||
+        game === "yukios"
+      ) {
         startSlideshow(game);
       }
     });
