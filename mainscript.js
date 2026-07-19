@@ -19,11 +19,11 @@ document.addEventListener("mousemove", (e) => {
 });
 
 const slideshows = {
-  voraxoid: { current: 0, interval: null, duration: 4000 },
-  soulthera: { current: 0, interval: null, duration: 4000 },
-  seasweeper: { current: 0, interval: null, duration: 4000 },
-  yukios: { current: 0, interval: null, duration: 4000 },
-  liventcord: { current: 0, interval: null, duration: 4000 },
+  voraxoid: { current: 0, interval: null, duration: 8000 },
+  soulthera: { current: 0, interval: null, duration: 8000 },
+  seasweeper: { current: 0, interval: null, duration: 8000 },
+  yukios: { current: 0, interval: null, duration: 8000 },
+  liventcord: { current: 0, interval: null, duration: 8000 },
 };
 function getSlides(gameId) {
   return document.querySelectorAll(`#slideshow-${gameId} .slide`);
