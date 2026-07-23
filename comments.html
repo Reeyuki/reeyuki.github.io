@@ -80,7 +80,6 @@
           const messages = data.messages;
           gbTotalPages = data.totalPages;
           gbMessages.innerHTML = messages
-            .toReversed()
             .map(
               (m) =>
                 `<div class="gb-entry"><div class="gb-entry-name">${m.name ? esc(m.name) : "\u200E"}</div><div class="gb-entry-text">${esc(m.message)}</div><div class="gb-entry-time">${new Date(m.timestamp).toLocaleDateString()}</div></div>`,

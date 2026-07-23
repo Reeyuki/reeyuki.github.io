@@ -43,6 +43,7 @@ export default {
       const allMessages = raw ? JSON.parse(raw) : [];
 
       const visible = allMessages.filter((m) => m.approved !== false);
+      visible.reverse();
 
       const page = Math.max(1, parseInt(url.searchParams.get("page")) || 1);
       const limit = Math.min(

@@ -172,3 +172,30 @@ document.getElementById("toggle-purple")?.addEventListener("click", () => {
     );
   }
 });
+
+const ITCH_CLICK_KEY = "reeyuki_itch_clicks";
+function trackItchClick(e) {
+  try {
+    let clicks = parseInt(localStorage.getItem(ITCH_CLICK_KEY) || "0", 10);
+    clicks++;
+    localStorage.setItem(ITCH_CLICK_KEY, String(clicks));
+    updateClickTracker();
+  } catch (_) {}
+}
+function updateClickTracker() {
+  const el = document.getElementById("click-tracker-seasweeper");
+  if (!el) return;
+  try {
+    const clicks = parseInt(localStorage.getItem(ITCH_CLICK_KEY) || "0", 10);
+    if (clicks > 0) {
+      el.textContent =
+        "🡒 " + clicks + " click" + (clicks !== 1 ? "s" : "") + " to itch.io";
+    } else {
+      el.textContent = "";
+    }
+  } catch (_) {}
+}
+document.addEventListener("DOMContentLoaded", updateClickTracker);
+window.addEventListener("storage", (e) => {
+  if (e.key === ITCH_CLICK_KEY) updateClickTracker();
+});

@@ -68,5 +68,5 @@ if [ -f "$TOKEN_FILE" ]; then
   fi
 else
   echo "=== Pending (Unmoderated) Comments ==="
-  echo "  (no admin token found at $TOKEN_FILE — skipping)"
+  echo "  (no admin token found at $TOKEN_FILE - skipping)"
 fi
