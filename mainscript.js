@@ -19,9 +19,8 @@ document.addEventListener("mousemove", (e) => {
 });
 
 const slideshows = {
-  voraxoid: { current: 0, interval: null, duration: 8000 },
   soulthera: { current: 0, interval: null, duration: 8000 },
-  seasweeper: { current: 0, interval: null, duration: 8000 },
+  voraxoid: { current: 0, interval: null, duration: 8000 },
   yukios: { current: 0, interval: null, duration: 8000 },
   liventcord: { current: 0, interval: null, duration: 8000 },
 };
@@ -97,9 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const target = document.getElementById("panel-" + game);
       if (target) target.classList.add("active");
       if (
-        game === "voraxoid" ||
         game === "soulthera" ||
-        game === "seasweeper" ||
+        game === "voraxoid" ||
         game === "yukios"
       ) {
         startSlideshow(game);
@@ -173,29 +171,4 @@ document.getElementById("toggle-purple")?.addEventListener("click", () => {
   }
 });
 
-const ITCH_CLICK_KEY = "reeyuki_itch_clicks";
-function trackItchClick(e) {
-  try {
-    let clicks = parseInt(localStorage.getItem(ITCH_CLICK_KEY) || "0", 10);
-    clicks++;
-    localStorage.setItem(ITCH_CLICK_KEY, String(clicks));
-    updateClickTracker();
-  } catch (_) {}
-}
-function updateClickTracker() {
-  const el = document.getElementById("click-tracker-seasweeper");
-  if (!el) return;
-  try {
-    const clicks = parseInt(localStorage.getItem(ITCH_CLICK_KEY) || "0", 10);
-    if (clicks > 0) {
-      el.textContent =
-        "🡒 " + clicks + " click" + (clicks !== 1 ? "s" : "") + " to itch.io";
-    } else {
-      el.textContent = "";
-    }
-  } catch (_) {}
-}
-document.addEventListener("DOMContentLoaded", updateClickTracker);
-window.addEventListener("storage", (e) => {
-  if (e.key === ITCH_CLICK_KEY) updateClickTracker();
-});
+
