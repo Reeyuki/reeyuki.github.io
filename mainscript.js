@@ -23,7 +23,14 @@ const slideshows = {
   voraxoid: { current: 0, interval: null, duration: 8000 },
   yukios: { current: 0, interval: null, duration: 8000 },
   liventcord: { current: 0, interval: null, duration: 8000 },
+  gnome: { current: 0, interval: null, duration: 8000 },
 };
+function getState(gameId) {
+  if (!slideshows[gameId]) {
+    slideshows[gameId] = { current: 0, interval: null, duration: 8000 };
+  }
+  return slideshows[gameId];
+}
 function getSlides(gameId) {
   return document.querySelectorAll(`#slideshow-${gameId} .slide`);
 }
@@ -31,8 +38,7 @@ function getDots(gameId) {
   return document.querySelectorAll(`#dots-${gameId} .dot`);
 }
 function goToSlide(gameId, index) {
-  const state = slideshows[gameId];
-  if (!state) return;
+  const state = getState(gameId);
 
   const slides = Array.from(getSlides(gameId));
   const dots = Array.from(getDots(gameId));
@@ -66,18 +72,15 @@ function goToSlide(gameId, index) {
   });
 }
 function nextSlide(gameId) {
-  const state = slideshows[gameId];
-  if (!state) return;
+  const state = getState(gameId);
   goToSlide(gameId, state.current + 1);
 }
 function prevSlide(gameId) {
-  const state = slideshows[gameId];
-  if (!state) return;
+  const state = getState(gameId);
   goToSlide(gameId, state.current - 1);
 }
 function startSlideshow(gameId) {
-  const state = slideshows[gameId];
-  if (!state) return;
+  const state = getState(gameId);
   if (state.interval) clearInterval(state.interval);
   goToSlide(gameId, 0);
   state.interval = setInterval(() => nextSlide(gameId), state.duration);
@@ -95,11 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tabPanels.forEach((p) => p.classList.remove("active"));
       const target = document.getElementById("panel-" + game);
       if (target) target.classList.add("active");
-      if (
-        game === "soulthera" ||
-        game === "voraxoid" ||
-        game === "yukios"
-      ) {
+      if (document.getElementById("slideshow-" + game)) {
         startSlideshow(game);
       }
     });
