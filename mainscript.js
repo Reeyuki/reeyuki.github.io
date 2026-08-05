@@ -104,8 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const defaultTab =
+    document.querySelector('.project-tab[data-game="yukios"]') ?? tabBtns[0];
   if (tabBtns.length > 0) {
-    tabBtns[0].click();
+    defaultTab.click();
   }
 
   document.querySelectorAll(".slide-nav").forEach((btn) => {
