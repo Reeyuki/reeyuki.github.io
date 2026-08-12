@@ -22,6 +22,7 @@ const slideshows = {
   soulthera: { current: 0, interval: null, duration: 8000 },
   voraxoid: { current: 0, interval: null, duration: 8000 },
   yukios: { current: 0, interval: null, duration: 8000 },
+  putitback: { current: 0, interval: null, duration: 8000 },
   liventcord: { current: 0, interval: null, duration: 8000 },
   gnome: { current: 0, interval: null, duration: 8000 },
 };
