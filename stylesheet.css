@@ -432,6 +432,13 @@ section ul li a:hover {
   margin-bottom: 12px;
 }
 
+.game-note {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--muted, #888);
+  margin: -6px 0 12px;
+}
+
 .game-stats {
   font-size: 0.9rem;
   color: var(--accent);

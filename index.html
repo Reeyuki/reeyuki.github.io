@@ -167,17 +167,20 @@
         <section class="project-showcase" id="sec-games">
           <div class="project-showcase-title">Projects</div>
           <div class="project-tabs">
-            <button class="project-tab active" data-game="yukios">YukiOS</button>
+            <button class="project-tab active" data-game="yukios">
+              YukiOS
+            </button>
             <button class="project-tab" data-game="putitback">
               Put It Back!
             </button>
             <button class="project-tab" data-game="voraxoid">Voraxoid</button>
             <button class="project-tab" data-game="soulthera">Soulthera</button>
-            <button class="project-tab" data-game="yukicord">
-              YukiCord
-            </button>
+            <button class="project-tab" data-game="yukicord">YukiCord</button>
             <button class="project-tab" data-game="gnome">
               Gnome In Browser
+            </button>
+            <button class="project-tab" data-game="dotfiles">
+              My Dotfiles
             </button>
           </div>
 
@@ -326,8 +329,8 @@
                   objects that behave like real things
                 </li>
                 <li>
-                  A harmless ghost knocks stuff over and hides your stuff.
-                  Stun it and tidy on
+                  A harmless ghost knocks stuff over and hides your stuff. Stun
+                  it and tidy on
                 </li>
                 <li>
                   Sparkles, chimes, and a cleanliness meter that climbs as you
@@ -467,8 +470,8 @@
               </p>
               <ul class="game-features">
                 <li>
-                  7 playable spirits, each with a different passive and
-                  starting weapon
+                  7 playable spirits, each with a different passive and starting
+                  weapon
                 </li>
                 <li>13 weapons that combine into synergies</li>
                 <li>
@@ -569,6 +572,117 @@
               >
             </div>
           </div>
+
+          <div class="project-panel" id="panel-dotfiles">
+            <div class="slideshow-wrapper" id="slideshow-dotfiles">
+              <div class="slide active" data-index="0">
+                <img
+                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-27-24.png"
+                  alt="reeyuki dotfiles desktop"
+                />
+                <div class="slide-caption">
+                  <p>The desktop, waybar and rofi all themed up</p>
+                </div>
+              </div>
+              <div class="slide" data-index="1">
+                <img
+                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-29-12.png"
+                  alt="reeyuki dotfiles window"
+                />
+                <div class="slide-caption">
+                  <p>Windows tiled out with the kitty terminal</p>
+                </div>
+              </div>
+              <div class="slide" data-index="2">
+                <img
+                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-31-39.png"
+                  alt="reeyuki dotfiles view"
+                />
+                <div class="slide-caption">
+                  <p>Another look at the themed setup</p>
+                </div>
+              </div>
+              <div class="slide" data-index="3">
+                <img
+                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-31-51.png"
+                  alt="reeyuki dotfiles detail"
+                />
+                <div class="slide-caption">
+                  <p>Neovim and the rest of the rice</p>
+                </div>
+              </div>
+              <div class="slide" data-index="4">
+                <img
+                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/hyprland/2025-11-19-131606_1920x1080_scrot.png"
+                  alt="reeyuki dotfiles hyprland"
+                />
+                <div class="slide-caption">
+                  <p>An earlier Hyprland screenshot of the build</p>
+                </div>
+              </div>
+              <div class="slide" data-index="5">
+                <img
+                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/fastfetch/Moon.png"
+                  alt="reeyuki dotfiles fastfetch"
+                />
+                <div class="slide-caption">
+                  <p>Fastfetch output with the moon logo</p>
+                </div>
+              </div>
+              <div class="slide" data-index="6">
+                <img
+                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/wallpapers/1.jpg"
+                  alt="reeyuki dotfiles wallpaper"
+                />
+                <div class="slide-caption">
+                  <p>One of the wallpapers shipped in the repo</p>
+                </div>
+              </div>
+              <div class="slide-dots" id="dots-dotfiles">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+                <div class="dot" data-index="3"></div>
+                <div class="dot" data-index="4"></div>
+                <div class="dot" data-index="5"></div>
+                <div class="dot" data-index="6"></div>
+              </div>
+              <button class="slide-nav prev-btn" data-target="dotfiles">
+                ◀
+              </button>
+              <button class="slide-nav next-btn" data-target="dotfiles">
+                &gt;
+              </button>
+            </div>
+            <div class="game-info">
+              <div class="game-name">reeyuki dotfiles</div>
+              <p class="game-desc">
+                My personal Arch and Hyprland setup. Forked from shub39, merged
+                with EviLuci's dotfiles, and tweaked until it felt like home.
+              </p>
+              <ul class="game-features">
+                <li>
+                  Hyprland config with waybar, rofi, and a keybind layout that
+                  makes sense to me
+                </li>
+                <li>Neovim with Lazy and debugging already set up</li>
+                <li>
+                  Fish shell with starship, thefuck, and pokemon colorscripts
+                </li>
+                <li>Hatsune Miku cursor and candy icons for a cute desktop</li>
+                <li>Fastfetch, swaync, wlogout, and copyq themed to match</li>
+              </ul>
+              <p class="game-note">
+                note: this is old and i don't really maintain it anymore.
+              </p>
+              <a
+                href="https://github.com/reeyuki/dotfiles"
+                class="play-btn"
+                target="_blank"
+                >▶ Open on GitHub</a
+              >
+            </div>
+          </div>
         </section>
 
         <section id="sec-footer-links">
@@ -614,7 +728,9 @@
             </div>
             <div class="footer-links-group">
               <span class="footer-links-label">Support</span>
-              <a target="_blank" href="https://www.patreon.com/Reeyuki">Patreon/Reeyuki</a>
+              <a target="_blank" href="https://www.patreon.com/Reeyuki"
+                >Patreon/Reeyuki</a
+              >
               <span class="footer-monero"
                 >Monero:
                 4B5RKGR4C5WDkHGKVemU4rDcnKDG5NbwBLogE1tnxAWJAqbLPpNiDNaVZC1jrfwSdB7Sh1ALQNe3TMMvhdEJTPRcAUJhyVm</span

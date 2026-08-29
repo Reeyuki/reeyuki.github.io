@@ -91,24 +91,43 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabBtns = document.querySelectorAll(".project-tab");
   const tabPanels = document.querySelectorAll(".project-panel");
 
+  function activateTab(game, push) {
+    const btn = document.querySelector(`.project-tab[data-game="${game}"]`);
+    if (!btn) return;
+    tabBtns.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    tabPanels.forEach((p) => p.classList.remove("active"));
+    const target = document.getElementById("panel-" + game);
+    if (target) target.classList.add("active");
+    if (document.getElementById("slideshow-" + game)) {
+      startSlideshow(game);
+    }
+    if (push) {
+      history.pushState(null, "", "#" + game);
+    }
+  }
+
   tabBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
-      const game = this.dataset.game;
-      tabBtns.forEach((b) => b.classList.remove("active"));
-      this.classList.add("active");
-      tabPanels.forEach((p) => p.classList.remove("active"));
-      const target = document.getElementById("panel-" + game);
-      if (target) target.classList.add("active");
-      if (document.getElementById("slideshow-" + game)) {
-        startSlideshow(game);
-      }
+      activateTab(this.dataset.game, true);
     });
   });
 
-  const defaultTab =
-    document.querySelector('.project-tab[data-game="yukios"]') ?? tabBtns[0];
-  if (tabBtns.length > 0) {
-    defaultTab.click();
+  window.addEventListener("hashchange", () => {
+    const game = location.hash.replace("#", "");
+    if (game) activateTab(game, false);
+  });
+
+  const fromHash = location.hash.replace("#", "");
+  if (
+    fromHash &&
+    document.querySelector(`.project-tab[data-game="${fromHash}"]`)
+  ) {
+    activateTab(fromHash, false);
+  } else {
+    const defaultTab =
+      document.querySelector('.project-tab[data-game="yukios"]') ?? tabBtns[0];
+    if (tabBtns.length > 0) defaultTab.click();
   }
 
   document.querySelectorAll(".slide-nav").forEach((btn) => {
@@ -172,5 +191,3 @@ document.getElementById("toggle-purple")?.addEventListener("click", () => {
     );
   }
 });
-
-
