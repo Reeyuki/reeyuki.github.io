@@ -38,6 +38,22 @@ function getSlides(gameId) {
 function getDots(gameId) {
   return document.querySelectorAll(`#dots-${gameId} .dot`);
 }
+function hydrateSlideImg(slide) {
+  if (!slide) return;
+  const img = slide.querySelector("img[data-src]");
+  if (img && img.dataset.src) {
+    let url = img.dataset.src;
+    if (
+      window.__isLocal &&
+      url.includes("cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser")
+    ) {
+      url = "/static/gnome/g3.webp";
+    }
+    img.src = url;
+    img.removeAttribute("data-src");
+    img.loading = "eager";
+  }
+}
 function goToSlide(gameId, index) {
   const state = getState(gameId);
 
@@ -66,7 +82,13 @@ function goToSlide(gameId, index) {
 
   state.current = targetIndex;
 
-  if (slides[targetIndex]) slides[targetIndex].classList.add("active");
+  if (slides[targetIndex]) {
+    hydrateSlideImg(slides[targetIndex]);
+    // preload next slide
+    const next = slides[(targetIndex + 1) % total];
+    hydrateSlideImg(next);
+    slides[targetIndex].classList.add("active");
+  }
 
   dots.forEach((dot, i) => {
     dot.classList.toggle("active", i === targetIndex);

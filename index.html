@@ -6,17 +6,65 @@
     <meta name="theme-color" content="#0b0e10" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://reeyuki.neocities.org/" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <script>
+      window.__isLocal =
+        location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1" ||
+        location.hostname === "";
+      // SEO-safe: on localhost, use local font to avoid external 7d cache
+      if (window.__isLocal) {
+        var fs = document.createElement("style");
+        fs.textContent =
+          '@font-face{font-family:"Monocraft";src:url("/static/fonts/Monocraft.woff2") format("woff2");font-display:swap}';
+        document.head.appendChild(fs);
+      }
+    </script>
     <link rel="preconnect" href="https://reeyuki.github.io" />
-    <link rel="preconnect" href="https://keepandroidopen.org" />
+    <script>
+      if (!window.__isLocal) {
+        var l1 = document.createElement("link");
+        l1.rel = "preconnect";
+        l1.href = "https://cdn.jsdelivr.net";
+        l1.crossOrigin = "";
+        document.head.appendChild(l1);
+        var l2 = document.createElement("link");
+        l2.rel = "preconnect";
+        l2.href = "https://keepandroidopen.org";
+        document.head.appendChild(l2);
+      }
+    </script>
     <link
       rel="preload"
       as="image"
       href="/static/reeyuki.webp"
       fetchpriority="high"
     />
+    <link
+      rel="preload"
+      as="image"
+      href="/static/yukios-login.webp"
+      fetchpriority="high"
+    />
+    <script>
+      var fl = document.createElement("link");
+      fl.rel = "preload";
+      fl.as = "font";
+      fl.href = "/static/fonts/Monocraft.woff2";
+      fl.type = "font/woff2";
+      fl.crossOrigin = "";
+      document.head.appendChild(fl);
+    </script>
     <title>Reeyuki Portfolio</title>
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link
+      rel="preload"
+      as="style"
+      href="stylesheet.css"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript><link rel="stylesheet" href="stylesheet.css" /></noscript>
     <link id="purple-theme" rel="stylesheet" href="" />
     <script>
       if (Math.random() >= 0.5) {
@@ -167,10 +215,10 @@
               height="31"
             />
             <img
-              src="/static/badges/chrmevil.gif"
+              src="/static/badges/chrmevil.webp"
               alt="Chrome evil"
-              width="88"
-              height="31"
+              width="51"
+              height="18"
             />
             <img
               src="/static/badges/madeon_linux.gif"
@@ -213,11 +261,15 @@
             <button class="project-tab active" data-game="yukios">
               YukiOS
             </button>
-            <button class="project-tab" data-game="putitback">
+            <button class="project-tab project-tab--game" data-game="putitback">
               Put It Back!
             </button>
-            <button class="project-tab" data-game="voraxoid">Voraxoid</button>
-            <button class="project-tab" data-game="soulthera">Soulthera</button>
+            <button class="project-tab project-tab--game" data-game="voraxoid">
+              Voraxoid
+            </button>
+            <button class="project-tab project-tab--game" data-game="soulthera">
+              Soulthera
+            </button>
             <button class="project-tab" data-game="yukicord">YukiCord</button>
             <button class="project-tab" data-game="gnome">
               Gnome In Browser
@@ -235,6 +287,7 @@
                   alt="YukiOS login"
                   width="1063"
                   height="494"
+                  fetchpriority="high"
                 />
                 <div class="slide-caption">
                   <p>
@@ -244,57 +297,156 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="/static/yukios-audio1.webp"
-                  alt="YukiOS audio mixer"
-                  width="1071"
-                  height="494"
+                  data-src="/static/yukios-mac.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Mac Mode"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
-                  <p>Audio mixer with per-app volume controls and visualizer</p>
+                  <p>Mac Mode — macOS-inspired desktop</p>
                 </div>
               </div>
               <div class="slide" data-index="2">
                 <img
-                  src="/static/yukios-overlay.webp"
-                  alt="YukiOS overlay"
+                  data-src="/static/yukios-yukideck.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="YukiDeck"
                   width="900"
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>In-game overlay with achievements, friends, and browser</p>
+                  <p>YukiDeck — game console environment</p>
                 </div>
               </div>
               <div class="slide" data-index="3">
                 <img
-                  src="/static/yukios-widget.webp"
-                  alt="YukiOS"
+                  data-src="/static/yukios-chromeos.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="ChromeOS Mode"
                   width="900"
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Desktop widgets</p>
+                  <p>ChromeOS Mode — lightweight shelf layout</p>
                 </div>
               </div>
               <div class="slide" data-index="4">
                 <img
-                  src="/static/yukios-mac.webp"
-                  alt="YukiOS Mac"
+                  data-src="/static/yukios-startmenu.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Start Menu"
                   width="900"
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>YukiOS MacOS view mode</p>
+                  <p>Start Menu — fuzzy search and favorites</p>
                 </div>
               </div>
               <div class="slide" data-index="5">
                 <img
-                  src="/static/yukios-launchpad.webp"
-                  alt="YukiOS Mac Launchpad"
+                  data-src="/static/yukios-workspaces.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Workspaces"
                   width="900"
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>YukiOS MacOS view mode launchpad</p>
+                  <p>Workspaces — 9 independent BSP workspaces</p>
+                </div>
+              </div>
+              <div class="slide" data-index="6">
+                <img
+                  data-src="/static/yukios-widgets.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Widgets"
+                  width="900"
+                  height="507"
+                />
+                <div class="slide-caption">
+                  <p>Widgets — desktop widgets and system monitor</p>
+                </div>
+              </div>
+              <div class="slide" data-index="7">
+                <img
+                  data-src="/static/yukios-btop.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="WASM Terminal Apps"
+                  width="900"
+                  height="507"
+                />
+                <div class="slide-caption">
+                  <p>WASM Terminal Apps — btop, lavat, cmatrix</p>
+                </div>
+              </div>
+              <div class="slide" data-index="8">
+                <img
+                  data-src="/static/yukios-3d.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="3D OS Mode"
+                  width="900"
+                  height="507"
+                />
+                <div class="slide-caption">
+                  <p>3D OS Mode — first-person room</p>
+                </div>
+              </div>
+              <div class="slide" data-index="9">
+                <img
+                  data-src="/static/yukios-remote.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Remote Desktop"
+                  width="900"
+                  height="507"
+                />
+                <div class="slide-caption">
+                  <p>Remote Desktop — WebRTC streaming</p>
+                </div>
+              </div>
+              <div class="slide" data-index="10">
+                <img
+                  data-src="/static/yukios-steam.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Steam"
+                  width="900"
+                  height="507"
+                />
+                <div class="slide-caption"><p>Steam — game storefront</p></div>
+              </div>
+              <div class="slide" data-index="11">
+                <img
+                  data-src="/static/yukios-overlay.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Steam Overlay"
+                  width="900"
+                  height="507"
+                />
+                <div class="slide-caption">
+                  <p>Steam Overlay — Shift+Tab in-game</p>
+                </div>
+              </div>
+              <div class="slide" data-index="12">
+                <img
+                  data-src="/static/yukios-tiling.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="Tiling Mode"
+                  width="900"
+                  height="507"
+                />
+                <div class="slide-caption">
+                  <p>Tiling Mode — Hyprland BSP tiling</p>
                 </div>
               </div>
               <div class="slide-dots" id="dots-yukios">
@@ -304,6 +456,13 @@
                 <div class="dot" data-index="3"></div>
                 <div class="dot" data-index="4"></div>
                 <div class="dot" data-index="5"></div>
+                <div class="dot" data-index="6"></div>
+                <div class="dot" data-index="7"></div>
+                <div class="dot" data-index="8"></div>
+                <div class="dot" data-index="9"></div>
+                <div class="dot" data-index="10"></div>
+                <div class="dot" data-index="11"></div>
+                <div class="dot" data-index="12"></div>
               </div>
               <button class="slide-nav prev-btn" data-target="yukios">◀</button>
               <button class="slide-nav next-btn" data-target="yukios">
@@ -356,7 +515,9 @@
             <div class="slideshow-wrapper" id="slideshow-putitback">
               <div class="slide active" data-index="0">
                 <img
-                  src="/static/pib1.webp"
+                  data-src="/static/pib1.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Put It Back main"
                   width="900"
                   height="417"
@@ -367,7 +528,9 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="/static/pib2.webp"
+                  data-src="/static/pib2.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Put It Back gameplay"
                   width="900"
                   height="417"
@@ -378,7 +541,9 @@
               </div>
               <div class="slide" data-index="2">
                 <img
-                  src="/static/pib3.webp"
+                  data-src="/static/pib3.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Put It Back ghost"
                   width="900"
                   height="418"
@@ -436,7 +601,9 @@
             <div class="slideshow-wrapper" id="slideshow-voraxoid">
               <div class="slide" data-index="0">
                 <img
-                  src="/static/vorax.webp"
+                  data-src="/static/vorax.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Voraxoid main"
                   width="1920"
                   height="1080"
@@ -447,7 +614,9 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="/static/lab1.webp"
+                  data-src="/static/lab1.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Evolution Laboratory"
                   width="1920"
                   height="1080"
@@ -458,7 +627,9 @@
               </div>
               <div class="slide" data-index="2">
                 <img
-                  src="/static/lab2.webp"
+                  data-src="/static/lab2.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Evolution Laboratory"
                   width="1920"
                   height="1080"
@@ -469,7 +640,9 @@
               </div>
               <div class="slide" data-index="3">
                 <img
-                  src="/static/lab3.webp"
+                  data-src="/static/lab3.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Evolution Laboratory"
                   width="1920"
                   height="1080"
@@ -480,7 +653,9 @@
               </div>
               <div class="slide" data-index="4">
                 <img
-                  src="/static/gun.webp"
+                  data-src="/static/gun.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Turret attachment"
                   width="1920"
                   height="1080"
@@ -539,7 +714,9 @@
             <div class="slideshow-wrapper" id="slideshow-soulthera">
               <div class="slide active" data-index="0">
                 <img
-                  src="/static/soulthera1.webp"
+                  data-src="/static/soulthera1.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Soulthera main"
                   width="1553"
                   height="860"
@@ -550,7 +727,9 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="/static/soulthera2.webp"
+                  data-src="/static/soulthera2.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Soulthera gameplay"
                   width="1549"
                   height="866"
@@ -561,7 +740,9 @@
               </div>
               <div class="slide" data-index="2">
                 <img
-                  src="/static/soulthera3.webp"
+                  data-src="/static/soulthera3.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Soulthera upgrades"
                   width="1545"
                   height="869"
@@ -646,7 +827,9 @@
             <div class="slideshow-wrapper" id="slideshow-gnome">
               <div class="slide active" data-index="0">
                 <img
-                  src="/static/gnome/g1.webp"
+                  data-src="/static/gnome/g1.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Gnome In Browser main"
                   width="900"
                   height="459"
@@ -657,7 +840,9 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="/static/gnome/g2.webp"
+                  data-src="/static/gnome/g2.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="Gnome In Browser desktop"
                   width="900"
                   height="459"
@@ -668,7 +853,8 @@
               </div>
               <div class="slide" data-index="2">
                 <img
-                  src="https://cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser@main/.github/gnome.webp"
+                  data-src="https://cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser@main/.github/gnome.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   alt="Gnome In Browser activity"
                   width="900"
                   height="459"
@@ -705,7 +891,9 @@
             <div class="slideshow-wrapper" id="slideshow-dotfiles">
               <div class="slide active" data-index="0">
                 <img
-                  src="/static/dotfiles/s1.webp"
+                  data-src="/static/dotfiles/s1.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="reeyuki dotfiles desktop"
                   width="900"
                   height="507"
@@ -716,7 +904,9 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="/static/dotfiles/s2.webp"
+                  data-src="/static/dotfiles/s2.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="reeyuki dotfiles window"
                   width="900"
                   height="507"
@@ -727,7 +917,9 @@
               </div>
               <div class="slide" data-index="2">
                 <img
-                  src="/static/dotfiles/s3.webp"
+                  data-src="/static/dotfiles/s3.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="reeyuki dotfiles view"
                   width="900"
                   height="507"
@@ -738,7 +930,9 @@
               </div>
               <div class="slide" data-index="3">
                 <img
-                  src="/static/dotfiles/s4.webp"
+                  data-src="/static/dotfiles/s4.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="reeyuki dotfiles detail"
                   width="900"
                   height="507"
@@ -747,47 +941,11 @@
                   <p>Neovim and the rest of the rice</p>
                 </div>
               </div>
-              <div class="slide" data-index="4">
-                <img
-                  src="/static/dotfiles/s5.webp"
-                  alt="reeyuki dotfiles hyprland"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>An earlier Hyprland screenshot of the build</p>
-                </div>
-              </div>
-              <div class="slide" data-index="5">
-                <img
-                  src="/static/dotfiles/s6.webp"
-                  alt="reeyuki dotfiles fastfetch"
-                  width="900"
-                  height="900"
-                />
-                <div class="slide-caption">
-                  <p>Fastfetch output with the moon logo</p>
-                </div>
-              </div>
-              <div class="slide" data-index="6">
-                <img
-                  src="/static/dotfiles/s7.webp"
-                  alt="reeyuki dotfiles wallpaper"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>One of the wallpapers shipped in the repo</p>
-                </div>
-              </div>
               <div class="slide-dots" id="dots-dotfiles">
                 <div class="dot active" data-index="0"></div>
                 <div class="dot" data-index="1"></div>
                 <div class="dot" data-index="2"></div>
                 <div class="dot" data-index="3"></div>
-                <div class="dot" data-index="4"></div>
-                <div class="dot" data-index="5"></div>
-                <div class="dot" data-index="6"></div>
               </div>
               <button class="slide-nav prev-btn" data-target="dotfiles">
                 ◀
@@ -912,7 +1070,8 @@
           </div>
           <a target="_blank" href="https://hits.sh/reeyuki.neocities.org/">
             <img
-              src="https://hits.sh/reeyuki.neocities.org/.svg?style=for-the-badge&label=VISITORS&color=00ffcc&labelColor=0a0a0a"
+              data-src="https://hits.sh/reeyuki.neocities.org/.svg?style=for-the-badge&label=VISITORS&color=00ffcc&labelColor=0a0a0a"
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
               alt="Visitor count"
               width="150"
               height="28"
@@ -926,21 +1085,40 @@
           <p>You found 3 demon girls</p>
           <p>Listen to some helltaker music since u scrolled that far</p>
           <audio controls src="/static/vitality.mp3"></audio>
-            <img
-              src="/static/helltaker.webp"
-              alt="Helltaker Dancing"
-              width="600"
-              height="353"
-              loading="lazy"
-            />
+          <img
+            src="/static/helltaker.webp"
+            alt="Helltaker Dancing"
+            width="600"
+            height="353"
+            loading="lazy"
+          />
         </div>
       </main>
     </div>
 
     <audio id="idiot-audio"></audio>
 
-    <script src="https://keepandroidopen.org/banner.js?id=android-banner"></script>
-    <script src="mainscript.min.js"></script>
+    <script src="mainscript.min.js" defer></script>
+    <script>
+      // hydrate only non-slide images (hits badge etc.); slides are lazy-hydrated on demand in mainscript.js
+      document
+        .querySelectorAll("img[data-src]:not(.slide img)")
+        .forEach(function (i) {
+          var url = i.dataset.src;
+          if (
+            window.__isLocal &&
+            url.includes("cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser")
+          ) {
+            url = "/static/gnome/g3.webp";
+          }
+          i.src = url;
+          i.removeAttribute("data-src");
+        });
+      var s = document.createElement("script");
+      s.src = "https://keepandroidopen.org/banner.js?id=android-banner";
+      s.async = true;
+      document.body.appendChild(s);
+    </script>
     <script>
       window.addEventListener("message", (e) => {
         if (e.data?.type === "resize" && e.data.height) {

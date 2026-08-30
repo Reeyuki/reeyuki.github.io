@@ -6,9 +6,33 @@
     <meta name="theme-color" content="#0b0e10" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://reeyuki.neocities.org/blog.html" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="preconnect" href="https://keepandroidopen.org" />
-    <link rel="preconnect" href="https://hits.sh" />
+    <script>
+      window.__isLocal =
+        location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1" ||
+        location.hostname === "";
+      if (window.__isLocal) {
+        var fs = document.createElement("style");
+        fs.textContent =
+          '@font-face{font-family:"Monocraft";src:url("/static/fonts/Monocraft.woff2") format("woff2");font-display:swap}';
+        document.head.appendChild(fs);
+      }
+    </script>
+    <script>
+      if (!window.__isLocal) {
+        [
+          "https://cdn.jsdelivr.net",
+          "https://keepandroidopen.org",
+          "https://hits.sh",
+        ].forEach(function (h) {
+          var l = document.createElement("link");
+          l.rel = "preconnect";
+          l.href = h;
+          if (h.includes("jsdelivr")) l.crossOrigin = "";
+          document.head.appendChild(l);
+        });
+      }
+    </script>
     <title>Blog – Reeyuki</title>
     <link
       rel="apple-touch-icon"
@@ -38,7 +62,25 @@
       name="msapplication-config"
       content="/static/favicon/browserconfig.xml"
     />
-    <link rel="stylesheet" href="stylesheet.css" />
+    <script>
+      var fl = document.createElement("link");
+      fl.rel = "preload";
+      fl.as = "font";
+      fl.href = "/static/fonts/Monocraft.woff2";
+      fl.type = "font/woff2";
+      fl.crossOrigin = "";
+      document.head.appendChild(fl);
+    </script>
+    <link
+      rel="preload"
+      as="style"
+      href="stylesheet.css"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript><link rel="stylesheet" href="stylesheet.css" /></noscript>
     <style>
       body {
         max-width: 800px;
@@ -292,7 +334,8 @@
         </a>
         <a href="https://hits.sh/reeyuki.neocities.org/">
           <img
-            src="https://hits.sh/reeyuki.neocities.org/.svg?style=for-the-badge&label=VISITORS&color=00ffcc&labelColor=0a0a0a"
+            data-src="https://hits.sh/reeyuki.neocities.org/.svg?style=for-the-badge&label=VISITORS&color=00ffcc&labelColor=0a0a0a"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             alt="Visitor count"
             width="150"
             height="28"
@@ -312,7 +355,15 @@
       </div>
     </main>
 
-    <script src="https://keepandroidopen.org/banner.js"></script>
+    <script>
+      document.querySelectorAll("img[data-src]").forEach(function (i) {
+        i.src = i.dataset.src;
+      });
+      var s = document.createElement("script");
+      s.src = "https://keepandroidopen.org/banner.js";
+      s.async = true;
+      document.body.appendChild(s);
+    </script>
     <script>
       function toggleArticle(header) {
         const body = header.nextElementSibling;
