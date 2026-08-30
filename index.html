@@ -3,6 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0e10" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://reeyuki.neocities.org/" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://reeyuki.github.io" />
+    <link rel="preconnect" href="https://keepandroidopen.org" />
+    <link
+      rel="preload"
+      as="image"
+      href="/static/reeyuki.webp"
+      fetchpriority="high"
+    />
     <title>Reeyuki Portfolio</title>
     <link rel="stylesheet" href="stylesheet.css" />
     <link id="purple-theme" rel="stylesheet" href="" />
@@ -51,6 +63,9 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/static/seo2.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://reeyuki.neocities.org" />
     <script type="application/ld+json">
       {
@@ -71,7 +86,14 @@
       <aside id="sidebar">
         <div class="sidebar-scroll">
           <div class="profile-block">
-            <img id="anime-greet" src="/static/reeyuki.jpg" alt="Reeyuki" />
+            <img
+              id="anime-greet"
+              src="/static/reeyuki.webp"
+              alt="Reeyuki"
+              fetchpriority="high"
+              width="186"
+              height="186"
+            />
             <h1 class="glitch-text" data-text="Reeyuki">Reeyuki</h1>
           </div>
 
@@ -114,42 +136,63 @@
             <img
               src="data:image/png;base64,R0lGODdhWAAfALMAAAMAAykBAGQeAZczAdgEAP8AAP8mJqtYEclzL/VkWc6TNdydUP+YmNPZ3f///////ywAAAAAWAAfAAAE/tDJSau9OOvNM+hgKI4b8DlNqqZF675rLM90bd+yKclv3+Mpk7ABWBVxx1pSeeL5ngVgULWUTq25pupH496SxaPYZCSHx8YgObtjwWxeJTVMrMeWdDvYTtOhGgZvN4EuX1RTaGWIamt6VXNtPkBxOYd1eJV5j5hsKDCCAAsLCgsHA1uFfZZ0Q3NiV42XsWUSbz2iuLmmblFYvr93J4K3oqS4CqcNLgnAzb5+qaguuaMCu8rRUq+PlrBg3Gq1LSsHCrcHogfWK9k2nO5zevKNZ+K9DaWkxAemCuzjRL6pCXjJm6s02xC9CmivgQBS/AYs6GHqWLJCCQvOY7WIj0ZN+2nCOXCBTtQAdQgO9CBlTMEBbFHwDFkIUgjIQxn3QBrZohwCBMgAlDP3otgCBAJ4xuwIq2OepjidGoTW8wDQnwMQLAhAtMUoUQgGvKG3sCDNb5zIXiFItcWAt/wEnLSqr4XLuS4YONsLpG2vt28bwOWnskXKAQTaPQs5A1ylnTCZzXAAWKxbmPeAOWaMhNYfQTUSPGmM9uDHgasSEfToh1fm0JSa7pk9e60Z2UwZ/sGMI/ZaPk/P4GwlL6CZmZ7/KZYGsDHT4Kc3Qf0drI1yKL4VMTKdM2081DKtM8f+mq95JFqcQDnP3ooOm/Djy59Pv779+/jz69/Pv799ADs="
               alt="No cookies badge"
+              width="88"
+              height="31"
             />
             <a target="_blank" href="//www.fsf.org/campaigns/fight-to-repair"
               ><img
-                src="/static/righttorepair.jpg"
+                src="/static/righttorepair.webp"
                 title="Fight to Repair"
                 alt="[Fight to Repair]"
+                width="128"
+                height="46"
             /></a>
             <img
-              src="/static/gimp.png"
+              src="/static/gimp.webp"
               title="Green Is My Pepper"
               alt="[Green Is My Pepper]"
+              width="128"
+              height="46"
             />
-            <img src="/static/keepwebfree.gif" alt="Keep web free badge" />
             <img
-              src="https://majestictux.neocities.org/assets/badge-neocities.gif"
+              src="/static/keepwebfree.webp"
+              alt="Keep web free badge"
+              width="128"
+              height="17"
+            />
+            <img
+              src="/static/badges/badge-neocities.gif"
               alt="Neocities"
+              width="88"
+              height="31"
             />
             <img
-              src="https://majestictux.neocities.org/assets/chrmevil.gif"
+              src="/static/badges/chrmevil.gif"
               alt="Chrome evil"
+              width="88"
+              height="31"
             />
             <img
-              src="https://majestictux.neocities.org/assets/madeon_linux.gif"
+              src="/static/badges/madeon_linux.gif"
               alt="Linux"
+              width="88"
+              height="31"
             />
 
             <a target="_blank" href="//www.kernel.org/"
               ><img
-                src="https://patchysicp.xyz/buttons/linux.gif"
+                src="/static/badges/linux.gif"
                 title="Linux Now!"
                 alt="[Linux Now!]"
+                width="88"
+                height="31"
             /></a>
             <a target="_blank" href="https://www.fsf.org/windows">
               <img
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAACpQTFRFKCcmgpGY293b////FBMVph0gn6GrSklJJigtZWxuAAD//wAAAP8A//8AgxdlfgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oDBxY6BJsTFY8AAAEdSURBVEjH1ZWNFoIgDIWHgyTQ93/dEEaOgWH+dE7TxqaH71xvs+Ax3BPwuIc8BjAcDmvtO5cxcnC4byngbIznFHfAQV/b/gsUP1UdA9jzintgY8y6yeS0XDQp0npAMdtTgnm/YYXWyjnl/VLsAhvONN94DBtgeuwSXDjBwVLwDsXE6igOOKeUj0VHcUqr1R1wrfgH4Na4CfDmuGkWteIzb54kXwh2zmntvb8YLMlXggsvBkAMt0JCKjCmpYacWYexwxT7wBDX+KHqfcqOrkjF8zxrPU1TBtPBtq34vIDoarDg7gBnQwhMvjTActywftC0m/Hwg2K79YK0wIW50DCm4XH1s4mMdeTLsz0wH7fS3WLcWuB7/v7h38BwS4wvWZAOKLy0D7UAAAAASUVORK5CYII="
                 alt="Hate microsoft"
+                width="88"
+                height="31"
               />
             </a>
           </div>
@@ -187,7 +230,12 @@
           <div class="project-panel active" id="panel-yukios">
             <div class="slideshow-wrapper" id="slideshow-yukios">
               <div class="slide active" data-index="0">
-                <img src="/static/yukios-login.webp" alt="YukiOS login" />
+                <img
+                  src="/static/yukios-login.webp"
+                  alt="YukiOS login"
+                  width="1063"
+                  height="494"
+                />
                 <div class="slide-caption">
                   <p>
                     YukiOS login screen, a browser-based desktop environment
@@ -198,25 +246,42 @@
                 <img
                   src="/static/yukios-audio1.webp"
                   alt="YukiOS audio mixer"
+                  width="1071"
+                  height="494"
                 />
                 <div class="slide-caption">
                   <p>Audio mixer with per-app volume controls and visualizer</p>
                 </div>
               </div>
               <div class="slide" data-index="2">
-                <img src="/static/yukios-overlay.webp" alt="YukiOS overlay" />
+                <img
+                  src="/static/yukios-overlay.webp"
+                  alt="YukiOS overlay"
+                  width="900"
+                  height="507"
+                />
                 <div class="slide-caption">
                   <p>In-game overlay with achievements, friends, and browser</p>
                 </div>
               </div>
               <div class="slide" data-index="3">
-                <img src="/static/yukios-widget.png" alt="YukiOS" />
+                <img
+                  src="/static/yukios-widget.webp"
+                  alt="YukiOS"
+                  width="900"
+                  height="507"
+                />
                 <div class="slide-caption">
                   <p>Desktop widgets</p>
                 </div>
               </div>
               <div class="slide" data-index="4">
-                <img src="/static/yukios-mac.webp" alt="YukiOS Mac" />
+                <img
+                  src="/static/yukios-mac.webp"
+                  alt="YukiOS Mac"
+                  width="900"
+                  height="507"
+                />
                 <div class="slide-caption">
                   <p>YukiOS MacOS view mode</p>
                 </div>
@@ -225,6 +290,8 @@
                 <img
                   src="/static/yukios-launchpad.webp"
                   alt="YukiOS Mac Launchpad"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
                   <p>YukiOS MacOS view mode launchpad</p>
@@ -288,19 +355,34 @@
           <div class="project-panel" id="panel-putitback">
             <div class="slideshow-wrapper" id="slideshow-putitback">
               <div class="slide active" data-index="0">
-                <img src="/static/pib1.png" alt="Put It Back main" />
+                <img
+                  src="/static/pib1.webp"
+                  alt="Put It Back main"
+                  width="900"
+                  height="417"
+                />
                 <div class="slide-caption">
                   <p>A cozy, messy room waiting to be tidied</p>
                 </div>
               </div>
               <div class="slide" data-index="1">
-                <img src="/static/pib2.png" alt="Put It Back gameplay" />
+                <img
+                  src="/static/pib2.webp"
+                  alt="Put It Back gameplay"
+                  width="900"
+                  height="417"
+                />
                 <div class="slide-caption">
                   <p>Grab, toss, and shelve for physics-y cleanup</p>
                 </div>
               </div>
               <div class="slide" data-index="2">
-                <img src="/static/pib3.png" alt="Put It Back ghost" />
+                <img
+                  src="/static/pib3.webp"
+                  alt="Put It Back ghost"
+                  width="900"
+                  height="418"
+                />
                 <div class="slide-caption">
                   <p>The ghost makes the mess. You clean it up.</p>
                 </div>
@@ -353,31 +435,56 @@
           <div class="project-panel" id="panel-voraxoid">
             <div class="slideshow-wrapper" id="slideshow-voraxoid">
               <div class="slide" data-index="0">
-                <img src="/static/vorax.webp" alt="Voraxoid main" />
+                <img
+                  src="/static/vorax.webp"
+                  alt="Voraxoid main"
+                  width="1920"
+                  height="1080"
+                />
                 <div class="slide-caption">
                   <p>Voraxoid, a monstrous evolution idle game</p>
                 </div>
               </div>
               <div class="slide" data-index="1">
-                <img src="/static/lab1.webp" alt="Evolution Laboratory" />
+                <img
+                  src="/static/lab1.webp"
+                  alt="Evolution Laboratory"
+                  width="1920"
+                  height="1080"
+                />
                 <div class="slide-caption">
                   <p>Evolution laboratory, mutate and upgrade your form</p>
                 </div>
               </div>
               <div class="slide" data-index="2">
-                <img src="/static/lab2.webp" alt="Evolution Laboratory" />
+                <img
+                  src="/static/lab2.webp"
+                  alt="Evolution Laboratory"
+                  width="1920"
+                  height="1080"
+                />
                 <div class="slide-caption">
                   <p>Grow claws, tails, and terrifying appendages</p>
                 </div>
               </div>
               <div class="slide" data-index="3">
-                <img src="/static/lab3.webp" alt="Evolution Laboratory" />
+                <img
+                  src="/static/lab3.webp"
+                  alt="Evolution Laboratory"
+                  width="1920"
+                  height="1080"
+                />
                 <div class="slide-caption">
                   <p>Unlock new biological tiers as you evolve</p>
                 </div>
               </div>
               <div class="slide" data-index="4">
-                <img src="/static/gun.webp" alt="Turret attachment" />
+                <img
+                  src="/static/gun.webp"
+                  alt="Turret attachment"
+                  width="1920"
+                  height="1080"
+                />
                 <div class="slide-caption">
                   <p>Mount turrets and unleash mechanical destruction</p>
                 </div>
@@ -431,19 +538,34 @@
           <div class="project-panel" id="panel-soulthera">
             <div class="slideshow-wrapper" id="slideshow-soulthera">
               <div class="slide active" data-index="0">
-                <img src="/static/soulthera1.webp" alt="Soulthera main" />
+                <img
+                  src="/static/soulthera1.webp"
+                  alt="Soulthera main"
+                  width="1553"
+                  height="860"
+                />
                 <div class="slide-caption">
                   <p>A wandering spirit in a haunted realm</p>
                 </div>
               </div>
               <div class="slide" data-index="1">
-                <img src="/static/soulthera2.webp" alt="Soulthera gameplay" />
+                <img
+                  src="/static/soulthera2.webp"
+                  alt="Soulthera gameplay"
+                  width="1549"
+                  height="866"
+                />
                 <div class="slide-caption">
                   <p>Every enemy type makes you move differently</p>
                 </div>
               </div>
               <div class="slide" data-index="2">
-                <img src="/static/soulthera3.webp" alt="Soulthera upgrades" />
+                <img
+                  src="/static/soulthera3.webp"
+                  alt="Soulthera upgrades"
+                  width="1545"
+                  height="869"
+                />
                 <div class="slide-caption">
                   <p>Pick upgrades. Shape your build.</p>
                 </div>
@@ -524,8 +646,10 @@
             <div class="slideshow-wrapper" id="slideshow-gnome">
               <div class="slide active" data-index="0">
                 <img
-                  src="https://cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser@main/.github/gnome1.png"
+                  src="/static/gnome/g1.webp"
                   alt="Gnome In Browser main"
+                  width="900"
+                  height="459"
                 />
                 <div class="slide-caption">
                   <p>A GNOME desktop recreated in React</p>
@@ -533,8 +657,10 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="https://cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser@main/.github/gnome2.png"
+                  src="/static/gnome/g2.webp"
                   alt="Gnome In Browser desktop"
+                  width="900"
+                  height="459"
                 />
                 <div class="slide-caption">
                   <p>Panels, apps, and the GNOME shell look in your browser</p>
@@ -544,6 +670,8 @@
                 <img
                   src="https://cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser@main/.github/gnome.webp"
                   alt="Gnome In Browser activity"
+                  width="900"
+                  height="459"
                 />
                 <div class="slide-caption">
                   <p>A GNOME recreation made in React</p>
@@ -577,8 +705,10 @@
             <div class="slideshow-wrapper" id="slideshow-dotfiles">
               <div class="slide active" data-index="0">
                 <img
-                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-27-24.png"
+                  src="/static/dotfiles/s1.webp"
                   alt="reeyuki dotfiles desktop"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
                   <p>The desktop, waybar and rofi all themed up</p>
@@ -586,8 +716,10 @@
               </div>
               <div class="slide" data-index="1">
                 <img
-                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-29-12.png"
+                  src="/static/dotfiles/s2.webp"
                   alt="reeyuki dotfiles window"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
                   <p>Windows tiled out with the kitty terminal</p>
@@ -595,8 +727,10 @@
               </div>
               <div class="slide" data-index="2">
                 <img
-                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-31-39.png"
+                  src="/static/dotfiles/s3.webp"
                   alt="reeyuki dotfiles view"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
                   <p>Another look at the themed setup</p>
@@ -604,8 +738,10 @@
               </div>
               <div class="slide" data-index="3">
                 <img
-                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/screenshots/screenshot_2025-11-23_10-31-51.png"
+                  src="/static/dotfiles/s4.webp"
                   alt="reeyuki dotfiles detail"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
                   <p>Neovim and the rest of the rice</p>
@@ -613,8 +749,10 @@
               </div>
               <div class="slide" data-index="4">
                 <img
-                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/hyprland/2025-11-19-131606_1920x1080_scrot.png"
+                  src="/static/dotfiles/s5.webp"
                   alt="reeyuki dotfiles hyprland"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
                   <p>An earlier Hyprland screenshot of the build</p>
@@ -622,8 +760,10 @@
               </div>
               <div class="slide" data-index="5">
                 <img
-                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/fastfetch/Moon.png"
+                  src="/static/dotfiles/s6.webp"
                   alt="reeyuki dotfiles fastfetch"
+                  width="900"
+                  height="900"
                 />
                 <div class="slide-caption">
                   <p>Fastfetch output with the moon logo</p>
@@ -631,8 +771,10 @@
               </div>
               <div class="slide" data-index="6">
                 <img
-                  src="https://raw.githubusercontent.com/reeyuki/dotfiles/main/wallpapers/1.jpg"
+                  src="/static/dotfiles/s7.webp"
                   alt="reeyuki dotfiles wallpaper"
+                  width="900"
+                  height="507"
                 />
                 <div class="slide-caption">
                   <p>One of the wallpapers shipped in the repo</p>
@@ -718,10 +860,10 @@
                 rel="noopener"
               >
                 <img
-                  src="/static/patchysicp.jpg"
+                  src="/static/patchysicp.webp"
                   alt="Patchysicp"
-                  width="24"
-                  height="24"
+                  width="74"
+                  height="66"
                 />
                 Patchysicp
               </a>
@@ -760,12 +902,20 @@
         <footer>
           <div id="android-banner"></div>
           <div class="construction-wrap">
-            <img src="/static/construction.gif" />
+            <img
+              src="/static/construction.webp"
+              alt="Under construction"
+              width="300"
+              height="188"
+              loading="lazy"
+            />
           </div>
           <a target="_blank" href="https://hits.sh/reeyuki.neocities.org/">
             <img
               src="https://hits.sh/reeyuki.neocities.org/.svg?style=for-the-badge&label=VISITORS&color=00ffcc&labelColor=0a0a0a"
               alt="Visitor count"
+              width="150"
+              height="28"
               style="border: 2px solid #00ffcc"
             />
           </a>
@@ -776,7 +926,13 @@
           <p>You found 3 demon girls</p>
           <p>Listen to some helltaker music since u scrolled that far</p>
           <audio controls src="/static/vitality.mp3"></audio>
-          <img src="/static/helltaker.webp" alt="Helltaker Dancing" />
+            <img
+              src="/static/helltaker.webp"
+              alt="Helltaker Dancing"
+              width="600"
+              height="353"
+              loading="lazy"
+            />
         </div>
       </main>
     </div>
@@ -784,7 +940,7 @@
     <audio id="idiot-audio"></audio>
 
     <script src="https://keepandroidopen.org/banner.js?id=android-banner"></script>
-    <script src="mainscript.js"></script>
+    <script src="mainscript.min.js"></script>
     <script>
       window.addEventListener("message", (e) => {
         if (e.data?.type === "resize" && e.data.height) {

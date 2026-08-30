@@ -154,6 +154,8 @@ function addLadderImage() {
   img.src = "/static/ladder.webp";
   img.alt = "Ladder";
   img.className = "ladder-image";
+  img.width = 160;
+  img.height = 160;
   ladderContainer.appendChild(img);
   ladderCount++;
 }
