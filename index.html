@@ -1083,8 +1083,23 @@
         <div id="ladder-container"></div>
         <div class="easter-egg">
           <p>You found 3 demon girls</p>
-          <p>Listen to some helltaker music since u scrolled that far</p>
-          <audio controls src="/static/vitality.mp3"></audio>
+          <p id="helltaker-music-text">
+            Listen to some helltaker music since u scrolled that far
+          </p>
+          <audio id="helltaker-audio" controls src="/static/vitality.mp3"></audio>
+          <script>
+            (function () {
+              var isNeocities =
+                location.hostname === "reeyuki.neocities.org" ||
+                (document.URL && document.URL.includes("reeyuki.neocities.org"));
+              if (isNeocities) {
+                var t = document.getElementById("helltaker-music-text");
+                var a = document.getElementById("helltaker-audio");
+                if (t) t.style.display = "none";
+                if (a) a.style.display = "none";
+              }
+            })();
+          </script>
           <img
             src="/static/helltaker.webp"
             alt="Helltaker Dancing"
