@@ -36,7 +36,7 @@
     <link
       rel="preload"
       as="image"
-      href="/static/reeyuki.webp"
+      href="/static/reeyuki-avatar.webp"
       fetchpriority="high"
     />
     <link
@@ -130,19 +130,36 @@
     </script>
   </head>
   <body>
+    <img
+      id="anime-greet"
+      src="/static/reeyuki-avatar.webp"
+      alt="Reeyuki"
+      fetchpriority="high"
+      width="186"
+      height="186"
+    />
     <div class="layout">
       <aside id="sidebar">
         <div class="sidebar-scroll">
           <div class="profile-block">
-            <img
-              id="anime-greet"
-              src="/static/reeyuki.webp"
-              alt="Reeyuki"
-              fetchpriority="high"
-              width="186"
-              height="186"
-            />
             <h1 class="glitch-text" data-text="Reeyuki">Reeyuki</h1>
+            <div id="avatar-switcher" aria-label="switch avatar">
+              <button
+                class="avatar-dot active"
+                data-idx="0"
+                aria-label="reeyuki avatar"
+              ></button>
+              <button
+                class="avatar-dot"
+                data-idx="1"
+                aria-label="dog avatar"
+              ></button>
+              <button
+                class="avatar-dot"
+                data-idx="2"
+                aria-label="astolfo avatar"
+              ></button>
+            </div>
           </div>
 
           <ul class="sidebar-links">
@@ -154,6 +171,15 @@
                 href="https://github.com/Reeyuki"
                 rel="noopener noreferrer"
                 >My GitHub
+              </a>
+            </li>
+            <li>
+              <a
+                class="external-link"
+                target="_blank"
+                href="https://reeyuki.itch.io"
+                rel="noopener noreferrer"
+                >My Itch Io
               </a>
             </li>
 
@@ -187,27 +213,6 @@
               width="88"
               height="31"
             />
-            <a target="_blank" href="//www.fsf.org/campaigns/fight-to-repair"
-              ><img
-                src="/static/righttorepair.webp"
-                title="Fight to Repair"
-                alt="[Fight to Repair]"
-                width="128"
-                height="46"
-            /></a>
-            <img
-              src="/static/gimp.webp"
-              title="Green Is My Pepper"
-              alt="[Green Is My Pepper]"
-              width="128"
-              height="46"
-            />
-            <img
-              src="/static/keepwebfree.webp"
-              alt="Keep web free badge"
-              width="128"
-              height="17"
-            />
             <img
               src="/static/badges/badge-neocities.gif"
               alt="Neocities"
@@ -220,21 +225,14 @@
               width="51"
               height="18"
             />
-            <img
-              src="/static/badges/madeon_linux.gif"
-              alt="Linux"
-              width="88"
-              height="31"
-            />
-
             <a target="_blank" href="//www.kernel.org/"
               ><img
-                src="/static/badges/linux.gif"
-                title="Linux Now!"
-                alt="[Linux Now!]"
+                src="/static/badges/madeon_linux.gif"
+                alt="Linux"
                 width="88"
                 height="31"
             /></a>
+
             <a target="_blank" href="https://www.fsf.org/windows">
               <img
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAACpQTFRFKCcmgpGY293b////FBMVph0gn6GrSklJJigtZWxuAAD//wAAAP8A//8AgxdlfgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+oDBxY6BJsTFY8AAAEdSURBVEjH1ZWNFoIgDIWHgyTQ93/dEEaOgWH+dE7TxqaH71xvs+Ax3BPwuIc8BjAcDmvtO5cxcnC4byngbIznFHfAQV/b/gsUP1UdA9jzintgY8y6yeS0XDQp0npAMdtTgnm/YYXWyjnl/VLsAhvONN94DBtgeuwSXDjBwVLwDsXE6igOOKeUj0VHcUqr1R1wrfgH4Na4CfDmuGkWteIzb54kXwh2zmntvb8YLMlXggsvBkAMt0JCKjCmpYacWYexwxT7wBDX+KHqfcqOrkjF8zxrPU1TBtPBtq34vIDoarDg7gBnQwhMvjTActywftC0m/Hwg2K79YK0wIW50DCm4XH1s4mMdeTLsz0wH7fS3WLcWuB7/v7h38BwS4wvWZAOKLy0D7UAAAAASUVORK5CYII="
@@ -252,8 +250,42 @@
           <h2 class="page-kicker">
             <span class="marquee-text">hi, i'm reeyuki</span>
           </h2>
-          <p class="intro-text">i make games and build websites</p>
         </header>
+
+        <section id="sec-about">
+          <h2>about</h2>
+          <p class="game-desc" style="margin-bottom: 12px">
+            i make games and web apps. mostly frontend and unity. just making
+            things i enjoy.
+          </p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div>
+                <h3>what i use</h3>
+                <p>
+                  js/ts, vue / vite / react, go / python / node / dotnet,
+                  fastapi, sqlite, docker, arch btw
+                </p>
+              </div>
+            </div>
+            <div class="feature-card">
+              <div>
+                <h3>game dev</h3>
+                <p>
+                  unity 2d / 3d + c# for cozy tidy sim (put it back!), survival
+                  arena (soulthera ascendant) and monster evolution idle game
+                  (voraxoid). also into reverse engineering games
+                </p>
+              </div>
+            </div>
+            <div class="feature-card">
+              <div>
+                <h3>web / desktop</h3>
+                <p>browser desktop (yukios), discord clone (yukicord)</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section class="project-showcase" id="sec-games">
           <div class="project-showcase-title">Projects</div>
@@ -305,7 +337,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Mac Mode — macOS-inspired desktop</p>
+                  <p>Mac Mode - macOS-inspired desktop</p>
                 </div>
               </div>
               <div class="slide" data-index="2">
@@ -318,7 +350,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>YukiDeck — game console environment</p>
+                  <p>YukiDeck - game console environment</p>
                 </div>
               </div>
               <div class="slide" data-index="3">
@@ -331,7 +363,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>ChromeOS Mode — lightweight shelf layout</p>
+                  <p>ChromeOS Mode - lightweight shelf layout</p>
                 </div>
               </div>
               <div class="slide" data-index="4">
@@ -344,7 +376,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Start Menu — fuzzy search and favorites</p>
+                  <p>Start Menu - fuzzy search and favorites</p>
                 </div>
               </div>
               <div class="slide" data-index="5">
@@ -357,7 +389,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Workspaces — 9 independent BSP workspaces</p>
+                  <p>Workspaces - 9 independent BSP workspaces</p>
                 </div>
               </div>
               <div class="slide" data-index="6">
@@ -370,7 +402,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Widgets — desktop widgets and system monitor</p>
+                  <p>Widgets - desktop widgets and system monitor</p>
                 </div>
               </div>
               <div class="slide" data-index="7">
@@ -383,7 +415,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>WASM Terminal Apps — btop, lavat, cmatrix</p>
+                  <p>WASM Terminal Apps - btop, lavat, cmatrix</p>
                 </div>
               </div>
               <div class="slide" data-index="8">
@@ -396,7 +428,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>3D OS Mode — first-person room</p>
+                  <p>3D OS Mode - first-person room</p>
                 </div>
               </div>
               <div class="slide" data-index="9">
@@ -409,7 +441,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Remote Desktop — WebRTC streaming</p>
+                  <p>Remote Desktop - WebRTC streaming</p>
                 </div>
               </div>
               <div class="slide" data-index="10">
@@ -421,7 +453,7 @@
                   width="900"
                   height="507"
                 />
-                <div class="slide-caption"><p>Steam — game storefront</p></div>
+                <div class="slide-caption"><p>Steam - game storefront</p></div>
               </div>
               <div class="slide" data-index="11">
                 <img
@@ -433,7 +465,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Steam Overlay — Shift+Tab in-game</p>
+                  <p>Steam Overlay - Shift+Tab in-game</p>
                 </div>
               </div>
               <div class="slide" data-index="12">
@@ -446,7 +478,7 @@
                   height="507"
                 />
                 <div class="slide-caption">
-                  <p>Tiling Mode — Hyprland BSP tiling</p>
+                  <p>Tiling Mode - Hyprland BSP tiling</p>
                 </div>
               </div>
               <div class="slide-dots" id="dots-yukios">
@@ -472,34 +504,34 @@
             <div class="game-info">
               <div class="game-name">YukiOS</div>
               <p class="game-desc">
-                A browser-based desktop environment running in a single web page
-                with windowed multitasking, persistent storage, emulators, and
-                80+ built-in applications.
+                A browser-native desktop hypervisor in a single tab. Six
+                switchable environments on one persistent vanilla JS core with
+                its own filesystem. No frameworks, no backend.
               </p>
               <ul class="game-features">
                 <li>
-                  Draggable, resizable windows with snapping, workspaces, and
-                  focus cycling
+                  Six desktop modes you can switch live: macOS, ChromeOS,
+                  Hyprland tiling, Yuki Deck, 3D and native
                 </li>
                 <li>
-                  File explorer with persistent IndexedDB storage and
-                  drag-and-drop from host OS
+                  Single session keeps all open apps, files and settings alive
+                  while the window manager rewrites itself
                 </li>
                 <li>
-                  Built-in terminal, code editor (Monaco), dev tools, and
-                  command palette
+                  File explorer on IndexedDB with trash, mounts, archives and
+                  drag and drop from host OS
+                </li>
+                <li>
+                  Built-in terminal with git, python and node, Monaco editor,
+                  command palette and dev tools
                 </li>
                 <li>
                   Emulators for Flash (Ruffle), DOS (JsDos), console
-                  (EmulatorJS), and x86
+                  (EmulatorJS), x86 (V86) plus WASM apps like btop and lavat
                 </li>
                 <li>
-                  Theme system with 40 presets, animated wallpapers, and
-                  Vanta.js support
-                </li>
-                <li>
-                  80+ apps including games, media tools, web apps, and
-                  Steam-like game launcher
+                  Theme system with 40+ presets, Vanta.js and video wallpapers,
+                  90+ apps including Steam with overlay and remote desktop
                 </li>
               </ul>
               <a
@@ -544,12 +576,12 @@
                   data-src="/static/pib3.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
                   loading="lazy"
-                  alt="Put It Back ghost"
+                  alt="Put It Back cozy room"
                   width="900"
                   height="418"
                 />
                 <div class="slide-caption">
-                  <p>The ghost makes the mess. You clean it up.</p>
+                  <p>A little home that gets cozier as you tidy</p>
                 </div>
               </div>
               <div class="slide-dots" id="dots-putitback">
@@ -567,8 +599,8 @@
             <div class="game-info">
               <div class="game-name">Put It Back!</div>
               <p class="game-desc">
-                A cozy first-person tidy-up sim. A ghost trashes your room, and
-                you put it back for cash.
+                A cozy first-person tidy-up sim. Come home to a messy room, put
+                everything back where it belongs and watch it become yours.
               </p>
               <ul class="game-features">
                 <li>
@@ -576,12 +608,12 @@
                   objects that behave like real things
                 </li>
                 <li>
-                  A harmless ghost knocks stuff over and hides your stuff. Stun
-                  it and tidy on
+                  Three connected rooms with a desk hologram hub and genre
+                  containers to sort into
                 </li>
                 <li>
                   Sparkles, chimes, and a cleanliness meter that climbs as you
-                  sort
+                  sort, with a before/after morph on payday
                 </li>
                 <li>
                   Earn money, buy tools, renovate, and decorate the room into
@@ -1040,7 +1072,21 @@
         </section>
 
         <section id="sec-comments">
-          <h2>comments</h2>
+          <h2>
+            comments
+            <span
+              id="gb-count"
+              style="
+                font-size: 0.6rem;
+                color: var(--accent);
+                opacity: 0.8;
+                letter-spacing: 1px;
+              "
+            ></span>
+          </h2>
+          <p class="game-desc" style="margin-bottom: 8px; font-size: 0.9rem">
+            leave something nice. i read them all.
+          </p>
           <iframe
             src="https://reeyuki.github.io/comments.html"
             id="gb-iframe"
@@ -1086,12 +1132,17 @@
           <p id="helltaker-music-text">
             Listen to some helltaker music since u scrolled that far
           </p>
-          <audio id="helltaker-audio" controls src="/static/vitality.mp3"></audio>
+          <audio
+            id="helltaker-audio"
+            controls
+            src="/static/vitality.mp3"
+          ></audio>
           <script>
             (function () {
               var isNeocities =
                 location.hostname === "reeyuki.neocities.org" ||
-                (document.URL && document.URL.includes("reeyuki.neocities.org"));
+                (document.URL &&
+                  document.URL.includes("reeyuki.neocities.org"));
               if (isNeocities) {
                 var t = document.getElementById("helltaker-music-text");
                 var a = document.getElementById("helltaker-audio");
@@ -1143,6 +1194,89 @@
           }
         }
       });
+    </script>
+    <script>
+      (function () {
+        var url =
+          "https://reeyuki-guestbook.liventcord-a60.workers.dev/?page=1&limit=1";
+        var countEl = document.getElementById("gb-count");
+        var headerEl = document.getElementById("gb-count-header");
+        fetch(url)
+          .then(function (r) {
+            return r.json();
+          })
+          .then(function (d) {
+            var total = d.totalPages || (d.messages && d.messages.length) || 0;
+            if (d.total !== undefined) total = d.total;
+            if (total > 0) {
+              if (countEl) countEl.textContent = "(" + total + ")";
+              if (headerEl) headerEl.textContent = "comments (" + total + ")";
+            }
+          })
+          .catch(function () {});
+      })();
+    </script>
+    <script>
+      (function () {
+        var avatars = [
+          "/static/reeyuki-avatar.webp",
+          "/static/avatardog.webp",
+          "/static/avatar-astolfo.webp",
+        ];
+        var key = "reeyuki-avatar-index";
+        var img = document.getElementById("anime-greet");
+        if (!img) return;
+        var saved = null;
+        try {
+          saved = localStorage.getItem(key);
+        } catch (e) {}
+        var idx = 0;
+        if (saved !== null) {
+          var p = parseInt(saved, 10);
+          if (!isNaN(p) && p >= 0 && p < avatars.length) idx = p;
+        }
+        img.src = avatars[idx];
+        var preload = document.querySelector(
+          'link[rel="preload"][href*="reeyuki-avatar"]',
+        );
+        if (preload) preload.href = avatars[idx];
+        img.style.cursor = "pointer";
+        img.title = "click avatar or use dots to switch";
+        var originalAlt = img.getAttribute("alt") || "Reeyuki";
+        img.addEventListener("mouseenter", function () {
+          img.removeAttribute("alt");
+        });
+        img.addEventListener("mouseleave", function () {
+          img.setAttribute("alt", originalAlt);
+        });
+        function setAvatar(newIdx) {
+          idx = newIdx;
+          img.src = avatars[idx];
+          if (preload) preload.href = avatars[idx];
+          try {
+            localStorage.setItem(key, String(idx));
+          } catch (e) {}
+          var dots = document.querySelectorAll(".avatar-dot");
+          dots.forEach(function (d) {
+            d.classList.toggle("active", Number(d.dataset.idx) === idx);
+          });
+        }
+        var dots = document.querySelectorAll(".avatar-dot");
+        dots.forEach(function (d) {
+          d.classList.toggle("active", Number(d.dataset.idx) === idx);
+          d.addEventListener("click", function () {
+            var n = parseInt(this.dataset.idx, 10);
+            if (!isNaN(n)) setAvatar(n);
+          });
+        });
+        img.addEventListener("click", function () {
+          setAvatar((idx + 1) % avatars.length);
+        });
+        avatars.forEach(function (src) {
+          var l = new Image();
+          l.src = src;
+        });
+      })();
     </script>
   </body>
 </html>

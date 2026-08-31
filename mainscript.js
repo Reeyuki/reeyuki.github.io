@@ -155,11 +155,30 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".slide-nav").forEach((btn) => {
     btn.addEventListener("click", () => {
       const game = btn.dataset.target;
+      const state = getState(game);
+      if (state.interval) {
+        clearInterval(state.interval);
+        state.interval = null;
+      }
       if (btn.classList.contains("prev-btn")) {
         prevSlide(game);
       } else if (btn.classList.contains("next-btn")) {
         nextSlide(game);
       }
+    });
+  });
+  document.querySelectorAll(".dot").forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const dotsContainer = dot.closest(".slide-dots");
+      if (!dotsContainer) return;
+      const game = dotsContainer.id.replace("dots-", "");
+      const state = getState(game);
+      if (state.interval) {
+        clearInterval(state.interval);
+        state.interval = null;
+      }
+      const idx = Number(dot.dataset.index);
+      if (Number.isFinite(idx)) goToSlide(game, idx);
     });
   });
 });
