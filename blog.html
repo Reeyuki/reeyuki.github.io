@@ -160,11 +160,43 @@
       <a href="/" class="home-button">◀ HOME</a>
       <div class="blog-title">BLOG</div>
       <nav>
+        <a href="#post3">POST_003</a>
         <a href="#post1">KERNEL ANTI-CHEATS</a>
       </nav>
     </header>
 
     <main>
+      <article id="post3">
+        <div class="article-header" onclick="toggleArticle(this)">
+          <div class="article-id">POST_003.TXT</div>
+          <div class="read-time"></div>
+        </div>
+        <div class="article-body open">
+          <img
+            src="/static/Screenshot_20260830_181932.png"
+            alt=""
+            style="max-width: 100%; height: auto; display: block"
+          />
+        </div>
+      </article>
+
+      <article id="post2">
+        <div class="article-header" onclick="toggleArticle(this)">
+          <div class="article-id">POST_002.TXT</div>
+          <div class="read-time"></div>
+        </div>
+        <div class="article-body">
+          <h2>Use Linux</h2>
+          <p id="linux"></p>
+          <p>is the year of linux desktop</p>
+          <script>
+            document.getElementById("linux").textContent = String(
+              new Date().getFullYear(),
+            );
+          </script>
+        </div>
+      </article>
+
       <article id="post1">
         <div class="article-header" onclick="toggleArticle(this)">
           <div class="article-id">POST_001.TXT</div>
@@ -270,23 +302,6 @@
               >
             </li>
           </ol>
-        </div>
-      </article>
-
-      <article id="post2">
-        <div class="article-header" onclick="toggleArticle(this)">
-          <div class="article-id">POST_002.TXT</div>
-          <div class="read-time"></div>
-        </div>
-        <div class="article-body">
-          <h2>Use Linux</h2>
-          <p id="linux"></p>
-          <p>is the year of linux desktop</p>
-          <script>
-            document.getElementById("linux").textContent = String(
-              new Date().getFullYear(),
-            );
-          </script>
         </div>
       </article>
 
