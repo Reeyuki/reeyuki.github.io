@@ -11,7 +11,7 @@
         location.hostname === "localhost" ||
         location.hostname === "127.0.0.1" ||
         location.hostname === "";
-      // SEO-safe: on localhost, use local font to avoid external 7d cache
+
       if (window.__isLocal) {
         var fs = document.createElement("style");
         fs.textContent =
@@ -42,7 +42,7 @@
     <link
       rel="preload"
       as="image"
-      href="/static/yukios-login.webp"
+      href="/static/yukios-eva.png"
       fetchpriority="high"
     />
     <script>
@@ -248,7 +248,7 @@
       <main id="content">
         <header id="sec-top">
           <h2 class="page-kicker">
-            <span class="marquee-text">hi, i'm reeyuki</span>
+            <span class="marquee-text">hi, i'm reeyuki!!</span>
           </h2>
         </header>
 
@@ -315,11 +315,24 @@
             <div class="slideshow-wrapper" id="slideshow-yukios">
               <div class="slide active" data-index="0">
                 <img
-                  src="/static/yukios-login.webp"
+                  src="/static/yukios-eva.png"
+                  alt="YukiOS Eva"
+                  width="1920"
+                  height="892"
+                  fetchpriority="high"
+                />
+                <div class="slide-caption">
+                  <p>YukiOS Eva - Evangelion-inspired desktop</p>
+                </div>
+              </div>
+              <div class="slide" data-index="1">
+                <img
+                  data-src="/static/yukios-login.webp"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
                   alt="YukiOS login"
                   width="1063"
                   height="494"
-                  fetchpriority="high"
                 />
                 <div class="slide-caption">
                   <p>
@@ -327,7 +340,7 @@
                   </p>
                 </div>
               </div>
-              <div class="slide" data-index="1">
+              <div class="slide" data-index="2">
                 <img
                   data-src="/static/yukios-mac.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -340,7 +353,7 @@
                   <p>Mac Mode - macOS-inspired desktop</p>
                 </div>
               </div>
-              <div class="slide" data-index="2">
+              <div class="slide" data-index="3">
                 <img
                   data-src="/static/yukios-yukideck.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -353,7 +366,7 @@
                   <p>YukiDeck - game console environment</p>
                 </div>
               </div>
-              <div class="slide" data-index="3">
+              <div class="slide" data-index="4">
                 <img
                   data-src="/static/yukios-chromeos.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -366,7 +379,7 @@
                   <p>ChromeOS Mode - lightweight shelf layout</p>
                 </div>
               </div>
-              <div class="slide" data-index="4">
+              <div class="slide" data-index="5">
                 <img
                   data-src="/static/yukios-startmenu.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -379,7 +392,7 @@
                   <p>Start Menu - fuzzy search and favorites</p>
                 </div>
               </div>
-              <div class="slide" data-index="5">
+              <div class="slide" data-index="6">
                 <img
                   data-src="/static/yukios-workspaces.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -392,7 +405,7 @@
                   <p>Workspaces - 9 independent BSP workspaces</p>
                 </div>
               </div>
-              <div class="slide" data-index="6">
+              <div class="slide" data-index="7">
                 <img
                   data-src="/static/yukios-widgets.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -405,7 +418,7 @@
                   <p>Widgets - desktop widgets and system monitor</p>
                 </div>
               </div>
-              <div class="slide" data-index="7">
+              <div class="slide" data-index="8">
                 <img
                   data-src="/static/yukios-btop.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -418,7 +431,7 @@
                   <p>WASM Terminal Apps - btop, lavat, cmatrix</p>
                 </div>
               </div>
-              <div class="slide" data-index="8">
+              <div class="slide" data-index="9">
                 <img
                   data-src="/static/yukios-3d.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -431,7 +444,7 @@
                   <p>3D OS Mode - first-person room</p>
                 </div>
               </div>
-              <div class="slide" data-index="9">
+              <div class="slide" data-index="10">
                 <img
                   data-src="/static/yukios-remote.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -444,7 +457,7 @@
                   <p>Remote Desktop - WebRTC streaming</p>
                 </div>
               </div>
-              <div class="slide" data-index="10">
+              <div class="slide" data-index="11">
                 <img
                   data-src="/static/yukios-steam.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -455,7 +468,7 @@
                 />
                 <div class="slide-caption"><p>Steam - game storefront</p></div>
               </div>
-              <div class="slide" data-index="11">
+              <div class="slide" data-index="12">
                 <img
                   data-src="/static/yukios-overlay.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -468,7 +481,7 @@
                   <p>Steam Overlay - Shift+Tab in-game</p>
                 </div>
               </div>
-              <div class="slide" data-index="12">
+              <div class="slide" data-index="13">
                 <img
                   data-src="/static/yukios-tiling.webp"
                   src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
@@ -495,6 +508,7 @@
                 <div class="dot" data-index="10"></div>
                 <div class="dot" data-index="11"></div>
                 <div class="dot" data-index="12"></div>
+                <div class="dot" data-index="13"></div>
               </div>
               <button class="slide-nav prev-btn" data-target="yukios">◀</button>
               <button class="slide-nav next-btn" data-target="yukios">
