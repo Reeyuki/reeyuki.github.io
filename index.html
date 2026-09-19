@@ -278,40 +278,13 @@
                 </p>
               </div>
             </div>
-            <div class="feature-card">
-              <div>
-                <h3>web / desktop</h3>
-                <p>browser desktop (yukios), discord clone (yukicord)</p>
-              </div>
-            </div>
           </div>
         </section>
 
         <section class="project-showcase" id="sec-games">
           <div class="project-showcase-title">Projects</div>
-          <div class="project-tabs">
-            <button class="project-tab active" data-game="yukios">
-              YukiOS
-            </button>
-            <button class="project-tab project-tab--game" data-game="putitback">
-              Put It Back!
-            </button>
-            <button class="project-tab project-tab--game" data-game="voraxoid">
-              Voraxoid
-            </button>
-            <button class="project-tab project-tab--game" data-game="soulthera">
-              Soulthera
-            </button>
-            <button class="project-tab" data-game="yukicord">YukiCord</button>
-            <button class="project-tab" data-game="gnome">
-              Gnome In Browser
-            </button>
-            <button class="project-tab" data-game="dotfiles">
-              My Dotfiles
-            </button>
-          </div>
-
-          <div class="project-panel active" id="panel-yukios">
+          <div class="projects-grid">
+          <div class="project-panel project-featured" id="panel-yukios">
             <div class="slideshow-wrapper" id="slideshow-yukios">
               <div class="slide active" data-index="0">
                 <img
@@ -516,7 +489,7 @@
               </button>
             </div>
             <div class="game-info">
-              <div class="game-name">YukiOS</div>
+              <div class="game-name"><a href="#yukios">YukiOS</a></div>
               <p class="game-desc">
                 A browser-native desktop hypervisor in a single tab. Six
                 switchable environments on one persistent vanilla JS core with
@@ -625,7 +598,7 @@
               </button>
             </div>
             <div class="game-info">
-              <div class="game-name">Put It Back!</div>
+              <div class="game-name"><a href="#putitback">Put It Back!</a></div>
               <p class="game-desc">
                 A cozy first-person tidy-up sim. Come home to a messy room, put
                 everything back where it belongs and watch it become yours.
@@ -739,7 +712,7 @@
               </button>
             </div>
             <div class="game-info">
-              <div class="game-name">Voraxoid</div>
+              <div class="game-name"><a href="#voraxoid">Voraxoid</a></div>
               <p class="game-desc">
                 Become a monstrous creation of the humans who made you.
               </p>
@@ -824,7 +797,7 @@
               </button>
             </div>
             <div class="game-info">
-              <div class="game-name">Soulthera Ascendant</div>
+              <div class="game-name"><a href="#soulthera">Soulthera Ascendant</a></div>
               <p class="game-desc">
                 A survival arena where you play a spirit reaping souls in a
                 haunted realm. Pick a character with a unique playstyle, then
@@ -853,26 +826,54 @@
           </div>
 
           <div class="project-panel" id="panel-yukicord">
-            <div
-              class="slideshow-wrapper"
-              id="slideshow-yukicord"
-              style="
-                background: transparent;
-                border: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <iframe
-                src="https://yukicord.github.io/"
-                style="width: 100%; height: 100%; border: none"
-                loading="lazy"
-                title="YukiCord"
-              ></iframe>
+            <div class="slideshow-wrapper" id="slideshow-yukicord">
+              <div class="slide active" data-index="0">
+                <img
+                  data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/afab7995-f75d-4d84-9a3c-da44755f744d-1771621784.png"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="YukiCord main"
+                />
+                <div class="slide-caption">
+                  <p>YukiCord - open source discord alternative</p>
+                </div>
+              </div>
+              <div class="slide" data-index="1">
+                <img
+                  data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/0137a61a-713c-40f1-9c77-48e88e545df3-1771621697.png"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="YukiCord chat"
+                />
+                <div class="slide-caption">
+                  <p>YukiCord chat view</p>
+                </div>
+              </div>
+              <div class="slide" data-index="2">
+                <img
+                  data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/2025-12-21-015638_hyprshot.png"
+                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                  loading="lazy"
+                  alt="YukiCord desktop"
+                />
+                <div class="slide-caption">
+                  <p>YukiCord on desktop</p>
+                </div>
+              </div>
+              <div class="slide-dots" id="dots-yukicord">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+              </div>
+              <button class="slide-nav prev-btn" data-target="yukicord">
+                ◀
+              </button>
+              <button class="slide-nav next-btn" data-target="yukicord">
+                &gt;
+              </button>
             </div>
             <div class="game-info">
-              <div class="game-name">YukiCord</div>
+              <div class="game-name"><a href="#yukicord">YukiCord</a></div>
               <p class="game-desc">A open source discord alternative</p>
               <a
                 href="https://yukicord.github.io/"
@@ -934,7 +935,7 @@
               </button>
             </div>
             <div class="game-info">
-              <div class="game-name">Gnome In Browser</div>
+              <div class="game-name"><a href="#gnome">Gnome In Browser</a></div>
               <p class="game-desc">
                 A GNOME recreation made in React, running right in your browser.
               </p>
@@ -1015,7 +1016,7 @@
               </button>
             </div>
             <div class="game-info">
-              <div class="game-name">reeyuki dotfiles</div>
+              <div class="game-name"><a href="#dotfiles">reeyuki dotfiles</a></div>
               <p class="game-desc">
                 My personal Arch and Hyprland setup. Forked from shub39, merged
                 with EviLuci's dotfiles, and tweaked until it felt like home.
@@ -1042,6 +1043,7 @@
                 >▶ Open on GitHub</a
               >
             </div>
+          </div>
           </div>
         </section>
 

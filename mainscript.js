@@ -110,46 +110,188 @@ function startSlideshow(gameId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const tabBtns = document.querySelectorAll(".project-tab");
-  const tabPanels = document.querySelectorAll(".project-panel");
-
-  function activateTab(game, push) {
-    const btn = document.querySelector(`.project-tab[data-game="${game}"]`);
-    if (!btn) return;
-    tabBtns.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    tabPanels.forEach((p) => p.classList.remove("active"));
-    const target = document.getElementById("panel-" + game);
-    if (target) target.classList.add("active");
+  // Grid view: all projects visible, start a slideshow per panel.
+  document.querySelectorAll(".project-panel[id^='panel-']").forEach((panel) => {
+    const game = panel.id.replace("panel-", "");
     if (document.getElementById("slideshow-" + game)) {
       startSlideshow(game);
     }
-    if (push) {
-      history.pushState(null, "", "#" + game);
+  });
+
+  // Truncate long explanations: collapsed by default, "read more" toggles.
+  document.querySelectorAll(".project-panel").forEach((panel) => {
+    const info = panel.querySelector(".game-info");
+    if (!info) return;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "read-more-btn";
+    btn.textContent = "+ read more";
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const expanded = panel.classList.toggle("expanded");
+      btn.textContent = expanded ? "− read less" : "+ read more";
+    });
+    const playBtn = info.querySelector(".play-btn");
+    info.insertBefore(btn, playBtn);
+  });
+
+  // Click-to-open modal with full details + permalink hash.
+  const modal = document.createElement("div");
+  modal.className = "project-modal";
+  modal.id = "project-modal";
+  modal.hidden = true;
+  modal.innerHTML =
+    '<div class="project-modal-backdrop"></div>' +
+    '<div class="project-modal-card" role="dialog" aria-modal="true">' +
+    '<button class="project-modal-close" type="button">✕</button>' +
+    '<div class="project-modal-body"></div></div>';
+  document.body.appendChild(modal);
+  const modalBody = modal.querySelector(".project-modal-body");
+
+  // URLs use the bare project name (e.g. #yukios); DOM ids stay panel-<name>.
+  function hashToPanelId(hash) {
+    if (!hash) return null;
+    if (document.getElementById(hash)?.classList?.contains("project-panel"))
+      return hash;
+    const prefixed = "panel-" + hash;
+    if (document.getElementById(prefixed)) return prefixed;
+    return null;
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    modalBody.innerHTML = "";
+    if (hashToPanelId(location.hash.replace("#", ""))) {
+      history.pushState(null, "", location.pathname + location.search);
     }
   }
 
-  tabBtns.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      activateTab(this.dataset.game, true);
+  function openModal(panelId, push) {
+    const panel = document.getElementById(panelId);
+    if (!panel) return;
+    const title = panel.querySelector(".game-name")?.textContent?.trim() ?? panelId;
+    const desc = panel.querySelector(".game-desc")?.innerHTML ?? "";
+    const features = panel.querySelector(".game-features")?.outerHTML ?? "";
+    const note = panel.querySelector(".game-note")?.outerHTML ?? "";
+    const link = panel.querySelector(".play-btn")?.outerHTML ?? "";
+    // Collect slides (resolve lazy data-src, skip placeholders).
+    const slides = Array.from(
+      panel.querySelectorAll(".slideshow-wrapper .slide"),
+    )
+      .map((s) => {
+        const img = s.querySelector("img");
+        if (!img) return null;
+        let src = img.dataset?.src || img.src || "";
+        if (window.__isLocal && src.includes("cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser")) {
+          src = "/static/gnome/g3.webp";
+        }
+        if (!src || src.startsWith("data:")) return null;
+        return {
+          src,
+          alt: img.alt || title,
+          caption: s.querySelector(".slide-caption p")?.textContent?.trim() ?? "",
+        };
+      })
+      .filter(Boolean);
+    const liveEmbed = panel.querySelector(".slideshow-wrapper iframe")?.outerHTML ?? "";
+    let media = "";
+    if (slides.length > 0) {
+      const dots = slides
+        .map((_, i) => `<div class="dot${i === 0 ? " active" : ""}" data-index="${i}"></div>`)
+        .join("");
+      media =
+        `<div class="modal-slideshow">` +
+        `<img src="${slides[0].src}" alt="${slides[0].alt}" />` +
+        `<button class="modal-nav prev-btn" type="button" aria-label="Previous slide">◀</button>` +
+        `<button class="modal-nav next-btn" type="button" aria-label="Next slide">&gt;</button>` +
+        `<div class="modal-counter">1 / ${slides.length}</div>` +
+        `<div class="modal-caption">${slides[0].caption}</div>` +
+        `<div class="modal-dots">${dots}</div></div>`;
+    } else if (liveEmbed) {
+      media = `<div class="modal-slideshow">${liveEmbed}</div>`;
+    }
+    modalBody.innerHTML =
+      media +
+      `<div class="game-name">${title}</div>` +
+      `<p class="game-desc" style="display:block;-webkit-line-clamp:unset">${desc}</p>` +
+      features +
+      note +
+      link;
+    // Unhide features/note inside modal (page CSS hides them in cards).
+    modalBody.querySelectorAll(".game-features, .game-note").forEach((el) => {
+      el.style.display = el.classList.contains("game-features") ? "flex" : "block";
+    });
+    // Wire modal slideshow controls.
+    if (slides.length > 1) {
+      let idx = 0;
+      const imgEl = modalBody.querySelector(".modal-slideshow img");
+      const capEl = modalBody.querySelector(".modal-caption");
+      const countEl = modalBody.querySelector(".modal-counter");
+      const dotEls = Array.from(modalBody.querySelectorAll(".modal-dots .dot"));
+      const show = (n) => {
+        idx = ((n % slides.length) + slides.length) % slides.length;
+        imgEl.src = slides[idx].src;
+        imgEl.alt = slides[idx].alt;
+        if (capEl) capEl.textContent = slides[idx].caption;
+        if (countEl) countEl.textContent = `${idx + 1} / ${slides.length}`;
+        dotEls.forEach((d, i) => d.classList.toggle("active", i === idx));
+      };
+      modalBody.querySelector(".modal-nav.prev-btn")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        show(idx - 1);
+      });
+      modalBody.querySelector(".modal-nav.next-btn")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        show(idx + 1);
+      });
+      dotEls.forEach((d) => {
+        d.addEventListener("click", (e) => {
+          e.stopPropagation();
+          show(Number(d.dataset.index));
+        });
+      });
+    }
+    modal.hidden = false;
+    if (push) history.pushState(null, "", "#" + panelId.replace(/^panel-/, ""));
+  }
+
+  modal.querySelector(".project-modal-backdrop").addEventListener("click", closeModal);
+  modal.querySelector(".project-modal-close").addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e) => {
+    if (modal.hidden) return;
+    if (e.key === "Escape") closeModal();
+    else if (e.key === "ArrowLeft")
+      modalBody.querySelector(".modal-nav.prev-btn")?.click();
+    else if (e.key === "ArrowRight")
+      modalBody.querySelector(".modal-nav.next-btn")?.click();
+  });
+
+  document.querySelectorAll(".project-panel").forEach((panel) => {
+    const opener = panel.querySelector(".slideshow-wrapper");
+    if (opener) {
+      opener.addEventListener("click", (e) => {
+        if (e.target.closest(".slide-nav, .dot, a, button, iframe")) return;
+        openModal(panel.id, true);
+      });
+    }
+    panel.querySelector(".game-name a")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal(panel.id, true);
     });
   });
 
   window.addEventListener("hashchange", () => {
-    const game = location.hash.replace("#", "");
-    if (game) activateTab(game, false);
+    const id = hashToPanelId(location.hash.replace("#", ""));
+    if (id) {
+      openModal(id, false);
+    } else if (!modal.hidden) {
+      closeModal();
+    }
   });
 
-  const fromHash = location.hash.replace("#", "");
-  if (
-    fromHash &&
-    document.querySelector(`.project-tab[data-game="${fromHash}"]`)
-  ) {
-    activateTab(fromHash, false);
-  } else {
-    const defaultTab =
-      document.querySelector('.project-tab[data-game="yukios"]') ?? tabBtns[0];
-    if (tabBtns.length > 0) defaultTab.click();
+  const fromHash = hashToPanelId(location.hash.replace("#", ""));
+  if (fromHash) {
+    openModal(fromHash, false);
   }
 
   document.querySelectorAll(".slide-nav").forEach((btn) => {
