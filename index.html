@@ -66,6 +66,7 @@
     />
     <noscript><link rel="stylesheet" href="stylesheet.css" /></noscript>
     <link id="purple-theme" rel="stylesheet" href="" />
+    <link id="pipboy-theme" rel="stylesheet" href="" />
     <script>
       if (Math.random() >= 0.5) {
         document.getElementById("purple-theme").href = "style-purple.css";
@@ -203,6 +204,13 @@
           >
             Purple theme
           </button>
+          <button
+            id="toggle-pipboy"
+            class="side-btn"
+            aria-label="Toggle Pip-Boy theme"
+          >
+            Pip-Boy theme
+          </button>
 
           <div class="sidebar-divider"></div>
 
@@ -264,7 +272,9 @@
                 <h3>what i use</h3>
                 <p>
                   js/ts, vue / vite / react, go / python / node / dotnet,
-                  fastapi, sqlite, docker, arch btw
+                  fastapi, sqlite, docker. unity c# with my own 60-package yuki
+                  toolkit (save, pooling, ui, combat, quests, shops...),
+                  syntax-checked with build.sh, no Unity needed.
                 </p>
               </div>
             </div>
@@ -284,766 +294,779 @@
         <section class="project-showcase" id="sec-games">
           <div class="project-showcase-title">Projects</div>
           <div class="projects-grid">
-          <div class="project-panel project-featured" id="panel-yukios">
-            <div class="slideshow-wrapper" id="slideshow-yukios">
-              <div class="slide active" data-index="0">
-                <img
-                  src="/static/yukios-eva.png"
-                  alt="YukiOS Eva"
-                  width="1920"
-                  height="892"
-                  fetchpriority="high"
-                />
-                <div class="slide-caption">
-                  <p>YukiOS Eva - Evangelion-inspired desktop</p>
+            <div class="project-panel project-featured" id="panel-yukios">
+              <div class="slideshow-wrapper" id="slideshow-yukios">
+                <div class="slide active" data-index="0">
+                  <img
+                    src="/static/yukios-eva.png"
+                    alt="YukiOS Eva"
+                    width="1920"
+                    height="892"
+                    fetchpriority="high"
+                  />
+                  <div class="slide-caption">
+                    <p>YukiOS Eva - Evangelion-inspired desktop</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="1">
-                <img
-                  data-src="/static/yukios-login.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="YukiOS login"
-                  width="1063"
-                  height="494"
-                />
-                <div class="slide-caption">
-                  <p>
-                    YukiOS login screen, a browser-based desktop environment
-                  </p>
+                <div class="slide" data-index="1">
+                  <img
+                    data-src="/static/yukios-login.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="YukiOS login"
+                    width="1063"
+                    height="494"
+                  />
+                  <div class="slide-caption">
+                    <p>
+                      YukiOS login screen, a browser-based desktop environment
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="2">
-                <img
-                  data-src="/static/yukios-mac.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Mac Mode"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Mac Mode - macOS-inspired desktop</p>
+                <div class="slide" data-index="2">
+                  <img
+                    data-src="/static/yukios-mac.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Mac Mode"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Mac Mode - macOS-inspired desktop</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="3">
-                <img
-                  data-src="/static/yukios-yukideck.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="YukiDeck"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>YukiDeck - game console environment</p>
+                <div class="slide" data-index="3">
+                  <img
+                    data-src="/static/yukios-yukideck.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="YukiDeck"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>YukiDeck - game console environment</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="4">
-                <img
-                  data-src="/static/yukios-chromeos.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="ChromeOS Mode"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>ChromeOS Mode - lightweight shelf layout</p>
+                <div class="slide" data-index="4">
+                  <img
+                    data-src="/static/yukios-chromeos.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="ChromeOS Mode"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>ChromeOS Mode - lightweight shelf layout</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="5">
-                <img
-                  data-src="/static/yukios-startmenu.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Start Menu"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Start Menu - fuzzy search and favorites</p>
+                <div class="slide" data-index="5">
+                  <img
+                    data-src="/static/yukios-startmenu.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Start Menu"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Start Menu - fuzzy search and favorites</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="6">
-                <img
-                  data-src="/static/yukios-workspaces.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Workspaces"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Workspaces - 9 independent BSP workspaces</p>
+                <div class="slide" data-index="6">
+                  <img
+                    data-src="/static/yukios-workspaces.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Workspaces"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Workspaces - 9 independent BSP workspaces</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="7">
-                <img
-                  data-src="/static/yukios-widgets.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Widgets"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Widgets - desktop widgets and system monitor</p>
+                <div class="slide" data-index="7">
+                  <img
+                    data-src="/static/yukios-widgets.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Widgets"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Widgets - desktop widgets and system monitor</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="8">
-                <img
-                  data-src="/static/yukios-btop.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="WASM Terminal Apps"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>WASM Terminal Apps - btop, lavat, cmatrix</p>
+                <div class="slide" data-index="8">
+                  <img
+                    data-src="/static/yukios-btop.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="WASM Terminal Apps"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>WASM Terminal Apps - btop, lavat, cmatrix</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="9">
-                <img
-                  data-src="/static/yukios-3d.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="3D OS Mode"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>3D OS Mode - first-person room</p>
+                <div class="slide" data-index="9">
+                  <img
+                    data-src="/static/yukios-3d.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="3D OS Mode"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>3D OS Mode - first-person room</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="10">
-                <img
-                  data-src="/static/yukios-remote.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Remote Desktop"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Remote Desktop - WebRTC streaming</p>
+                <div class="slide" data-index="10">
+                  <img
+                    data-src="/static/yukios-remote.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Remote Desktop"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Remote Desktop - WebRTC streaming</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="11">
-                <img
-                  data-src="/static/yukios-steam.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Steam"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption"><p>Steam - game storefront</p></div>
-              </div>
-              <div class="slide" data-index="12">
-                <img
-                  data-src="/static/yukios-overlay.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Steam Overlay"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Steam Overlay - Shift+Tab in-game</p>
+                <div class="slide" data-index="11">
+                  <img
+                    data-src="/static/yukios-steam.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Steam"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Steam - game storefront</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="13">
-                <img
-                  data-src="/static/yukios-tiling.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Tiling Mode"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Tiling Mode - Hyprland BSP tiling</p>
+                <div class="slide" data-index="12">
+                  <img
+                    data-src="/static/yukios-overlay.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Steam Overlay"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Steam Overlay - Shift+Tab in-game</p>
+                  </div>
                 </div>
+                <div class="slide" data-index="13">
+                  <img
+                    data-src="/static/yukios-tiling.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Tiling Mode"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Tiling Mode - Hyprland BSP tiling</p>
+                  </div>
+                </div>
+                <div class="slide-dots" id="dots-yukios">
+                  <div class="dot active" data-index="0"></div>
+                  <div class="dot" data-index="1"></div>
+                  <div class="dot" data-index="2"></div>
+                  <div class="dot" data-index="3"></div>
+                  <div class="dot" data-index="4"></div>
+                  <div class="dot" data-index="5"></div>
+                  <div class="dot" data-index="6"></div>
+                  <div class="dot" data-index="7"></div>
+                  <div class="dot" data-index="8"></div>
+                  <div class="dot" data-index="9"></div>
+                  <div class="dot" data-index="10"></div>
+                  <div class="dot" data-index="11"></div>
+                  <div class="dot" data-index="12"></div>
+                  <div class="dot" data-index="13"></div>
+                </div>
+                <button class="slide-nav prev-btn" data-target="yukios">
+                  ◀
+                </button>
+                <button class="slide-nav next-btn" data-target="yukios">
+                  &gt;
+                </button>
               </div>
-              <div class="slide-dots" id="dots-yukios">
-                <div class="dot active" data-index="0"></div>
-                <div class="dot" data-index="1"></div>
-                <div class="dot" data-index="2"></div>
-                <div class="dot" data-index="3"></div>
-                <div class="dot" data-index="4"></div>
-                <div class="dot" data-index="5"></div>
-                <div class="dot" data-index="6"></div>
-                <div class="dot" data-index="7"></div>
-                <div class="dot" data-index="8"></div>
-                <div class="dot" data-index="9"></div>
-                <div class="dot" data-index="10"></div>
-                <div class="dot" data-index="11"></div>
-                <div class="dot" data-index="12"></div>
-                <div class="dot" data-index="13"></div>
+              <div class="game-info">
+                <div class="game-name"><a href="#yukios">YukiOS</a></div>
+                <p class="game-desc">
+                  A full desktop OS in one browser tab. Six switchable
+                  environments, zero backend, zero frameworks.
+                </p>
+                <ul class="game-features">
+                  <li>
+                    Six live-switchable desktops: macOS, ChromeOS, Hyprland
+                    tiling, Yuki Deck, 3D and native
+                  </li>
+                  <li>
+                    One persistent session, apps, files and settings survive the
+                    switch
+                  </li>
+                  <li>
+                    Terminal, Monaco editor, file explorer, emulators (Flash,
+                    DOS, x86) plus WASM apps
+                  </li>
+                  <li>
+                    90+ apps, 40+ themes, Steam with overlay and remote desktop
+                  </li>
+                </ul>
+                <a
+                  href="https://github.com/reeyuki/yukios"
+                  class="play-btn"
+                  target="_blank"
+                  >▶ Open on GitHub</a
+                >
               </div>
-              <button class="slide-nav prev-btn" data-target="yukios">◀</button>
-              <button class="slide-nav next-btn" data-target="yukios">
-                &gt;
-              </button>
             </div>
-            <div class="game-info">
-              <div class="game-name"><a href="#yukios">YukiOS</a></div>
-              <p class="game-desc">
-                A browser-native desktop hypervisor in a single tab. Six
-                switchable environments on one persistent vanilla JS core with
-                its own filesystem. No frameworks, no backend.
-              </p>
-              <ul class="game-features">
-                <li>
-                  Six desktop modes you can switch live: macOS, ChromeOS,
-                  Hyprland tiling, Yuki Deck, 3D and native
-                </li>
-                <li>
-                  Single session keeps all open apps, files and settings alive
-                  while the window manager rewrites itself
-                </li>
-                <li>
-                  File explorer on IndexedDB with trash, mounts, archives and
-                  drag and drop from host OS
-                </li>
-                <li>
-                  Built-in terminal with git, python and node, Monaco editor,
-                  command palette and dev tools
-                </li>
-                <li>
-                  Emulators for Flash (Ruffle), DOS (JsDos), console
-                  (EmulatorJS), x86 (V86) plus WASM apps like btop and lavat
-                </li>
-                <li>
-                  Theme system with 40+ presets, Vanta.js and video wallpapers,
-                  90+ apps including Steam with overlay and remote desktop
-                </li>
-              </ul>
-              <a
-                href="https://github.com/reeyuki/yukios"
-                class="play-btn"
-                target="_blank"
-                >▶ Open on GitHub</a
-              >
-            </div>
-          </div>
 
-          <div class="project-panel" id="panel-putitback">
-            <div class="slideshow-wrapper" id="slideshow-putitback">
-              <div class="slide active" data-index="0">
-                <img
-                  data-src="/static/putitback.png"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Put It Back main"
-                  width="1920"
-                  height="1080"
-                />
-                <div class="slide-caption">
-                  <p>Put It Back! - cozy tidy-up sim</p>
+            <div class="project-panel" id="panel-putitback">
+              <div class="slideshow-wrapper" id="slideshow-putitback">
+                <div class="slide active" data-index="0">
+                  <img
+                    data-src="/static/putitback.png"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Put It Back main"
+                    width="1920"
+                    height="1080"
+                  />
+                  <div class="slide-caption">
+                    <p>Put It Back! - cozy tidy-up sim</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="1">
-                <img
-                  data-src="/static/pib1.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Put It Back cozy room"
-                  width="900"
-                  height="417"
-                />
-                <div class="slide-caption">
-                  <p>A cozy, messy room waiting to be tidied</p>
+                <div class="slide" data-index="1">
+                  <img
+                    data-src="/static/pib1.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Put It Back cozy room"
+                    width="900"
+                    height="417"
+                  />
+                  <div class="slide-caption">
+                    <p>A cozy, messy room waiting to be tidied</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="2">
-                <img
-                  data-src="/static/pib2.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Put It Back gameplay"
-                  width="900"
-                  height="417"
-                />
-                <div class="slide-caption">
-                  <p>Grab, toss, and shelve for physics-y cleanup</p>
+                <div class="slide" data-index="2">
+                  <img
+                    data-src="/static/pib2.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Put It Back gameplay"
+                    width="900"
+                    height="417"
+                  />
+                  <div class="slide-caption">
+                    <p>Grab, toss, and shelve for physics-y cleanup</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="3">
-                <img
-                  data-src="/static/pib3.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Put It Back cozy room"
-                  width="900"
-                  height="418"
-                />
-                <div class="slide-caption">
-                  <p>A little home that gets cozier as you tidy</p>
+                <div class="slide" data-index="3">
+                  <img
+                    data-src="/static/pib3.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Put It Back cozy room"
+                    width="900"
+                    height="418"
+                  />
+                  <div class="slide-caption">
+                    <p>A little home that gets cozier as you tidy</p>
+                  </div>
                 </div>
+                <div class="slide-dots" id="dots-putitback">
+                  <div class="dot active" data-index="0"></div>
+                  <div class="dot" data-index="1"></div>
+                  <div class="dot" data-index="2"></div>
+                  <div class="dot" data-index="3"></div>
+                </div>
+                <button class="slide-nav prev-btn" data-target="putitback">
+                  ◀
+                </button>
+                <button class="slide-nav next-btn" data-target="putitback">
+                  &gt;
+                </button>
               </div>
-              <div class="slide-dots" id="dots-putitback">
-                <div class="dot active" data-index="0"></div>
-                <div class="dot" data-index="1"></div>
-                <div class="dot" data-index="2"></div>
-                <div class="dot" data-index="3"></div>
+              <div class="game-info">
+                <div class="game-name">
+                  <a href="#putitback">Put It Back!</a>
+                </div>
+                <p class="game-desc">
+                  A cozy first-person tidy-up sim. Come home to a messy room,
+                  put everything back where it belongs and watch it become
+                  yours.
+                </p>
+                <ul class="game-features">
+                  <li>
+                    Satisfying physics based tidying: grab, toss, and shelve
+                    objects that behave like real things
+                  </li>
+                  <li>
+                    Three connected rooms with a desk hologram hub and genre
+                    containers to sort into
+                  </li>
+                  <li>
+                    Sparkles, chimes, and a cleanliness meter that climbs as you
+                    sort, with a before/after morph on payday
+                  </li>
+                  <li>
+                    Earn money, buy tools, renovate, and decorate the room into
+                    your home
+                  </li>
+                </ul>
+                <a
+                  href="https://put-it-back.netlify.app"
+                  class="play-btn"
+                  target="_blank"
+                  >▶ Play free in browser</a
+                >
               </div>
-              <button class="slide-nav prev-btn" data-target="putitback">
-                ◀
-              </button>
-              <button class="slide-nav next-btn" data-target="putitback">
-                &gt;
-              </button>
             </div>
-            <div class="game-info">
-              <div class="game-name"><a href="#putitback">Put It Back!</a></div>
-              <p class="game-desc">
-                A cozy first-person tidy-up sim. Come home to a messy room, put
-                everything back where it belongs and watch it become yours.
-              </p>
-              <ul class="game-features">
-                <li>
-                  Satisfying physics based tidying: grab, toss, and shelve
-                  objects that behave like real things
-                </li>
-                <li>
-                  Three connected rooms with a desk hologram hub and genre
-                  containers to sort into
-                </li>
-                <li>
-                  Sparkles, chimes, and a cleanliness meter that climbs as you
-                  sort, with a before/after morph on payday
-                </li>
-                <li>
-                  Earn money, buy tools, renovate, and decorate the room into
-                  your home
-                </li>
-              </ul>
-              <a
-                href="https://put-it-back.netlify.app"
-                class="play-btn"
-                target="_blank"
-                >▶ Play free in browser</a
-              >
-            </div>
-          </div>
 
-          <div class="project-panel" id="panel-voraxoid">
-            <div class="slideshow-wrapper" id="slideshow-voraxoid">
-              <div class="slide" data-index="0">
-                <img
-                  data-src="/static/vorax.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Voraxoid main"
-                  width="1920"
-                  height="1080"
-                />
-                <div class="slide-caption">
-                  <p>Voraxoid, a monstrous evolution idle game</p>
+            <div class="project-panel" id="panel-voraxoid">
+              <div class="slideshow-wrapper" id="slideshow-voraxoid">
+                <div class="slide" data-index="0">
+                  <img
+                    data-src="/static/vorax.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Voraxoid main"
+                    width="1920"
+                    height="1080"
+                  />
+                  <div class="slide-caption">
+                    <p>Voraxoid, a monstrous evolution idle game</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="1">
-                <img
-                  data-src="/static/lab1.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Evolution Laboratory"
-                  width="1920"
-                  height="1080"
-                />
-                <div class="slide-caption">
-                  <p>Evolution laboratory, mutate and upgrade your form</p>
+                <div class="slide" data-index="1">
+                  <img
+                    data-src="/static/lab1.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Evolution Laboratory"
+                    width="1920"
+                    height="1080"
+                  />
+                  <div class="slide-caption">
+                    <p>Evolution laboratory, mutate and upgrade your form</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="2">
-                <img
-                  data-src="/static/lab2.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Evolution Laboratory"
-                  width="1920"
-                  height="1080"
-                />
-                <div class="slide-caption">
-                  <p>Grow claws, tails, and terrifying appendages</p>
+                <div class="slide" data-index="2">
+                  <img
+                    data-src="/static/lab2.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Evolution Laboratory"
+                    width="1920"
+                    height="1080"
+                  />
+                  <div class="slide-caption">
+                    <p>Grow claws, tails, and terrifying appendages</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="3">
-                <img
-                  data-src="/static/lab3.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Evolution Laboratory"
-                  width="1920"
-                  height="1080"
-                />
-                <div class="slide-caption">
-                  <p>Unlock new biological tiers as you evolve</p>
+                <div class="slide" data-index="3">
+                  <img
+                    data-src="/static/lab3.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Evolution Laboratory"
+                    width="1920"
+                    height="1080"
+                  />
+                  <div class="slide-caption">
+                    <p>Unlock new biological tiers as you evolve</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="4">
-                <img
-                  data-src="/static/gun.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Turret attachment"
-                  width="1920"
-                  height="1080"
-                />
-                <div class="slide-caption">
-                  <p>Mount turrets and unleash mechanical destruction</p>
+                <div class="slide" data-index="4">
+                  <img
+                    data-src="/static/gun.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Turret attachment"
+                    width="1920"
+                    height="1080"
+                  />
+                  <div class="slide-caption">
+                    <p>Mount turrets and unleash mechanical destruction</p>
+                  </div>
                 </div>
+                <div class="slide-dots" id="dots-voraxoid">
+                  <div class="dot active" data-index="0"></div>
+                  <div class="dot" data-index="1"></div>
+                  <div class="dot" data-index="2"></div>
+                  <div class="dot" data-index="3"></div>
+                  <div class="dot" data-index="4"></div>
+                </div>
+                <button class="slide-nav prev-btn" data-target="voraxoid">
+                  ◀
+                </button>
+                <button class="slide-nav next-btn" data-target="voraxoid">
+                  &gt;
+                </button>
               </div>
-              <div class="slide-dots" id="dots-voraxoid">
-                <div class="dot active" data-index="0"></div>
-                <div class="dot" data-index="1"></div>
-                <div class="dot" data-index="2"></div>
-                <div class="dot" data-index="3"></div>
-                <div class="dot" data-index="4"></div>
+              <div class="game-info">
+                <div class="game-name"><a href="#voraxoid">Voraxoid</a></div>
+                <p class="game-desc">
+                  Become a monstrous creation of the humans who made you.
+                </p>
+                <ul class="game-features">
+                  <li>Devour humans, civilians and scientists alike.</li>
+                  <li>
+                    Collect rewards, meat, gems and eggs to power upgrades.
+                  </li>
+                  <li>
+                    Evolve your body, grow claws, tails, and turret attachments.
+                  </li>
+                  <li>
+                    Summon allies, hatch demon servants, mage allies, and mimic
+                    bots to hunt for you.
+                  </li>
+                  <li>
+                    Explore new worlds, gather broken spaceship parts to move to
+                    the next planet.
+                  </li>
+                  <li>
+                    Idle & daily rewards, keep growing even when you're away.
+                  </li>
+                </ul>
+                <a
+                  href="https://reeyuki.itch.io/voraxoid"
+                  class="play-btn"
+                  target="_blank"
+                  >▶ Play on itch</a
+                >
               </div>
-              <button class="slide-nav prev-btn" data-target="voraxoid">
-                ◀
-              </button>
-              <button class="slide-nav next-btn" data-target="voraxoid">
-                &gt;
-              </button>
             </div>
-            <div class="game-info">
-              <div class="game-name"><a href="#voraxoid">Voraxoid</a></div>
-              <p class="game-desc">
-                Become a monstrous creation of the humans who made you.
-              </p>
-              <ul class="game-features">
-                <li>Devour humans, civilians and scientists alike.</li>
-                <li>Collect rewards, meat, gems and eggs to power upgrades.</li>
-                <li>
-                  Evolve your body, grow claws, tails, and turret attachments.
-                </li>
-                <li>
-                  Summon allies, hatch demon servants, mage allies, and mimic
-                  bots to hunt for you.
-                </li>
-                <li>
-                  Explore new worlds, gather broken spaceship parts to move to
-                  the next planet.
-                </li>
-                <li>
-                  Idle & daily rewards, keep growing even when you're away.
-                </li>
-              </ul>
-              <a
-                href="https://reeyuki.itch.io/voraxoid"
-                class="play-btn"
-                target="_blank"
-                >▶ Play on itch</a
-              >
-            </div>
-          </div>
 
-          <div class="project-panel" id="panel-soulthera">
-            <div class="slideshow-wrapper" id="slideshow-soulthera">
-              <div class="slide active" data-index="0">
-                <img
-                  data-src="/static/soulthera1.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Soulthera main"
-                  width="1553"
-                  height="860"
-                />
-                <div class="slide-caption">
-                  <p>A wandering spirit in a haunted realm</p>
+            <div class="project-panel" id="panel-soulthera">
+              <div class="slideshow-wrapper" id="slideshow-soulthera">
+                <div class="slide active" data-index="0">
+                  <img
+                    data-src="/static/soulthera1.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Soulthera main"
+                    width="1553"
+                    height="860"
+                  />
+                  <div class="slide-caption">
+                    <p>A wandering spirit in a haunted realm</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="1">
-                <img
-                  data-src="/static/soulthera2.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Soulthera gameplay"
-                  width="1549"
-                  height="866"
-                />
-                <div class="slide-caption">
-                  <p>Every enemy type makes you move differently</p>
+                <div class="slide" data-index="1">
+                  <img
+                    data-src="/static/soulthera2.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Soulthera gameplay"
+                    width="1549"
+                    height="866"
+                  />
+                  <div class="slide-caption">
+                    <p>Every enemy type makes you move differently</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="2">
-                <img
-                  data-src="/static/soulthera3.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Soulthera upgrades"
-                  width="1545"
-                  height="869"
-                />
-                <div class="slide-caption">
-                  <p>Pick upgrades. Shape your build.</p>
+                <div class="slide" data-index="2">
+                  <img
+                    data-src="/static/soulthera3.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Soulthera upgrades"
+                    width="1545"
+                    height="869"
+                  />
+                  <div class="slide-caption">
+                    <p>Pick upgrades. Shape your build.</p>
+                  </div>
                 </div>
+                <div class="slide-dots" id="dots-soulthera">
+                  <div class="dot active" data-index="0"></div>
+                  <div class="dot" data-index="1"></div>
+                  <div class="dot" data-index="2"></div>
+                </div>
+                <button class="slide-nav prev-btn" data-target="soulthera">
+                  ◀
+                </button>
+                <button class="slide-nav next-btn" data-target="soulthera">
+                  &gt;
+                </button>
               </div>
-              <div class="slide-dots" id="dots-soulthera">
-                <div class="dot active" data-index="0"></div>
-                <div class="dot" data-index="1"></div>
-                <div class="dot" data-index="2"></div>
+              <div class="game-info">
+                <div class="game-name">
+                  <a href="#soulthera">Soulthera Ascendant</a>
+                </div>
+                <p class="game-desc">
+                  A survival arena where you play a spirit reaping souls in a
+                  haunted realm. Pick a character with a unique playstyle, then
+                  survive waves of enemies built to make you move. Your build
+                  decides the fight.
+                </p>
+                <ul class="game-features">
+                  <li>
+                    7 playable spirits, each with a different passive and
+                    starting weapon
+                  </li>
+                  <li>13 weapons that combine into synergies</li>
+                  <li>
+                    Enemies that push back. Rangers shoot, burrowers ambush,
+                    leapers charge
+                  </li>
+                  <li>Bosses with two phases at the end of each map</li>
+                </ul>
+                <a
+                  href="https://reeyuki.itch.io/soulthera-ascendant"
+                  class="play-btn"
+                  target="_blank"
+                  >▶ Play on itch</a
+                >
               </div>
-              <button class="slide-nav prev-btn" data-target="soulthera">
-                ◀
-              </button>
-              <button class="slide-nav next-btn" data-target="soulthera">
-                &gt;
-              </button>
             </div>
-            <div class="game-info">
-              <div class="game-name"><a href="#soulthera">Soulthera Ascendant</a></div>
-              <p class="game-desc">
-                A survival arena where you play a spirit reaping souls in a
-                haunted realm. Pick a character with a unique playstyle, then
-                survive waves of enemies built to make you move. Your build
-                decides the fight.
-              </p>
-              <ul class="game-features">
-                <li>
-                  7 playable spirits, each with a different passive and starting
-                  weapon
-                </li>
-                <li>13 weapons that combine into synergies</li>
-                <li>
-                  Enemies that push back. Rangers shoot, burrowers ambush,
-                  leapers charge
-                </li>
-                <li>Bosses with two phases at the end of each map</li>
-              </ul>
-              <a
-                href="https://reeyuki.itch.io/soulthera-ascendant"
-                class="play-btn"
-                target="_blank"
-                >▶ Play on itch</a
-              >
-            </div>
-          </div>
 
-          <div class="project-panel" id="panel-yukicord">
-            <div class="slideshow-wrapper" id="slideshow-yukicord">
-              <div class="slide active" data-index="0">
-                <img
-                  data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/afab7995-f75d-4d84-9a3c-da44755f744d-1771621784.png"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="YukiCord main"
-                />
-                <div class="slide-caption">
-                  <p>YukiCord - open source discord alternative</p>
+            <div class="project-panel" id="panel-yukicord">
+              <div class="slideshow-wrapper" id="slideshow-yukicord">
+                <div class="slide active" data-index="0">
+                  <img
+                    data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/afab7995-f75d-4d84-9a3c-da44755f744d-1771621784.png"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="YukiCord main"
+                  />
+                  <div class="slide-caption">
+                    <p>YukiCord - open source discord alternative</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="1">
-                <img
-                  data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/0137a61a-713c-40f1-9c77-48e88e545df3-1771621697.png"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="YukiCord chat"
-                />
-                <div class="slide-caption">
-                  <p>YukiCord chat view</p>
+                <div class="slide" data-index="1">
+                  <img
+                    data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/0137a61a-713c-40f1-9c77-48e88e545df3-1771621697.png"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="YukiCord chat"
+                  />
+                  <div class="slide-caption">
+                    <p>YukiCord chat view</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="2">
-                <img
-                  data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/2025-12-21-015638_hyprshot.png"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="YukiCord desktop"
-                />
-                <div class="slide-caption">
-                  <p>YukiCord on desktop</p>
+                <div class="slide" data-index="2">
+                  <img
+                    data-src="https://raw.githubusercontent.com/yukicord/.github/refs/heads/main/2025-12-21-015638_hyprshot.png"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="YukiCord desktop"
+                  />
+                  <div class="slide-caption">
+                    <p>YukiCord on desktop</p>
+                  </div>
                 </div>
+                <div class="slide-dots" id="dots-yukicord">
+                  <div class="dot active" data-index="0"></div>
+                  <div class="dot" data-index="1"></div>
+                  <div class="dot" data-index="2"></div>
+                </div>
+                <button class="slide-nav prev-btn" data-target="yukicord">
+                  ◀
+                </button>
+                <button class="slide-nav next-btn" data-target="yukicord">
+                  &gt;
+                </button>
               </div>
-              <div class="slide-dots" id="dots-yukicord">
-                <div class="dot active" data-index="0"></div>
-                <div class="dot" data-index="1"></div>
-                <div class="dot" data-index="2"></div>
+              <div class="game-info">
+                <div class="game-name"><a href="#yukicord">YukiCord</a></div>
+                <p class="game-desc">A open source discord alternative</p>
+                <a
+                  href="https://yukicord.github.io/"
+                  class="play-btn"
+                  target="_blank"
+                  >▶ Visit YukiCord</a
+                >
               </div>
-              <button class="slide-nav prev-btn" data-target="yukicord">
-                ◀
-              </button>
-              <button class="slide-nav next-btn" data-target="yukicord">
-                &gt;
-              </button>
             </div>
-            <div class="game-info">
-              <div class="game-name"><a href="#yukicord">YukiCord</a></div>
-              <p class="game-desc">A open source discord alternative</p>
-              <a
-                href="https://yukicord.github.io/"
-                class="play-btn"
-                target="_blank"
-                >▶ Visit YukiCord</a
-              >
-            </div>
-          </div>
 
-          <div class="project-panel" id="panel-gnome">
-            <div class="slideshow-wrapper" id="slideshow-gnome">
-              <div class="slide active" data-index="0">
-                <img
-                  data-src="/static/gnome/g1.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Gnome In Browser main"
-                  width="900"
-                  height="459"
-                />
-                <div class="slide-caption">
-                  <p>A GNOME desktop recreated in React</p>
+            <div class="project-panel" id="panel-gnome">
+              <div class="slideshow-wrapper" id="slideshow-gnome">
+                <div class="slide active" data-index="0">
+                  <img
+                    data-src="/static/gnome/g1.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Gnome In Browser main"
+                    width="900"
+                    height="459"
+                  />
+                  <div class="slide-caption">
+                    <p>A GNOME desktop recreated in React</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="1">
-                <img
-                  data-src="/static/gnome/g2.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="Gnome In Browser desktop"
-                  width="900"
-                  height="459"
-                />
-                <div class="slide-caption">
-                  <p>Panels, apps, and the GNOME shell look in your browser</p>
+                <div class="slide" data-index="1">
+                  <img
+                    data-src="/static/gnome/g2.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="Gnome In Browser desktop"
+                    width="900"
+                    height="459"
+                  />
+                  <div class="slide-caption">
+                    <p>
+                      Panels, apps, and the GNOME shell look in your browser
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="2">
-                <img
-                  data-src="https://cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser@main/.github/gnome.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  alt="Gnome In Browser activity"
-                  width="900"
-                  height="459"
-                />
-                <div class="slide-caption">
-                  <p>A GNOME recreation made in React</p>
+                <div class="slide" data-index="2">
+                  <img
+                    data-src="https://cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser@main/.github/gnome.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    alt="Gnome In Browser activity"
+                    width="900"
+                    height="459"
+                  />
+                  <div class="slide-caption">
+                    <p>A GNOME recreation made in React</p>
+                  </div>
                 </div>
+                <div class="slide-dots" id="dots-gnome">
+                  <div class="dot active" data-index="0"></div>
+                  <div class="dot" data-index="1"></div>
+                  <div class="dot" data-index="2"></div>
+                </div>
+                <button class="slide-nav prev-btn" data-target="gnome">
+                  ◀
+                </button>
+                <button class="slide-nav next-btn" data-target="gnome">
+                  &gt;
+                </button>
               </div>
-              <div class="slide-dots" id="dots-gnome">
-                <div class="dot active" data-index="0"></div>
-                <div class="dot" data-index="1"></div>
-                <div class="dot" data-index="2"></div>
+              <div class="game-info">
+                <div class="game-name">
+                  <a href="#gnome">Gnome In Browser</a>
+                </div>
+                <p class="game-desc">
+                  A GNOME recreation made in React, running right in your
+                  browser.
+                </p>
+                <a
+                  href="https://github.com/Reeyuki/GnomeInBrowser"
+                  class="play-btn"
+                  target="_blank"
+                  >▶ Open on GitHub</a
+                >
               </div>
-              <button class="slide-nav prev-btn" data-target="gnome">◀</button>
-              <button class="slide-nav next-btn" data-target="gnome">
-                &gt;
-              </button>
             </div>
-            <div class="game-info">
-              <div class="game-name"><a href="#gnome">Gnome In Browser</a></div>
-              <p class="game-desc">
-                A GNOME recreation made in React, running right in your browser.
-              </p>
-              <a
-                href="https://github.com/Reeyuki/GnomeInBrowser"
-                class="play-btn"
-                target="_blank"
-                >▶ Open on GitHub</a
-              >
-            </div>
-          </div>
 
-          <div class="project-panel" id="panel-dotfiles">
-            <div class="slideshow-wrapper" id="slideshow-dotfiles">
-              <div class="slide active" data-index="0">
-                <img
-                  data-src="/static/dotfiles/s1.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="reeyuki dotfiles desktop"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>The desktop, waybar and rofi all themed up</p>
+            <div class="project-panel" id="panel-dotfiles">
+              <div class="slideshow-wrapper" id="slideshow-dotfiles">
+                <div class="slide active" data-index="0">
+                  <img
+                    data-src="/static/dotfiles/s1.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="reeyuki dotfiles desktop"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>The desktop, waybar and rofi all themed up</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="1">
-                <img
-                  data-src="/static/dotfiles/s2.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="reeyuki dotfiles window"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Windows tiled out with the kitty terminal</p>
+                <div class="slide" data-index="1">
+                  <img
+                    data-src="/static/dotfiles/s2.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="reeyuki dotfiles window"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Windows tiled out with the kitty terminal</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="2">
-                <img
-                  data-src="/static/dotfiles/s3.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="reeyuki dotfiles view"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Another look at the themed setup</p>
+                <div class="slide" data-index="2">
+                  <img
+                    data-src="/static/dotfiles/s3.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="reeyuki dotfiles view"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Another look at the themed setup</p>
+                  </div>
                 </div>
-              </div>
-              <div class="slide" data-index="3">
-                <img
-                  data-src="/static/dotfiles/s4.webp"
-                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                  loading="lazy"
-                  alt="reeyuki dotfiles detail"
-                  width="900"
-                  height="507"
-                />
-                <div class="slide-caption">
-                  <p>Neovim and the rest of the rice</p>
+                <div class="slide" data-index="3">
+                  <img
+                    data-src="/static/dotfiles/s4.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    loading="lazy"
+                    alt="reeyuki dotfiles detail"
+                    width="900"
+                    height="507"
+                  />
+                  <div class="slide-caption">
+                    <p>Neovim and the rest of the rice</p>
+                  </div>
                 </div>
+                <div class="slide-dots" id="dots-dotfiles">
+                  <div class="dot active" data-index="0"></div>
+                  <div class="dot" data-index="1"></div>
+                  <div class="dot" data-index="2"></div>
+                  <div class="dot" data-index="3"></div>
+                </div>
+                <button class="slide-nav prev-btn" data-target="dotfiles">
+                  ◀
+                </button>
+                <button class="slide-nav next-btn" data-target="dotfiles">
+                  &gt;
+                </button>
               </div>
-              <div class="slide-dots" id="dots-dotfiles">
-                <div class="dot active" data-index="0"></div>
-                <div class="dot" data-index="1"></div>
-                <div class="dot" data-index="2"></div>
-                <div class="dot" data-index="3"></div>
+              <div class="game-info">
+                <div class="game-name">
+                  <a href="#dotfiles">reeyuki dotfiles</a>
+                </div>
+                <p class="game-desc">
+                  My personal Arch and Hyprland setup. Forked from shub39,
+                  merged with EviLuci's dotfiles, and tweaked until it felt like
+                  home.
+                </p>
+                <ul class="game-features">
+                  <li>
+                    Hyprland config with waybar, rofi, and a keybind layout that
+                    makes sense to me
+                  </li>
+                  <li>Neovim with Lazy and debugging already set up</li>
+                  <li>
+                    Fish shell with starship, thefuck, and pokemon colorscripts
+                  </li>
+                  <li>
+                    Hatsune Miku cursor and candy icons for a cute desktop
+                  </li>
+                  <li>Fastfetch, swaync, wlogout, and copyq themed to match</li>
+                </ul>
+                <p class="game-note">
+                  note: this is old and i don't really maintain it anymore.
+                </p>
+                <a
+                  href="https://github.com/reeyuki/dotfiles"
+                  class="play-btn"
+                  target="_blank"
+                  >▶ Open on GitHub</a
+                >
               </div>
-              <button class="slide-nav prev-btn" data-target="dotfiles">
-                ◀
-              </button>
-              <button class="slide-nav next-btn" data-target="dotfiles">
-                &gt;
-              </button>
             </div>
-            <div class="game-info">
-              <div class="game-name"><a href="#dotfiles">reeyuki dotfiles</a></div>
-              <p class="game-desc">
-                My personal Arch and Hyprland setup. Forked from shub39, merged
-                with EviLuci's dotfiles, and tweaked until it felt like home.
-              </p>
-              <ul class="game-features">
-                <li>
-                  Hyprland config with waybar, rofi, and a keybind layout that
-                  makes sense to me
-                </li>
-                <li>Neovim with Lazy and debugging already set up</li>
-                <li>
-                  Fish shell with starship, thefuck, and pokemon colorscripts
-                </li>
-                <li>Hatsune Miku cursor and candy icons for a cute desktop</li>
-                <li>Fastfetch, swaync, wlogout, and copyq themed to match</li>
-              </ul>
-              <p class="game-note">
-                note: this is old and i don't really maintain it anymore.
-              </p>
-              <a
-                href="https://github.com/reeyuki/dotfiles"
-                class="play-btn"
-                target="_blank"
-                >▶ Open on GitHub</a
-              >
-            </div>
-          </div>
           </div>
         </section>
 

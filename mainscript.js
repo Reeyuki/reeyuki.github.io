@@ -17,18 +17,17 @@ document.addEventListener("mousemove", (e) => {
     if (i > -1) sparkles.splice(i, 1);
   }, 500);
 });
-
 const slideshows = {
-  soulthera: { current: 0, interval: null, duration: 8000 },
-  voraxoid: { current: 0, interval: null, duration: 8000 },
-  yukios: { current: 0, interval: null, duration: 8000 },
-  putitback: { current: 0, interval: null, duration: 8000 },
-  yukicord: { current: 0, interval: null, duration: 8000 },
-  gnome: { current: 0, interval: null, duration: 8000 },
+  soulthera: { current: 0, interval: null, duration: 8e3 },
+  voraxoid: { current: 0, interval: null, duration: 8e3 },
+  yukios: { current: 0, interval: null, duration: 8e3 },
+  putitback: { current: 0, interval: null, duration: 8e3 },
+  yukicord: { current: 0, interval: null, duration: 8e3 },
+  gnome: { current: 0, interval: null, duration: 8e3 },
 };
 function getState(gameId) {
   if (!slideshows[gameId]) {
-    slideshows[gameId] = { current: 0, interval: null, duration: 8000 };
+    slideshows[gameId] = { current: 0, interval: null, duration: 8e3 };
   }
   return slideshows[gameId];
 }
@@ -56,40 +55,29 @@ function hydrateSlideImg(slide) {
 }
 function goToSlide(gameId, index) {
   const state = getState(gameId);
-
   const slides = Array.from(getSlides(gameId));
   const dots = Array.from(getDots(gameId));
-
   const total = slides.length;
   if (total === 0) return;
-
   let targetIndex = Number(index);
   if (!Number.isFinite(targetIndex)) targetIndex = 0;
-
   targetIndex = ((targetIndex % total) + total) % total;
-
   const prevIdx = state.current ?? 0;
-
   if (slides[prevIdx]) {
     slides[prevIdx].classList.remove("active");
     slides[prevIdx].classList.add("prev");
-
     const prevEl = slides[prevIdx];
     setTimeout(() => {
       if (prevEl) prevEl.classList.remove("prev");
     }, 900);
   }
-
   state.current = targetIndex;
-
   if (slides[targetIndex]) {
     hydrateSlideImg(slides[targetIndex]);
-    // preload next slide
     const next = slides[(targetIndex + 1) % total];
     hydrateSlideImg(next);
     slides[targetIndex].classList.add("active");
   }
-
   dots.forEach((dot, i) => {
     dot.classList.toggle("active", i === targetIndex);
   });
@@ -108,34 +96,30 @@ function startSlideshow(gameId) {
   goToSlide(gameId, 0);
   state.interval = setInterval(() => nextSlide(gameId), state.duration);
 }
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Grid view: all projects visible, start a slideshow per panel.
   document.querySelectorAll(".project-panel[id^='panel-']").forEach((panel) => {
     const game = panel.id.replace("panel-", "");
     if (document.getElementById("slideshow-" + game)) {
       startSlideshow(game);
     }
   });
-
-  // Truncate long explanations: collapsed by default, "read more" toggles.
   document.querySelectorAll(".project-panel").forEach((panel) => {
+    if (panel.classList.contains("project-featured")) {
+      panel.classList.add("expanded");
+    }
     const info = panel.querySelector(".game-info");
     if (!info) return;
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "read-more-btn";
-    btn.textContent = "+ read more";
+    btn.className = "details-btn";
+    btn.textContent = "full details →";
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      const expanded = panel.classList.toggle("expanded");
-      btn.textContent = expanded ? "− read less" : "+ read more";
+      openModal(panel.id, true);
     });
     const playBtn = info.querySelector(".play-btn");
     info.insertBefore(btn, playBtn);
   });
-
-  // Click-to-open modal with full details + permalink hash.
   const modal = document.createElement("div");
   modal.className = "project-modal";
   modal.id = "project-modal";
@@ -147,8 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     '<div class="project-modal-body"></div></div>';
   document.body.appendChild(modal);
   const modalBody = modal.querySelector(".project-modal-body");
-
-  // URLs use the bare project name (e.g. #yukios); DOM ids stay panel-<name>.
   function hashToPanelId(hash) {
     if (!hash) return null;
     if (document.getElementById(hash)?.classList?.contains("project-panel"))
@@ -157,24 +139,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById(prefixed)) return prefixed;
     return null;
   }
-
   function closeModal() {
     modal.hidden = true;
     modalBody.innerHTML = "";
+    delete document.body.dataset.project;
     if (hashToPanelId(location.hash.replace("#", ""))) {
       history.pushState(null, "", location.pathname + location.search);
     }
   }
-
   function openModal(panelId, push) {
     const panel = document.getElementById(panelId);
     if (!panel) return;
-    const title = panel.querySelector(".game-name")?.textContent?.trim() ?? panelId;
+    document.body.dataset.project = panelId.replace(/^panel-/, "");
+    const title =
+      panel.querySelector(".game-name")?.textContent?.trim() ?? panelId;
     const desc = panel.querySelector(".game-desc")?.innerHTML ?? "";
     const features = panel.querySelector(".game-features")?.outerHTML ?? "";
     const note = panel.querySelector(".game-note")?.outerHTML ?? "";
     const link = panel.querySelector(".play-btn")?.outerHTML ?? "";
-    // Collect slides (resolve lazy data-src, skip placeholders).
     const slides = Array.from(
       panel.querySelectorAll(".slideshow-wrapper .slide"),
     )
@@ -182,22 +164,30 @@ document.addEventListener("DOMContentLoaded", () => {
         const img = s.querySelector("img");
         if (!img) return null;
         let src = img.dataset?.src || img.src || "";
-        if (window.__isLocal && src.includes("cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser")) {
+        if (
+          window.__isLocal &&
+          src.includes("cdn.jsdelivr.net/gh/Reeyuki/GnomeInBrowser")
+        ) {
           src = "/static/gnome/g3.webp";
         }
         if (!src || src.startsWith("data:")) return null;
         return {
-          src,
+          src: src,
           alt: img.alt || title,
-          caption: s.querySelector(".slide-caption p")?.textContent?.trim() ?? "",
+          caption:
+            s.querySelector(".slide-caption p")?.textContent?.trim() ?? "",
         };
       })
       .filter(Boolean);
-    const liveEmbed = panel.querySelector(".slideshow-wrapper iframe")?.outerHTML ?? "";
+    const liveEmbed =
+      panel.querySelector(".slideshow-wrapper iframe")?.outerHTML ?? "";
     let media = "";
     if (slides.length > 0) {
       const dots = slides
-        .map((_, i) => `<div class="dot${i === 0 ? " active" : ""}" data-index="${i}"></div>`)
+        .map(
+          (_, i) =>
+            `<div class="dot${i === 0 ? " active" : ""}" data-index="${i}"></div>`,
+        )
         .join("");
       media =
         `<div class="modal-slideshow">` +
@@ -217,11 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
       features +
       note +
       link;
-    // Unhide features/note inside modal (page CSS hides them in cards).
     modalBody.querySelectorAll(".game-features, .game-note").forEach((el) => {
-      el.style.display = el.classList.contains("game-features") ? "flex" : "block";
+      el.style.display = el.classList.contains("game-features")
+        ? "flex"
+        : "block";
     });
-    // Wire modal slideshow controls.
     if (slides.length > 1) {
       let idx = 0;
       const imgEl = modalBody.querySelector(".modal-slideshow img");
@@ -236,14 +226,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (countEl) countEl.textContent = `${idx + 1} / ${slides.length}`;
         dotEls.forEach((d, i) => d.classList.toggle("active", i === idx));
       };
-      modalBody.querySelector(".modal-nav.prev-btn")?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        show(idx - 1);
-      });
-      modalBody.querySelector(".modal-nav.next-btn")?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        show(idx + 1);
-      });
+      modalBody
+        .querySelector(".modal-nav.prev-btn")
+        ?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          show(idx - 1);
+        });
+      modalBody
+        .querySelector(".modal-nav.next-btn")
+        ?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          show(idx + 1);
+        });
       dotEls.forEach((d) => {
         d.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -254,9 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.hidden = false;
     if (push) history.pushState(null, "", "#" + panelId.replace(/^panel-/, ""));
   }
-
-  modal.querySelector(".project-modal-backdrop").addEventListener("click", closeModal);
-  modal.querySelector(".project-modal-close").addEventListener("click", closeModal);
+  modal
+    .querySelector(".project-modal-backdrop")
+    .addEventListener("click", closeModal);
+  modal
+    .querySelector(".project-modal-close")
+    .addEventListener("click", closeModal);
   document.addEventListener("keydown", (e) => {
     if (modal.hidden) return;
     if (e.key === "Escape") closeModal();
@@ -265,7 +262,6 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (e.key === "ArrowRight")
       modalBody.querySelector(".modal-nav.next-btn")?.click();
   });
-
   document.querySelectorAll(".project-panel").forEach((panel) => {
     const opener = panel.querySelector(".slideshow-wrapper");
     if (opener) {
@@ -279,7 +275,6 @@ document.addEventListener("DOMContentLoaded", () => {
       openModal(panel.id, true);
     });
   });
-
   window.addEventListener("hashchange", () => {
     const id = hashToPanelId(location.hash.replace("#", ""));
     if (id) {
@@ -288,12 +283,10 @@ document.addEventListener("DOMContentLoaded", () => {
       closeModal();
     }
   });
-
   const fromHash = hashToPanelId(location.hash.replace("#", ""));
   if (fromHash) {
     openModal(fromHash, false);
   }
-
   document.querySelectorAll(".slide-nav").forEach((btn) => {
     btn.addEventListener("click", () => {
       const game = btn.dataset.target;
@@ -324,15 +317,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
 const ladderContainer = document.getElementById("ladder-container");
 const MAX_LADDERS = 600;
 let ladderCount = 0;
 let isLoading = false;
-
 function addLadderImage() {
   if (ladderCount >= MAX_LADDERS) return;
-
   const img = document.createElement("img");
   img.src = "/static/ladder.webp";
   img.alt = "Ladder";
@@ -342,13 +332,10 @@ function addLadderImage() {
   ladderContainer.appendChild(img);
   ladderCount++;
 }
-
 function handleScroll() {
   if (isLoading || ladderCount >= MAX_LADDERS) return;
-
   const scrollPosition = window.scrollY + window.innerHeight;
   const pageHeight = document.documentElement.scrollHeight;
-
   if (scrollPosition >= pageHeight - 500) {
     isLoading = true;
     for (let i = 0; i < 60; i++) {
@@ -359,20 +346,40 @@ function handleScroll() {
     }, 100);
   }
 }
-
 for (let i = 0; i < 50; i++) {
   addLadderImage();
 }
-
-document.getElementById("toggle-purple")?.addEventListener("click", () => {
-  const link = document.getElementById("purple-theme");
-  if (!link) return;
-  link.href = link.href.endsWith("style-purple.css") ? "" : "style-purple.css";
+function notifyThemeIframe() {
+  const purpleOn = document
+    .getElementById("purple-theme")
+    ?.href.endsWith("style-purple.css");
   const iframe = document.getElementById("gb-iframe");
   if (iframe?.contentWindow) {
     iframe.contentWindow.postMessage(
-      { type: "theme", purple: link.href.endsWith("style-purple.css") },
+      { type: "theme", purple: !!purpleOn },
       "*",
     );
   }
+}
+document.getElementById("toggle-purple")?.addEventListener("click", () => {
+  const link = document.getElementById("purple-theme");
+  if (!link) return;
+  const on = !link.href.endsWith("style-purple.css");
+  link.href = on ? "style-purple.css" : "";
+  if (on) {
+    const pip = document.getElementById("pipboy-theme");
+    if (pip) pip.href = "";
+  }
+  notifyThemeIframe();
+});
+document.getElementById("toggle-pipboy")?.addEventListener("click", () => {
+  const link = document.getElementById("pipboy-theme");
+  if (!link) return;
+  const on = !link.href.endsWith("style-pipboy.css");
+  link.href = on ? "style-pipboy.css" : "";
+  if (on) {
+    const purple = document.getElementById("purple-theme");
+    if (purple) purple.href = "";
+  }
+  notifyThemeIframe();
 });

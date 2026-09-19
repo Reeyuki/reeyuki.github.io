@@ -13,9 +13,73 @@
   --card: #11171a;
   --border: #1c2529;
   --text: #cfd8dc;
-  --sidebar-w: 230px;
+  --sidebar-w: 200px;
   --pixel: "Monocraft", monospace;
   --vt: "Monocraft", monospace;
+}
+
+body[data-project="yukios"] {
+  --accent: #8fd4ff;
+  --accent2: #f2faff;
+  --bg: #080d13;
+  --bg2: #0b1220;
+  --card: #0d1626;
+  --border: #274a6b;
+  --text: #d8ecfa;
+}
+body[data-project="putitback"] {
+  --accent: #ffb86b;
+  --accent2: #ff7b9c;
+  --bg: #100c08;
+  --bg2: #17100a;
+  --card: #191209;
+  --border: #4d3a1e;
+  --text: #f5e6d0;
+}
+body[data-project="voraxoid"] {
+  --accent: #ff3b30;
+  --accent2: #ff8a80;
+  --bg: #0f0606;
+  --bg2: #150808;
+  --card: #170a0a;
+  --border: #521b1b;
+  --text: #f3cfcf;
+}
+body[data-project="soulthera"] {
+  --accent: #b388ff;
+  --accent2: #69f0ae;
+  --bg: #0c0a12;
+  --bg2: #100d18;
+  --card: #130f1d;
+  --border: #3a2d5c;
+  --text: #ddd6f3;
+}
+body[data-project="yukicord"] {
+  --accent: #5865f2;
+  --accent2: #fee75c;
+  --bg: #0a0b12;
+  --bg2: #0e0f1a;
+  --card: #12131f;
+  --border: #2b2e5c;
+  --text: #d6d8f5;
+}
+body[data-project="gnome"] {
+  --accent: #4a90d9;
+  --accent2: #ff7a59;
+  --bg: #080d12;
+  --bg2: #0a1118;
+  --card: #0c131c;
+  --border: #1e3a52;
+  --text: #cfdded;
+}
+body[data-project="dotfiles"] {
+  --accent: #39c5cf;
+  --accent2: #ff5da2;
+  --bg: #081014;
+  --bg2: #0a151b;
+  --card: #0b1820;
+  --border: #1d4552;
+  --text: #cfeef2;
 }
 * {
   box-sizing: border-box;
@@ -35,6 +99,10 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent2);
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg);
 }
 body {
   background: var(--bg);
@@ -289,16 +357,16 @@ section ul li a:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-/* Featured card: spans full width, side-by-side on desktop.
-   Move .project-featured to any .project-panel to feature it. */
+
 .project-panel.project-featured {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: 2fr 1fr;
+}
+.project-panel.project-featured > * {
+  min-width: 0;
 }
 .project-panel.project-featured .slideshow-wrapper {
-  height: auto;
-  min-height: 0;
   aspect-ratio: 16 / 9;
   align-self: start;
 }
@@ -306,7 +374,18 @@ section ul li a:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 24px 26px;
+  padding: 20px 22px;
+}
+
+.project-panel.project-featured .game-desc {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+.project-panel.project-featured .game-features {
+  display: flex;
+}
+.project-panel.project-featured .game-note {
+  display: block;
 }
 @keyframes fadeIn {
   from {
@@ -331,7 +410,7 @@ section ul li a:hover {
   position: relative;
   width: 100%;
   min-width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   height: auto;
   min-height: 0;
   max-height: none;
@@ -435,6 +514,7 @@ section ul li a:hover {
   font-family: var(--pixel);
   font-size: 0.8rem;
   color: var(--accent2);
+  margin-top: 12px;
   margin-bottom: 8px;
   letter-spacing: 1px;
 }
@@ -449,7 +529,7 @@ section ul li a:hover {
 .project-panel .slideshow-wrapper {
   cursor: zoom-in;
 }
-/* Card hover affordance: lift + image zoom + open hint */
+
 .project-panel {
   transition:
     transform 0.25s ease,
@@ -479,7 +559,7 @@ section ul li a:hover {
     transform: none;
   }
 }
-/* Truncated by default, expand on demand */
+
 .project-panel .game-desc {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -500,23 +580,24 @@ section ul li a:hover {
 .project-panel.expanded .game-note {
   display: block;
 }
-.read-more-btn {
+.details-btn {
   font-family: var(--pixel);
   font-size: 0.5rem;
   color: var(--accent);
   background: transparent;
-  border: 1px solid var(--border);
-  padding: 6px 10px;
+  border: none;
+  padding: 0;
   cursor: pointer;
   letter-spacing: 1px;
   margin-bottom: 10px;
   transition: 0.2s;
+  text-align: left;
 }
-.read-more-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.details-btn:hover {
+  color: var(--accent2);
+  text-decoration: underline;
 }
-/* Click-to-open modal */
+
 .project-modal {
   position: fixed;
   inset: 0;
@@ -536,8 +617,8 @@ section ul li a:hover {
 }
 .project-modal-card {
   position: relative;
-  max-width: 1100px;
-  width: min(1100px, 94vw);
+  max-width: 1200px;
+  width: min(1200px, 94vw);
   max-height: 92vh;
   overflow-y: auto;
   background: var(--card);
@@ -546,7 +627,7 @@ section ul li a:hover {
 }
 .project-modal-card img {
   width: 100%;
-  max-height: 68vh;
+  max-height: 74vh;
   object-fit: contain;
   object-position: center;
   display: block;
@@ -559,7 +640,7 @@ section ul li a:hover {
 }
 .modal-slideshow img {
   width: 100%;
-  max-height: 68vh;
+  max-height: 74vh;
   object-fit: contain;
   object-position: center;
   display: block;
@@ -1169,9 +1250,6 @@ footer {
   }
   .project-panel.project-featured {
     grid-template-columns: 1fr;
-  }
-  .project-panel.project-featured .slideshow-wrapper {
-    aspect-ratio: 16 / 9;
   }
 }
 @media (max-width: 480px) {
