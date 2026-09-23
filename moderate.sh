@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GUESTBOOK_URL="https://reeyuki.netlify.app/.netlify/functions/guestbook"
+GUESTBOOK_URL="https://reeyuki.netlify.app/api/guestbook"
 CONFIG_DIR="${HOME}/.config/guestbook-admin"
 TOKEN_FILE="${CONFIG_DIR}/token"
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GUESTBOOK_URL="https://reeyuki.netlify.app/.netlify/functions/guestbook"
+GUESTBOOK_URL="https://reeyuki.netlify.app/api/guestbook"
 TOKEN_FILE="${HOME}/.config/guestbook-admin/token"
 
 if ! command -v jq >/dev/null 2>&1; then
