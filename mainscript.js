@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "details-btn";
-    btn.textContent = "full details →";
+    btn.textContent = "full details";
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
       openModal(panel.id, true);

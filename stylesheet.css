@@ -1257,6 +1257,3 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-.external-link::after {
-  content: " ↗";
-}
