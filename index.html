@@ -131,19 +131,25 @@
     </script>
   </head>
   <body>
-    <img
-      id="anime-greet"
-      src="/static/reeyuki-avatar.webp"
-      alt="Reeyuki"
-      fetchpriority="high"
-      width="186"
-      height="186"
-    />
+    <div id="xp-bar" aria-hidden="true"><div id="xp-fill"></div></div>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <div id="scanlines" aria-hidden="true"></div>
     <div class="layout">
       <aside id="sidebar">
         <div class="sidebar-scroll">
           <div class="profile-block">
+            <img
+              id="anime-greet"
+              src="/static/reeyuki-avatar.webp"
+              alt="Reeyuki"
+              fetchpriority="high"
+              width="186"
+              height="186"
+            />
             <h1 class="glitch-text" data-text="Reeyuki">Reeyuki</h1>
+            <span id="typing-tagline" aria-label="what i do"
+              >i make games_</span
+            >
             <div id="avatar-switcher" aria-label="switch avatar">
               <button
                 class="avatar-dot active"
@@ -210,6 +216,9 @@
             aria-label="Toggle Pip-Boy theme"
           >
             Pip-Boy theme
+          </button>
+          <button id="toggle-fx" class="side-btn" aria-label="Toggle effects">
+            FX: ON
           </button>
 
           <div class="sidebar-divider"></div>
@@ -1248,8 +1257,7 @@
     </script>
     <script>
       (function () {
-        var url =
-          "https://reeyuki.netlify.app/api/guestbook?page=1&limit=1";
+        var url = "https://reeyuki.netlify.app/api/guestbook?page=1&limit=1";
         var countEl = document.getElementById("gb-count");
         var headerEl = document.getElementById("gb-count-header");
         fetch(url)

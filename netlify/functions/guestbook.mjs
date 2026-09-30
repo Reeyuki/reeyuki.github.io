@@ -45,7 +45,7 @@ function subPath(url) {
   const marker = "/guestbook";
   const idx = url.pathname.indexOf(marker);
   const rest = idx === -1 ? "/" : url.pathname.slice(idx + marker.length);
-  return (rest.replace(/\/+$/, "") || "/");
+  return rest.replace(/\/+$/, "") || "/";
 }
 
 export default async (req) => {

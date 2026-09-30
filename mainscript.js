@@ -1,5 +1,19 @@
+const FX = {
+  on: true,
+  reduced: false,
+};
+try {
+  FX.reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  FX.on = localStorage.getItem("reeyuki-fx") !== "off" && !FX.reduced;
+} catch (e) {}
+if (!FX.on) document.body.classList.add("fx-off");
 const sparkles = [];
+let lastSpark = 0;
 document.addEventListener("mousemove", (e) => {
+  if (!FX.on) return;
+  const now = performance.now();
+  if (now - lastSpark < 80) return;
+  lastSpark = now;
   const sparkle = document.createElement("div");
   sparkle.className = "sparkle";
   sparkle.style.left = e.clientX - 4 + "px";
@@ -7,7 +21,7 @@ document.addEventListener("mousemove", (e) => {
   sparkle.style.background = `hsl(${Math.random() * 60 + 160}, 80%, 70%)`;
   document.body.appendChild(sparkle);
   sparkles.push(sparkle);
-  if (sparkles.length > 60) {
+  if (sparkles.length > 24) {
     const old = sparkles.shift();
     old?.remove();
   }
@@ -383,3 +397,256 @@ document.getElementById("toggle-pipboy")?.addEventListener("click", () => {
   }
   notifyThemeIframe();
 });
+/* ===== WOW FX PACK ===== */
+(function initFx() {
+  const fxBtn = document.getElementById("toggle-fx");
+  const syncBtn = () => {
+    if (fxBtn) fxBtn.textContent = FX.on ? "FX: ON" : "FX: OFF";
+  };
+  syncBtn();
+  fxBtn?.addEventListener("click", () => {
+    FX.on = !FX.on;
+    document.body.classList.toggle("fx-off", !FX.on);
+    try {
+      localStorage.setItem("reeyuki-fx", FX.on ? "on" : "off");
+    } catch (e) {}
+    syncBtn();
+    if (FX.on)
+      requestAnimationFrame(() => document.body.classList.remove("fx-off"));
+  });
+
+  // typing tagline
+  const tag = document.getElementById("typing-tagline");
+  const phrases = [
+    "i make games_",
+    "cozy tidy sims_",
+    "survival arenas_",
+    "browser OSes_",
+    "weird web stuff_",
+  ];
+  if (tag && FX.on) {
+    let pi = 0,
+      ci = phrases[0].length,
+      del = true;
+    setInterval(() => {
+      if (!FX.on) return;
+      const cur = phrases[pi];
+      if (del) {
+        ci -= 1;
+        if (ci <= 0) {
+          del = false;
+          pi = (pi + 1) % phrases.length;
+          ci = 0;
+        }
+        tag.textContent = cur.slice(0, Math.max(ci, 0));
+      } else {
+        ci += 1;
+        const next = phrases[pi];
+        tag.textContent = next.slice(0, ci);
+        if (ci >= next.length) del = true;
+      }
+    }, 90);
+  }
+
+  // xp scroll bar
+  const fill = document.getElementById("xp-fill");
+  const onScrollBar = () => {
+    if (!fill) return;
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    fill.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+  };
+  addEventListener("scroll", onScrollBar, { passive: true });
+  onScrollBar();
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll(
+    ".project-panel, #sec-about .feature-card, #sec-footer-links, #sec-comments",
+  );
+  revealEls.forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.setProperty("--reveal-delay", Math.min((i % 4) * 60, 240) + "ms");
+  });
+  if ("IntersectionObserver" in window && FX.reduced === false) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("in-view");
+            io.unobserve(en.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("in-view"));
+  }
+
+  // retro selection-cursor corners on every card (CSS :hover reveals them)
+  document.querySelectorAll(".project-panel").forEach((panel) => {
+    ["tl", "tr", "bl", "br"].forEach((pos) => {
+      const c = document.createElement("i");
+      c.className = "corner " + pos;
+      c.setAttribute("aria-hidden", "true");
+      panel.appendChild(c);
+    });
+  });
+
+  // tilt (desktop pointers only)
+  if (matchMedia("(pointer: fine)").matches) {
+    document.querySelectorAll(".project-panel").forEach((panel) => {
+      panel.classList.add("tilt");
+      let raf = 0;
+      panel.addEventListener("mousemove", (e) => {
+        if (!FX.on) return;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const r = panel.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          panel.style.transform = `translateY(-3px) rotateX(${(-py * 6).toFixed(2)}deg) rotateY(${(px * 6).toFixed(2)}deg)`;
+        });
+      });
+      panel.addEventListener("mouseleave", () => {
+        cancelAnimationFrame(raf);
+        panel.style.transform = "";
+      });
+    });
+
+    // magnetic play buttons
+    document.querySelectorAll(".play-btn").forEach((btn) => {
+      btn.addEventListener("mousemove", (e) => {
+        if (!FX.on) return;
+        const r = btn.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = `translate(${(dx * 0.12).toFixed(1)}px, ${(dy * 0.18).toFixed(1)}px) scale(1.03)`;
+      });
+      btn.addEventListener("mouseleave", () => {
+        btn.style.transform = "";
+      });
+    });
+  }
+
+  // click pixel burst (gated, tiny)
+  const burstColors = () => {
+    const cs = getComputedStyle(document.body);
+    return [
+      cs.getPropertyValue("--accent").trim() || "#66e6c8",
+      cs.getPropertyValue("--accent2").trim() || "#d96bb3",
+    ];
+  };
+  document.addEventListener("click", (e) => {
+    if (!FX.on) return;
+    const t = e.target.closest?.(".play-btn, .side-btn, .slide-nav, .dot");
+    if (!t) return;
+    t.classList.add("fx-press");
+    setTimeout(() => {
+      t.classList.remove("fx-press");
+      t.style.transform = "";
+    }, 140);
+    const [c1, c2] = burstColors();
+    for (let i = 0; i < 8; i++) {
+      const p = document.createElement("div");
+      p.className = "fx-burst";
+      p.style.background = i % 2 ? c1 : c2;
+      p.style.left = e.clientX + "px";
+      p.style.top = e.clientY + "px";
+      document.body.appendChild(p);
+      const ang = (Math.PI * 2 * i) / 8 + Math.random() * 0.4;
+      const dist = 22 + Math.random() * 26;
+      p.animate(
+        [
+          { transform: "translate(0,0) scale(1)", opacity: 1 },
+          {
+            transform: `translate(${Math.cos(ang) * dist}px, ${Math.sin(ang) * dist - 8}px) scale(0.2)`,
+            opacity: 0,
+          },
+        ],
+        { duration: 420, easing: "cubic-bezier(.22,1,.36,1)" },
+      ).onfinish = () => p.remove();
+      setTimeout(() => p.remove(), 600);
+    }
+  });
+
+  // pixel starfield
+  const canvas = document.getElementById("starfield");
+  if (canvas && FX.on) {
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+    let running = true;
+    const resize = () => {
+      canvas.width = Math.floor(innerWidth / 2);
+      canvas.height = Math.floor(innerHeight / 2);
+      stars = Array.from({ length: Math.min(40, innerWidth / 28) }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        s: Math.random() < 0.85 ? 1 : 2,
+        v: 0.08 + Math.random() * 0.3,
+        tw: Math.random() * Math.PI * 2,
+      }));
+    };
+    resize();
+    addEventListener("resize", resize);
+    const tick = () => {
+      if (!running) return;
+      if (!FX.on) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const accent =
+        getComputedStyle(document.body).getPropertyValue("--accent").trim() ||
+        "#66e6c8";
+      ctx.fillStyle = accent;
+      for (const st of stars) {
+        st.y -= st.v;
+        st.tw += 0.05;
+        if (st.y < -2) {
+          st.y = canvas.height + 2;
+          st.x = Math.random() * canvas.width;
+        }
+        ctx.globalAlpha = 0.25 + Math.abs(Math.sin(st.tw)) * 0.5;
+        ctx.fillRect(st.x | 0, st.y | 0, st.s, st.s);
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(tick);
+    };
+    // pause offscreen / hidden tab
+    new IntersectionObserver((en) => {
+      running = en[0].isIntersecting || document.visibilityState === "visible";
+      if (running) requestAnimationFrame(tick);
+    }).observe(canvas);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && FX.on) requestAnimationFrame(tick);
+    });
+    requestAnimationFrame(tick);
+  }
+
+  // scroll-spy project theming (skip while modal open)
+  const panels = Array.from(
+    document.querySelectorAll(".project-panel[id^='panel-']"),
+  );
+  if ("IntersectionObserver" in window && panels.length) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        if (
+          !FX.on ||
+          document.getElementById("project-modal")?.hidden === false
+        )
+          return;
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            panels.forEach((p) => p.classList.remove("spy-active"));
+            en.target.classList.add("spy-active");
+            document.body.dataset.project = en.target.id.replace(/^panel-/, "");
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 },
+    );
+    panels.forEach((p) => spy.observe(p));
+  }
+})();

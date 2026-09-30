@@ -222,15 +222,6 @@ h2 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(51, 255, 102, 0.75);
 }
-@keyframes cta-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-}
 .slideshow-cta-text {
   box-shadow: 0 0 20px rgba(51, 255, 102, 0.3);
 }

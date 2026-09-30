@@ -156,7 +156,6 @@ h2 {
   align-items: center;
   text-align: center;
   gap: 6px;
-  margin-top: 112px;
 }
 #anime-greet {
   width: 96px;
@@ -166,27 +165,15 @@ h2 {
   image-rendering: pixelated;
   cursor: pointer;
   display: block;
-  position: fixed;
-  top: 18px;
-  left: calc(var(--sidebar-w) / 2 - 48px);
-  will-change: transform;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  transform-origin: left top;
+  position: relative;
   z-index: 100;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: center top;
 }
 #anime-greet:hover {
   transform: scale(3);
-  z-index: 100;
   image-rendering: auto;
   border-radius: 0;
-}
-@media (max-width: 860px) {
-  #anime-greet {
-    left: calc(50% - 48px);
-  }
-  #anime-greet:hover {
-    transform-origin: center top;
-  }
 }
 #avatar-switcher {
   display: flex;
@@ -791,22 +778,11 @@ section ul li a:hover {
   cursor: pointer;
   transition: 0.2s;
   letter-spacing: 1px;
-  animation: cta-pulse 2.5s ease-in-out infinite;
 }
 .play-btn-large:hover {
   background: var(--accent2);
   color: #fff;
-  animation: none;
   transform: scale(1.03);
-}
-@keyframes cta-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
 }
 .play-btn-icon {
   font-size: 1.2rem;
@@ -1256,4 +1232,192 @@ footer {
   .projects-grid {
     grid-template-columns: 1fr;
   }
+}
+/* ===== WOW FX PACK (pixel-safe, vanilla) ===== */
+body {
+  transition:
+    background 0.5s ease,
+    color 0.5s ease;
+}
+#xp-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  z-index: 9998;
+  pointer-events: none;
+}
+#xp-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 8px var(--accent);
+  transition: width 0.1s linear;
+}
+#starfield {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  image-rendering: pixelated;
+}
+.layout,
+#content,
+#sidebar {
+  position: relative;
+  z-index: 1;
+}
+#scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  pointer-events: none;
+  opacity: 0.5;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(0, 0, 0, 0.12) 2px 3px
+  );
+  mix-blend-mode: multiply;
+}
+#typing-tagline {
+  font-family: var(--vt);
+  font-size: 0.85rem;
+  color: var(--accent2);
+  min-height: 1.4em;
+  display: block;
+}
+#typing-tagline::after {
+  content: "▊";
+  animation: caret-blink 1s steps(1) infinite;
+  color: var(--accent);
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+/* juicy tilt */
+.project-panel.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.project-panel.tilt:hover {
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45),
+    0 0 0 1px var(--accent),
+    0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+/* retro selection-cursor corner brackets */
+.project-panel .corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s steps(2);
+}
+.corner.tl {
+  top: 4px;
+  left: 4px;
+  border-top: 3px solid var(--accent);
+  border-left: 3px solid var(--accent);
+}
+.corner.tr {
+  top: 4px;
+  right: 4px;
+  border-top: 3px solid var(--accent);
+  border-right: 3px solid var(--accent);
+}
+.corner.bl {
+  bottom: 4px;
+  left: 4px;
+  border-bottom: 3px solid var(--accent);
+  border-left: 3px solid var(--accent);
+}
+.corner.br {
+  bottom: 4px;
+  right: 4px;
+  border-bottom: 3px solid var(--accent);
+  border-right: 3px solid var(--accent);
+}
+.project-panel:hover .corner {
+  opacity: 1;
+}
+/* featured glow border */
+.project-panel.project-featured {
+  position: relative;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+/* magnetic buttons */
+.play-btn,
+.side-btn {
+  will-change: transform;
+}
+.play-btn.fx-press,
+.side-btn.fx-press {
+  transform: scale(0.94);
+}
+/* click burst pixels */
+.fx-burst {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  pointer-events: none;
+  z-index: 9999;
+  image-rendering: pixelated;
+}
+/* scroll-spy active card */
+.project-panel.spy-active {
+  border-color: var(--accent2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  #starfield,
+  #scanlines,
+  #xp-bar {
+    display: none;
+  }
+  #typing-tagline::after {
+    animation: none;
+  }
+  .project-panel,
+  .slide img,
+  .play-btn,
+  .side-btn {
+    transition: none !important;
+  }
+}
+body.fx-off #starfield,
+body.fx-off #scanlines {
+  display: none;
+}
+body.fx-off .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
