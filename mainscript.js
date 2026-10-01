@@ -7,30 +7,6 @@ try {
   FX.on = localStorage.getItem("reeyuki-fx") !== "off" && !FX.reduced;
 } catch (e) {}
 if (!FX.on) document.body.classList.add("fx-off");
-const sparkles = [];
-let lastSpark = 0;
-document.addEventListener("mousemove", (e) => {
-  if (!FX.on) return;
-  const now = performance.now();
-  if (now - lastSpark < 80) return;
-  lastSpark = now;
-  const sparkle = document.createElement("div");
-  sparkle.className = "sparkle";
-  sparkle.style.left = e.clientX - 4 + "px";
-  sparkle.style.top = e.clientY - 4 + "px";
-  sparkle.style.background = `hsl(${Math.random() * 60 + 160}, 80%, 70%)`;
-  document.body.appendChild(sparkle);
-  sparkles.push(sparkle);
-  if (sparkles.length > 24) {
-    const old = sparkles.shift();
-    old?.remove();
-  }
-  setTimeout(() => {
-    sparkle.remove();
-    const i = sparkles.indexOf(sparkle);
-    if (i > -1) sparkles.splice(i, 1);
-  }, 500);
-});
 const slideshows = {
   soulthera: { current: 0, interval: null, duration: 8e3 },
   voraxoid: { current: 0, interval: null, duration: 8e3 },
@@ -530,14 +506,7 @@ document.getElementById("toggle-pipboy")?.addEventListener("click", () => {
     });
   }
 
-  // click pixel burst (gated, tiny)
-  const burstColors = () => {
-    const cs = getComputedStyle(document.body);
-    return [
-      cs.getPropertyValue("--accent").trim() || "#66e6c8",
-      cs.getPropertyValue("--accent2").trim() || "#d96bb3",
-    ];
-  };
+  // click press feedback
   document.addEventListener("click", (e) => {
     if (!FX.on) return;
     const t = e.target.closest?.(".play-btn, .side-btn, .slide-nav, .dot");
@@ -547,83 +516,7 @@ document.getElementById("toggle-pipboy")?.addEventListener("click", () => {
       t.classList.remove("fx-press");
       t.style.transform = "";
     }, 140);
-    const [c1, c2] = burstColors();
-    for (let i = 0; i < 8; i++) {
-      const p = document.createElement("div");
-      p.className = "fx-burst";
-      p.style.background = i % 2 ? c1 : c2;
-      p.style.left = e.clientX + "px";
-      p.style.top = e.clientY + "px";
-      document.body.appendChild(p);
-      const ang = (Math.PI * 2 * i) / 8 + Math.random() * 0.4;
-      const dist = 22 + Math.random() * 26;
-      p.animate(
-        [
-          { transform: "translate(0,0) scale(1)", opacity: 1 },
-          {
-            transform: `translate(${Math.cos(ang) * dist}px, ${Math.sin(ang) * dist - 8}px) scale(0.2)`,
-            opacity: 0,
-          },
-        ],
-        { duration: 420, easing: "cubic-bezier(.22,1,.36,1)" },
-      ).onfinish = () => p.remove();
-      setTimeout(() => p.remove(), 600);
-    }
   });
-
-  // pixel starfield
-  const canvas = document.getElementById("starfield");
-  if (canvas && FX.on) {
-    const ctx = canvas.getContext("2d");
-    let stars = [];
-    let running = true;
-    const resize = () => {
-      canvas.width = Math.floor(innerWidth / 2);
-      canvas.height = Math.floor(innerHeight / 2);
-      stars = Array.from({ length: Math.min(40, innerWidth / 28) }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        s: Math.random() < 0.85 ? 1 : 2,
-        v: 0.08 + Math.random() * 0.3,
-        tw: Math.random() * Math.PI * 2,
-      }));
-    };
-    resize();
-    addEventListener("resize", resize);
-    const tick = () => {
-      if (!running) return;
-      if (!FX.on) {
-        requestAnimationFrame(tick);
-        return;
-      }
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const accent =
-        getComputedStyle(document.body).getPropertyValue("--accent").trim() ||
-        "#66e6c8";
-      ctx.fillStyle = accent;
-      for (const st of stars) {
-        st.y -= st.v;
-        st.tw += 0.05;
-        if (st.y < -2) {
-          st.y = canvas.height + 2;
-          st.x = Math.random() * canvas.width;
-        }
-        ctx.globalAlpha = 0.25 + Math.abs(Math.sin(st.tw)) * 0.5;
-        ctx.fillRect(st.x | 0, st.y | 0, st.s, st.s);
-      }
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(tick);
-    };
-    // pause offscreen / hidden tab
-    new IntersectionObserver((en) => {
-      running = en[0].isIntersecting || document.visibilityState === "visible";
-      if (running) requestAnimationFrame(tick);
-    }).observe(canvas);
-    document.addEventListener("visibilitychange", () => {
-      if (!document.hidden && FX.on) requestAnimationFrame(tick);
-    });
-    requestAnimationFrame(tick);
-  }
 
   // scroll-spy project theming (skip while modal open)
   const panels = Array.from(
