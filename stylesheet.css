@@ -272,6 +272,15 @@ h2 {
   max-width: 88px;
   max-height: 32px;
 }
+.sidebar-badges > a.wide-badge {
+  grid-column: span 2;
+  height: auto;
+  padding: 2px 0;
+}
+.sidebar-badges > a.wide-badge img {
+  max-width: 180px;
+  max-height: 40px;
+}
 #content {
   flex: 1 1 auto;
   min-width: 0;

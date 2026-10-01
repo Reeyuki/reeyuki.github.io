@@ -258,6 +258,21 @@
                 height="31"
               />
             </a>
+            <a
+              id="destroy-badge"
+              href="https://destroy.spritefusion.com/?url=reeyuki.neocities.org"
+              target="_blank"
+              rel="noopener"
+              class="wide-badge"
+            >
+              <img
+                src="https://destroy.spritefusion.com/badge.svg"
+                alt="Destroy this website"
+                width="180"
+                height="40"
+                loading="lazy"
+              />
+            </a>
           </div>
         </div>
       </aside>
@@ -1254,6 +1269,20 @@
           }
         }
       });
+    </script>
+    <script>
+      (function () {
+        var a = document.getElementById("destroy-badge");
+        if (!a) return;
+        try {
+          var host = location.hostname;
+          if (host && host !== "localhost" && host !== "127.0.0.1" && host !== "") {
+            a.href =
+              "https://destroy.spritefusion.com/?url=" +
+              encodeURIComponent(host);
+          }
+        } catch (e) {}
+      })();
     </script>
     <script>
       (function () {
